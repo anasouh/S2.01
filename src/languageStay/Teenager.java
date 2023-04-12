@@ -1,3 +1,4 @@
+package languageStay;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +32,7 @@ public class Teenager{
             return false;
         }
         else if(this.country == Country.FRANCE){
-            if(!requierments.get("HOBBIES").isIn(teenager.requierments.get("HOBBIES").getValue())){
+            if(!requierments.get("HOBBIES").allIn(teenager.requierments.get("HOBBIES").getValue())){
                 return false;
             }
         }
@@ -44,11 +45,17 @@ public class Teenager{
                 requierments.remove(c);
             }
        }
-    } 
+    }
 
     public void addCriterion(CriterionName label, String value){
         Criterion criterion =  new Criterion(label, value);
         requierments.put(label.name(), criterion);
+    }
+
+    public String getCriterion(CriterionName label){
+        Criterion res = requierments.get(label.name());
+        if (res != null) return res.getValue();
+        return null;
     }
 
     @Override
@@ -65,9 +72,44 @@ public class Teenager{
         return true;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
     public Map<String, Criterion> getRequierments() {
         return requierments;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
     
 }

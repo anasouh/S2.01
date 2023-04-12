@@ -1,5 +1,6 @@
+package languageStay;
 public enum CriterionName {
-    GUEST_ANIMAL_ALLERGIE('B'),
+    GUEST_ANIMAL_ALLERGY('B'),
     HOST_HAS_ANIMAL('B'),
     GUEST_FOOD('T'),
     HOST_FOOD('T'),

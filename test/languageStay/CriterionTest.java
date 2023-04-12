@@ -1,3 +1,4 @@
+package languageStay;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -16,17 +17,20 @@ public class CriterionTest {
     
     @BeforeEach
     public void testInitialization() {
+        c1 = new Criterion(CriterionName.HOST_FOOD, "vegetarian, fff");
+        c2 = new Criterion(CriterionName.GUEST_FOOD, "vegetarian, nonuts");
         
     }
 
     @Test
-    public void testIsIn() {
-
-        c1 = new Criterion(CriterionName.HOST_FOOD, "vegetarian, fff");
-        c2 = new Criterion(CriterionName.GUEST_FOOD, "vegetarian, nonuts");
-
+    public void testAllIn() {
+        assertFalse(c1.allIn(c2.getValue()));
+        c1 = new Criterion(CriterionName.HOST_FOOD, "vegetarian ,fff");
+        c2 = new Criterion(CriterionName.GUEST_FOOD, "vegetarian,nonuts");
+        assertFalse(c1.allIn(c2.getValue()));
+        c1 = new Criterion(CriterionName.HOST_FOOD, "vegetarian, fff, nonuts");
+        c2 = new Criterion(CriterionName.GUEST_FOOD, "vegetarian,nonuts");
         assertTrue(c1.allIn(c2.getValue()));
-
 
     }
 }

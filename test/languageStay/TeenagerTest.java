@@ -1,3 +1,4 @@
+package languageStay;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -27,31 +28,38 @@ public class TeenagerTest {
     }
 
     @Test
-    public void testAdd() {}
+    public void testAddCriterion() {
+        t1.addCriterion(CriterionName.GENDER, "M");
+        assertEquals("M", t1.getCriterion(CriterionName.GENDER));
+        t1.addCriterion(CriterionName.GENDER, "F");
+        assertEquals("F", t1.getCriterion(CriterionName.GENDER));
+        assertNull(t1.getCriterion(CriterionName.HISTORY));
+    }
 
     @Test
     public void testCompatibility() {
         t1.addCriterion(CriterionName.GENDER, "M");
         t1.addCriterion(CriterionName.HOBBIES, "Sport");
         t1.addCriterion(CriterionName.HOST_HAS_ANIMAL, "no");
-        t1.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGIE, "no");
+        t1.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY, "no");
         t1.addCriterion(CriterionName.HOST_FOOD, "");
         t1.addCriterion(CriterionName.GUEST_FOOD, "");
 
         t2.addCriterion(CriterionName.GENDER, "M");
         t2.addCriterion(CriterionName.HOBBIES, "Sport");
         t2.addCriterion(CriterionName.HOST_HAS_ANIMAL, "no");
-        t2.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGIE, "no");
+        t2.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY, "no");
         t2.addCriterion(CriterionName.HOST_FOOD, "");
         t2.addCriterion(CriterionName.GUEST_FOOD, "");
 
         assertTrue(t1.compatibleWithGuest(t2));
         assertTrue(t2.compatibleWithGuest(t1));
 
-        t1.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGIE, "yes");
+        t1.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY, "yes");
         t2.addCriterion(CriterionName.HOST_HAS_ANIMAL, "yes");
 
         assertTrue(t1.compatibleWithGuest(t2));
+        assertFalse(t2.compatibleWithGuest(t1));
     }
 
     @Test
