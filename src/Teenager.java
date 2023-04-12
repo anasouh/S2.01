@@ -65,5 +65,9 @@ public class Teenager{
         return true;
     }
 
+    public Map<String, Criterion> getRequierments() {
+        return requierments;
+    }
 
+    
 }

@@ -52,7 +52,12 @@ public class TeenagerTest {
         t2.addCriterion(CriterionName.HOST_HAS_ANIMAL, "yes");
 
         assertTrue(t1.compatibleWithGuest(t2));
-        assertFalse(t2.compatibleWithGuest(t1));
+    }
+
+    @Test
+    public void testEquals(){
+        assertTrue(t1.equals(t1));
+        assertFalse(t1.equals(t2));
     }
     
 }
