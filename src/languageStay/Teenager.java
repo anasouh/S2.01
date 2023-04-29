@@ -1,7 +1,10 @@
 package languageStay;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.lang.model.element.ModuleElement.RequiresDirective;
 
 public class Teenager{
 
@@ -13,6 +16,8 @@ public class Teenager{
     private Country country;
     
     Map<String, Criterion> requierments = new HashMap<String, Criterion>();
+
+    Map<Sejour, Teenager> history = new HashMap<Sejour, Teenager>();
 
     public Teenager(String name, String firstname, LocalDate birthday, Country country){
         this.name = name;
@@ -31,20 +36,32 @@ public class Teenager{
         else if(!requierments.get("HOST_FOOD").allIn(teenager.requierments.get("GUEST_FOOD").getValue()) ){
             return false;
         }
-        else if(this.country == Country.FRANCE){
-            if(!requierments.get("HOBBIES").allIn(teenager.requierments.get("HOBBIES").getValue())){
+        else if(this.country == Country.FRANCE || teenager.getCountry() == Country.FRANCE){
+            if(!requierments.get("HOBBIES").isIn(teenager.requierments.get("HOBBIES").getValue())){
                 return false;
             }
+        }else if(history.values().contains(teenager) && requierments.get("HISTORY").getValue().equals("other")){
+            return false;
+        }else if(teenager.history.values().contains(this) && teenager.requierments.get("HISTORY").getValue().equals("other")){
+            return false;
         }
         return true;
     }
 
     public void purgeInvalidRequierement(){
-       for(String c : requierments.keySet()){
+        if(requierments.get("HOST_HAS_ANIMAL").getValue().equals("yes") && requierments.get("GUEST_ANIMAL_ALLERGY").getValue().equals("yes")){
+            requierments.remove("HOST_HAS_ANIMAL");
+            requierments.remove("GUEST_ANIMAL_ALLERGY");
+        }
+        ArrayList<String> supp = new ArrayList<String>();
+        for(String c : requierments.keySet()){
             if(!requierments.get(c).isValid()){
-                requierments.remove(c);
+                supp.add(c);
             }
-       }
+        }
+        for(String c : supp){
+            requierments.remove(c);
+        }
     }
 
     public void addCriterion(CriterionName label, String value){
@@ -58,58 +75,11 @@ public class Teenager{
         return null;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Teenager other = (Teenager) obj;
-        if (id != other.id)
-            return false;
-        return true;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public LocalDate getBirthday() {
-        return birthday;
-    }
-
     public Country getCountry() {
         return country;
     }
-
-    public Map<String, Criterion> getRequierments() {
-        return requierments;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
-    }
     
+    public int getNbCriterion(){
+        return this.requierments.size();
+    }
 }

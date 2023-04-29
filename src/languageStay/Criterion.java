@@ -14,9 +14,7 @@ public class Criterion {
         if(this.label.getTYPE() == 'B'){
             return this.value.equals("yes") || this.value.equals("no");
         }
-        else{
-            return true;
-        }
+        return true;
     }
 
     public String getValue() {
@@ -28,7 +26,29 @@ public class Criterion {
     }
 
     public boolean allIn(String necessary){
-        boolean allIn = true;
+        ArrayList<String> necessaries = new ArrayList<>();
+        ArrayList<String> values = new ArrayList<>();
+
+        if(!necessary.equals("")){
+            for (String s : necessary.split(",")) {
+                necessaries.add(s);
+            }
+        }
+        if(!this.value.equals("")){
+            for (String s : this.value.split(",")) {
+                values.add(s);
+            }
+        }
+        for (String s : necessaries) {
+            if (values.indexOf(s) < 0) {
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+    public boolean isIn(String necessary){
         ArrayList<String> necessaries = new ArrayList<>();
         ArrayList<String> values = new ArrayList<>();
 
@@ -40,12 +60,11 @@ public class Criterion {
         }
 
         for (String s : necessaries) {
-            System.out.println(s);
-            if (values.indexOf(s) < 0) {
-                allIn = false;
+            if (values.indexOf(s) >= 0) {
+                return true;
             }
         }
-        return allIn;
+        return false;
 
     }
 }
