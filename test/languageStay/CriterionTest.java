@@ -13,24 +13,19 @@ import org.junit.jupiter.api.Test;
 
 
 public class CriterionTest {
-    Criterion c1, c2;
+    Criterion c5, c6, c7;
     
     @BeforeEach
     public void testInitialization() {
-        c1 = new Criterion(CriterionName.HOST_FOOD, "vegetarian, fff");
-        c2 = new Criterion(CriterionName.GUEST_FOOD, "vegetarian, nonuts");
-        
+        c5 = new Criterion(CriterionName.HOST_HAS_ANIMAL, "yes");
+        c6 = new Criterion(CriterionName.HOST_HAS_ANIMAL, "peut-etre");
+        c7 = new Criterion(CriterionName.HOST_HAS_ANIMAL, "no");
     }
 
     @Test
-    public void testAllIn() {
-        assertFalse(c1.allIn(c2.getValue()));
-        c1 = new Criterion(CriterionName.HOST_FOOD, "vegetarian ,fff");
-        c2 = new Criterion(CriterionName.GUEST_FOOD, "vegetarian,nonuts");
-        assertFalse(c1.allIn(c2.getValue()));
-        c1 = new Criterion(CriterionName.HOST_FOOD, "vegetarian, fff, nonuts");
-        c2 = new Criterion(CriterionName.GUEST_FOOD, "vegetarian,nonuts");
-        assertTrue(c1.allIn(c2.getValue()));
-
+    public void testIsValid(){
+        assertTrue(c5.isValid());
+        assertTrue(c7.isValid());
+        assertFalse(c6.isValid());
     }
 }

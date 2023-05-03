@@ -13,6 +13,8 @@ public class Criterion {
     public boolean isValid(){
         if(this.label.getTYPE() == 'B'){
             return this.value.equals("yes") || this.value.equals("no");
+        }else if(this.label.getTYPE() == 'N'){
+            return Criterion.isNumeric(this.value);
         }
         return true;
     }
@@ -25,46 +27,23 @@ public class Criterion {
         return this.label;
     }
 
-    public boolean allIn(String necessary){
-        ArrayList<String> necessaries = new ArrayList<>();
-        ArrayList<String> values = new ArrayList<>();
+    public boolean equals(String text){
+        return this.value.equals(text);
+    }
 
-        if(!necessary.equals("")){
-            for (String s : necessary.split(",")) {
-                necessaries.add(s);
-            }
+    public static boolean isNumeric(String s)
+    {
+        if (s == null || s.equals("")) {
+            return false;
         }
-        if(!this.value.equals("")){
-            for (String s : this.value.split(",")) {
-                values.add(s);
-            }
-        }
-        for (String s : necessaries) {
-            if (values.indexOf(s) < 0) {
+ 
+        for (int i = 0; i < s.length(); i++)
+        {
+            char c = s.charAt(i);
+            if (c < '0' || c > '9') {
                 return false;
             }
         }
         return true;
-
-    }
-
-    public boolean isIn(String necessary){
-        ArrayList<String> necessaries = new ArrayList<>();
-        ArrayList<String> values = new ArrayList<>();
-
-        for (String s : necessary.replaceAll("\\s+","").split(",")) {
-            necessaries.add(s);
-        }
-        for (String s : this.value.replaceAll("\\s+","").split(",")) {
-            values.add(s);
-        }
-
-        for (String s : necessaries) {
-            if (values.indexOf(s) >= 0) {
-                return true;
-            }
-        }
-        return false;
-
     }
 }

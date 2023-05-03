@@ -3,8 +3,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.lang.model.element.ModuleElement.RequiresDirective;
+import java.util.TreeMap;
 
 public class Teenager{
 
@@ -17,7 +16,7 @@ public class Teenager{
     
     Map<String, Criterion> requierments = new HashMap<String, Criterion>();
 
-    Map<Sejour, Teenager> history = new HashMap<Sejour, Teenager>();
+    TreeMap<Sejour, Teenager> history = new TreeMap<Sejour, Teenager>();
 
     public Teenager(String name, String firstname, LocalDate birthday, Country country){
         this.name = name;
@@ -29,8 +28,8 @@ public class Teenager{
     }
 
     public boolean compatibleWithGuest(Teenager teenager){
-        if(requierments.get("HOST_HAS_ANIMAL").getValue().equals("yes") 
-        && teenager.requierments.get("GUEST_ANIMAL_ALLERGY").getValue().equals("yes")){
+        if(this.criterionEquals("HOST_HAS_ANIMAL", "yes") 
+        && teenager.criterionEquals("GUEST_ANIMAL_ALLERGY", "yes")){
             return false;
         }
         else if(!requierments.get("HOST_FOOD").allIn(teenager.requierments.get("GUEST_FOOD").getValue()) ){
@@ -40,16 +39,16 @@ public class Teenager{
             if(!requierments.get("HOBBIES").isIn(teenager.requierments.get("HOBBIES").getValue())){
                 return false;
             }
-        }else if(history.values().contains(teenager) && requierments.get("HISTORY").getValue().equals("other")){
+        }else if(!this.history.isEmpty() && this.history.get(this.history.lastKey()) == teenager && this.requierments.get("HISTORY").equals("other")){
             return false;
-        }else if(teenager.history.values().contains(this) && teenager.requierments.get("HISTORY").getValue().equals("other")){
+        }else if(!teenager.history.isEmpty() && teenager.history.get(teenager.history.lastKey()) == this && teenager.requierments.get("HISTORY").equals("other")){
             return false;
         }
         return true;
     }
 
     public void purgeInvalidRequierement(){
-        if(requierments.get("HOST_HAS_ANIMAL").getValue().equals("yes") && requierments.get("GUEST_ANIMAL_ALLERGY").getValue().equals("yes")){
+        if(requierments.get("HOST_HAS_ANIMAL").equals("yes") && requierments.get("GUEST_ANIMAL_ALLERGY").equals("yes")){
             requierments.remove("HOST_HAS_ANIMAL");
             requierments.remove("GUEST_ANIMAL_ALLERGY");
         }
@@ -81,5 +80,62 @@ public class Teenager{
     
     public int getNbCriterion(){
         return this.requierments.size();
+    }
+
+    public void addHistory(int annee, Country pays, Teenager etudiant){
+        Sejour s = new Sejour(annee, pays);
+        this.history.put(s, etudiant);
+    }
+
+    public boolean criterionEquals(String nameCriterion, String value){
+        if(!this.requierments.containsKey(nameCriterion)){
+            return false;
+        }
+        return this.requierments.get(nameCriterion).equals(value);
+    }
+
+    public boolean peutNourrir(Teenager teen){
+        if(!teen.requierments.containsKey("GUEST_FOOD") && !this.requierments.containsKey("HOST_FOOD")){
+            return false;
+        }
+        ArrayList<String> ask = new ArrayList<>();
+        ArrayList<String> give = new ArrayList<>();
+        if(!teen.requierments.get("GUEST_FOOD").equals("")){
+            for (String s : teen.requierments.get("GUEST_FOOD").getValue().split(",")) {
+                ask.add(s);
+            }
+        }
+        if(!this.requierments.get("HOST_FOOD").equals("")){
+            for (String s : this.requierments.get("HOST_FOOD").getValue().split(",")) {
+                give.add(s);
+            }
+        }
+        for (String s : ask) {
+            if (give.indexOf(s) < 0) {
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+    public boolean isIn(String necessary){
+        ArrayList<String> necessaries = new ArrayList<>();
+        ArrayList<String> values = new ArrayList<>();
+
+        for (String s : necessary.replaceAll("\\s+","").split(",")) {
+            necessaries.add(s);
+        }
+        for (String s : this.value.replaceAll("\\s+","").split(",")) {
+            values.add(s);
+        }
+
+        for (String s : necessaries) {
+            if (values.indexOf(s) >= 0) {
+                return true;
+            }
+        }
+        return false;
+
     }
 }
