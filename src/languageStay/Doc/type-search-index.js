@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"languageStay","l":"Country"},{"p":"languageStay","l":"Criterion"},{"p":"languageStay","l":"CriterionName"},{"p":"languageStay","l":"Plateform"},{"p":"languageStay","l":"Sejour"},{"p":"languageStay","l":"Teenager"}];updateSearchResults();
