@@ -14,8 +14,8 @@ public class Plateform {
     private ArrayList<Teenager> promo = new ArrayList<>();
 
     /**
-     * Supprime de la platform des teenagers pour qu'il y en reste juste le nombre donné en paramètre
-     * @param i nombre max de teenager 
+     * Supprime de la platforme les teenagers en trop par rapport au nombre entré en paramètre.
+     * @param i Nombre maximum de teenager 
      */
     public void supprimer(int i){
         int c = 0;
@@ -36,16 +36,16 @@ public class Plateform {
     }
 
     /**
-     * Supprime de la platform des teenagers pour qu'il y en reste juste le nombre donné en paramètre
-     * @param i nombre max de teenager 
-     * @param pays le pays du teenager
+     * Supprime des teenagers d'un pays de la plateforme.
+     * @param nbSupp nombre de teenagers du pays à supprimer
+     * @param pays pays des teenagers à supprimer
      */
-    public void supprimer(int i, Country pays){
+    public void supprimer(int nbSupp, Country pays){
         int c = 0;
         for(Teenager t : promo){
             t.purgeInvalidRequierement();
         }
-        while(c < i && promo.size() > 0){
+        while(c < nbSupp && promo.size() > 0){
             int minCri = minimumCritere(promo);
             List<Teenager> aSupp = new ArrayList<>();
             for(Teenager etudiant : promo){
@@ -100,5 +100,26 @@ public class Plateform {
         for (Teenager t: teenagers){
             if (!promo.contains(t)) promo.add(t);
         }
+    }
+
+    /**
+     * Retire tous les teenagers présents dans la plateforme.
+     */
+    public void clear(){
+        promo.clear();
+    }
+
+    /**
+     * Vérifie si la plateforme contient un teenager. 
+     */
+    public boolean contains(Teenager teenager){
+        return promo.contains(teenager);
+    }
+
+    /**
+     * Retourne le nombre de teenagers dans la plateforme.
+     */
+    public int size(){
+        return promo.size();
     }
 }
