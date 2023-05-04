@@ -1,4 +1,10 @@
 package languageStay;
+
+/**
+ * <strong>Permet de créer un objet Teenager </strong>
+ * @author Desmee Nathan, Ouhdda Anas, Belguebli Rayane
+ */
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,6 +24,14 @@ public class Teenager{
 
     TreeMap<Sejour, Teenager> history = new TreeMap<Sejour, Teenager>();
 
+
+    /**
+     * Crée un Teenager complètement spécifiée
+     * @param name nom du Teenager
+     * @param firstname prénom du Teenager
+     * @param birthday date d'anniversaire du Teenager
+     * @param country pays du Teenager
+     */
     public Teenager(String name, String firstname, LocalDate birthday, Country country){
         this.name = name;
         this.firstname = firstname;
