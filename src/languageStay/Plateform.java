@@ -1,5 +1,6 @@
 package languageStay;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <strong>Permet de créer un objet Platform </strong>
@@ -23,12 +24,14 @@ public class Plateform {
         }
         while(c < i && promo.size() > 0){
             int minCri = minimumCritere(promo);
+            List<Teenager> aSupp = new ArrayList<>();
             for(Teenager etudiant : promo){
                 if(etudiant.getNbCriterion() == minCri){
                     c++;
-                    promo.remove(etudiant);
+                    aSupp.add(etudiant);
                 }
             }
+            promo.removeAll(aSupp);
         }
     }
 
@@ -44,12 +47,14 @@ public class Plateform {
         }
         while(c < i && promo.size() > 0){
             int minCri = minimumCritere(promo);
+            List<Teenager> aSupp = new ArrayList<>();
             for(Teenager etudiant : promo){
                 if(etudiant.getNbCriterion() == minCri && etudiant.getCountry() == pays){
                     c++;
-                    promo.remove(etudiant);
+                    aSupp.add(etudiant);
                 }
             }
+            promo.removeAll(aSupp);
         }
     }
 
