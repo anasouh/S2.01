@@ -74,5 +74,17 @@ public class TeenagerTest {
         assertFalse(t3.compatibleWithGuest(t1));
         assertTrue(t3.compatibleWithGuest(t2));
     } 
+
+    @Test
+    public void testCriterionEquals() {
+        t1.addCriterion(CriterionName.GENDER, "M");
+        t1.addCriterion(CriterionName.HOBBIES, "Sport");
+
+        t2.addCriterion(CriterionName.GENDER, "M");
+        t2.addCriterion(CriterionName.HOBBIES, "Art");
+
+        assertTrue(t1.criterionEquals(CriterionName.GENDER.name(), t2.getCriterion(CriterionName.GENDER)));
+        assertFalse(t1.criterionEquals(CriterionName.HOBBIES.name(), t2.getCriterion(CriterionName.HOBBIES)));
+    }
     
 }

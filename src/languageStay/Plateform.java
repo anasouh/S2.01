@@ -67,4 +67,33 @@ public class Plateform {
         }
         return min;
     }
+
+    /**
+     * Ajoute à la plateforme un teenager, à condition que celui-ci n'y est pas déjà présent.
+     * @param teenager Teenager à ajouter 
+     */
+    public boolean ajouter(Teenager teenager){
+        if (!promo.contains(teenager)) return promo.add(teenager);
+        return false;
+    }
+
+    /**
+     * Ajoute à la plateforme des teenagers, à condition que ceux-ci n'y soient pas déjà.
+     * @param teenagers Liste de Teenager à ajouter 
+     */
+    public void ajouter(ArrayList<Teenager> teenagers){
+        for (Teenager t: teenagers){
+            if (!promo.contains(t)) promo.add(t);
+        }
+    }
+
+    /**
+     * Ajoute à la plateforme des teenagers, à condition que ceux-ci n'y soient pas déjà.
+     * @param teenagers Tableau de Teenager à ajouter 
+     */
+    public void ajouter(Teenager[] teenagers){
+        for (Teenager t: teenagers){
+            if (!promo.contains(t)) promo.add(t);
+        }
+    }
 }

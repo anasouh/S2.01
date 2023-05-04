@@ -5,12 +5,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+
 /**
  * <strong>Permet de créer un objet Teenager </strong>
  * @author Desmee Nathan
  * @author Ouhdda Anas
  * @author Belguebli Rayane
  */
+
 
 public class Teenager{
 
@@ -120,12 +122,15 @@ public class Teenager{
         return this.requierments.size();
     }
 
+
     /**
      * Renvoie true si le critère est égal à celui donné en paramètre 
      * @param nameCriterion nom du critère
      * @param value valeur du critère
      * @return boolean true or false
      */
+
+
     public boolean criterionEquals(String nameCriterion, String value){
         if(!this.requierments.containsKey(nameCriterion)){
             return false;
