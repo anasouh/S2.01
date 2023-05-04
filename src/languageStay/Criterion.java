@@ -4,9 +4,7 @@ package languageStay;
  * <strong>Permet de créer un objet Criterion </strong>
  * @author Desmee Nathan, Ouhdda Anas, Belguebli Rayane
  */
-import java.time.LocalDate;
 import java.time.Month;
-import java.util.ArrayList;
 
 public class Criterion {
     private String value;

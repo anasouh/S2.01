@@ -3,7 +3,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class Teenager{
 
@@ -16,7 +15,6 @@ public class Teenager{
     
     Map<String, Criterion> requierments = new HashMap<String, Criterion>();
 
-    TreeMap<Sejour, Teenager> history = new TreeMap<Sejour, Teenager>();
 
     public Teenager(String name, String firstname, LocalDate birthday, Country country){
         this.name = name;
@@ -39,10 +37,6 @@ public class Teenager{
             if(!this.loisirCommun(teenager)){
                 return false;
             }
-        }else if(!this.history.isEmpty() && this.history.get(this.history.lastKey()) == teenager && this.requierments.get("HISTORY").equals("other")){
-            return false;
-        }else if(!teenager.history.isEmpty() && teenager.history.get(teenager.history.lastKey()) == this && teenager.requierments.get("HISTORY").equals("other")){
-            return false;
         }
         return true;
     }
@@ -80,11 +74,6 @@ public class Teenager{
     
     public int getNbCriterion(){
         return this.requierments.size();
-    }
-
-    public void addHistory(int annee, Country pays, Teenager etudiant){
-        Sejour s = new Sejour(annee, pays);
-        this.history.put(s, etudiant);
     }
 
     public boolean criterionEquals(String nameCriterion, String value){
