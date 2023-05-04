@@ -28,4 +28,27 @@ public class CriterionTest {
         assertTrue(c7.isValid());
         assertFalse(c6.isValid());
     }
+
+    @Test
+    public void testIsNumeric(){
+        assertTrue(Criterion.isNumeric("42"));
+        assertTrue(Criterion.isNumeric("042"));
+        assertFalse(Criterion.isNumeric("42f"));
+    }
+
+    @Test
+    public void testIsMonth(){
+        assertTrue(Criterion.isMonth("11"));
+        assertFalse(Criterion.isMonth("18"));
+        assertTrue(Criterion.isNumeric("01"));
+        assertFalse(Criterion.isMonth("11f"));
+    }
+
+    @Test
+    public void testIsDay(){
+        assertTrue(Criterion.isDays("30","11"));
+        assertFalse(Criterion.isDays("31", "11"));
+        assertTrue(Criterion.isDays("01", "11"));
+        assertFalse(Criterion.isDays("F1", "11"));
+    }
 }
