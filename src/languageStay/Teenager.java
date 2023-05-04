@@ -32,11 +32,11 @@ public class Teenager{
         && teenager.criterionEquals("GUEST_ANIMAL_ALLERGY", "yes")){
             return false;
         }
-        else if(!requierments.get("HOST_FOOD").allIn(teenager.requierments.get("GUEST_FOOD").getValue()) ){
+        else if(!this.peutNourrir(teenager)){
             return false;
         }
         else if(this.country == Country.FRANCE || teenager.getCountry() == Country.FRANCE){
-            if(!requierments.get("HOBBIES").isIn(teenager.requierments.get("HOBBIES").getValue())){
+            if(!this.loisirCommun(teenager)){
                 return false;
             }
         }else if(!this.history.isEmpty() && this.history.get(this.history.lastKey()) == teenager && this.requierments.get("HISTORY").equals("other")){
