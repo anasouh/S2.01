@@ -14,15 +14,15 @@ public class Plateform {
     private ArrayList<Teenager> promo = new ArrayList<>();
 
     /**
-     * Supprime de la platforme les teenagers en trop par rapport au nombre entré en paramètre.
-     * @param i Nombre maximum de teenager 
+     * Supprime de la platforme un nombre de teenagers.
+     * @param nbSupp Nombre de teenager à supprimer
      */
-    public void supprimer(int i){
+    public void supprimer(int nbSupp){
         int c = 0;
         for(Teenager t : promo){
             t.purgeInvalidRequierement();
         }
-        while(c < i && promo.size() > 0){
+        while(c < nbSupp && promo.size() > 0){
             int minCri = minimumCritere(promo);
             List<Teenager> aSupp = new ArrayList<>();
             for(Teenager etudiant : promo){

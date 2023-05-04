@@ -43,7 +43,7 @@ public class PlatformTest {
         t1.addCriterion(CriterionName.GENDER, "M");
         t1.addCriterion(CriterionName.HOBBIES, "Sport");
         t1.addCriterion(CriterionName.HOST_HAS_ANIMAL, "no");
-        t1.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY, "yes");
+        t1.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY, "aaaa");
         t1.addCriterion(CriterionName.HOST_FOOD, "nonuts,vegetarian");
         t1.addCriterion(CriterionName.GUEST_FOOD, "vegetarian");
 
@@ -100,14 +100,14 @@ public class PlatformTest {
         pf.ajouter(t1);
         pf.ajouter(t2);
         pf.ajouter(t3);
-        pf.supprimer(2);
+        pf.supprimer(1);
         assertEquals(pf.size(), 2);
         pf.clear();
         
         pf.ajouter(t1);
         pf.ajouter(t2);
         pf.supprimer(3);
-        assertEquals(pf.size(), 2);
+        assertEquals(pf.size(), 0);
         pf.clear();
 
         pf.ajouter(t1);
