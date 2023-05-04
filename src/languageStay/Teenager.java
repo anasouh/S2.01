@@ -95,7 +95,7 @@ public class Teenager{
     }
 
     public boolean peutNourrir(Teenager teen){
-        if(!teen.requierments.containsKey("GUEST_FOOD") && !this.requierments.containsKey("HOST_FOOD")){
+        if(!teen.requierments.containsKey("GUEST_FOOD") || !this.requierments.containsKey("HOST_FOOD")){
             return false;
         }
         ArrayList<String> ask = new ArrayList<>();
@@ -119,19 +119,24 @@ public class Teenager{
 
     }
 
-    public boolean isIn(String necessary){
-        ArrayList<String> necessaries = new ArrayList<>();
-        ArrayList<String> values = new ArrayList<>();
-
-        for (String s : necessary.replaceAll("\\s+","").split(",")) {
-            necessaries.add(s);
+    public boolean loisirCommun(Teenager teen){
+        if(!teen.requierments.containsKey("HOBBIES") || !this.requierments.containsKey("HOBBIES")){
+            return false;
         }
-        for (String s : this.value.replaceAll("\\s+","").split(",")) {
-            values.add(s);
+        ArrayList<String> ask = new ArrayList<>();
+        ArrayList<String> give = new ArrayList<>();
+        if(!teen.requierments.get("HOBBIES").equals("")){
+            for (String s : teen.requierments.get("HOBBIES").getValue().split(",")) {
+                ask.add(s);
+            }
         }
-
-        for (String s : necessaries) {
-            if (values.indexOf(s) >= 0) {
+        if(!this.requierments.get("HOBBIES").equals("")){
+            for (String s : this.requierments.get("HOBBIES").getValue().split(",")) {
+                give.add(s);
+            }
+        }
+        for (String s : ask) {
+            if (give.indexOf(s) >= 0) {
                 return true;
             }
         }

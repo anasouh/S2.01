@@ -1,4 +1,6 @@
 package languageStay;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 
 public class Criterion {
@@ -15,6 +17,9 @@ public class Criterion {
             return this.value.equals("yes") || this.value.equals("no");
         }else if(this.label.getTYPE() == 'N'){
             return Criterion.isNumeric(this.value);
+        }else if(this.label.getTYPE() == 'D'){
+            String[] date = this.value.split("-");
+            return Criterion.isYear(date[0]) && Criterion.isMonth(date[1]) && Criterion.isDays(date[2], date[1]);
         }
         return true;
     }
@@ -45,5 +50,17 @@ public class Criterion {
             }
         }
         return true;
+    }
+
+    public static boolean isYear(String s){
+        return s.length() == 4 && Criterion.isNumeric(s);
+    }
+
+    public static boolean isMonth(String s){
+        return Criterion.isNumeric(s) && Integer.parseInt(s) >= 1 && Integer.parseInt(s) <= 12;
+    }
+
+    public static boolean isDays(String s, String month){
+        return Criterion.isNumeric(s) && Integer.parseInt(s) >= 1 && Integer.parseInt(s) <= Month.of(Integer.parseInt(month)).length(false);
     }
 }
