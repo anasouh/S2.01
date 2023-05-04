@@ -1,15 +1,12 @@
 package languageStay;
+import java.util.ArrayList;
 
 /**
  * <strong>Permet de créer un objet Platform </strong>
- * @author Desmee Nathan, Ouhdda Anas, Belguebli Rayane
+ * @author Desmee Nathan
+ * @author Ouhdda Anas
+ * @author Belguebli Rayane
  */
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-
 
 public class Plateform {
 
@@ -38,7 +35,7 @@ public class Plateform {
     /**
      * Supprime de la platform des teenagers pour qu'il y en reste juste le nombre donné en paramètre
      * @param i nombre max de teenager 
-     * @param pays 
+     * @param pays le pays du teenager
      */
     public void supprimer(int i, Country pays){
         int c = 0;
@@ -59,6 +56,7 @@ public class Plateform {
     /**
      * Renvoie le nombre de critère minimum 
      * @param etudiants liste des étudiants 
+     * @return le nombre minimal de critère
      */
     public int minimumCritere(ArrayList<Teenager> etudiants){
         int min = etudiants.get(0).getNbCriterion();

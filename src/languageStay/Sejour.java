@@ -2,7 +2,9 @@ package languageStay;
 
 /**
  * <strong>Permet de créer un objet Séjour </strong>
- * @author Desmee Nathan, Ouhdda Anas, Belguebli Rayane
+ * @author Desmee Nathan
+ * @author Ouhdda Anas
+ * @author Belguebli Rayane
  */
 
 public class Sejour {
@@ -22,6 +24,7 @@ public class Sejour {
 
     /**
     * Retourne l'année du séjour
+    * @return int l'année
     */
     public int getAnnee() {
         return annee;
@@ -29,6 +32,7 @@ public class Sejour {
 
     /**
     * Retourne le pays du séjour
+    * @return Country le pays 
     */
     public Country getPays() {
         return pays;

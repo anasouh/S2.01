@@ -1,15 +1,16 @@
 package languageStay;
-
-/**
- * <strong>Permet de créer un objet Teenager </strong>
- * @author Desmee Nathan, Ouhdda Anas, Belguebli Rayane
- */
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
+
+
+/**
+ * <strong>Permet de créer un objet Teenager </strong>
+ * @author Desmee Nathan
+ * @author Ouhdda Anas
+ * @author Belguebli Rayane
+ */
 
 public class Teenager{
 
@@ -21,8 +22,6 @@ public class Teenager{
     private Country country;
     
     Map<String, Criterion> requierments = new HashMap<String, Criterion>();
-
-    TreeMap<Sejour, Teenager> history = new TreeMap<Sejour, Teenager>();
 
 
     /**
@@ -41,6 +40,12 @@ public class Teenager{
         Teenager.compteur ++;
     }
 
+
+    /**
+     * Vérifie la compatibilité entre 2 Teenagers
+     * @param teenager le teenager pour la vérifier la compatibilité
+     * @return boolean true or false
+     */
     public boolean compatibleWithGuest(Teenager teenager){
         if(this.criterionEquals("HOST_HAS_ANIMAL", "yes") 
         && teenager.criterionEquals("GUEST_ANIMAL_ALLERGY", "yes")){
@@ -53,14 +58,14 @@ public class Teenager{
             if(!this.loisirCommun(teenager)){
                 return false;
             }
-        }else if(!this.history.isEmpty() && this.history.get(this.history.lastKey()) == teenager && this.requierments.get("HISTORY").equals("other")){
-            return false;
-        }else if(!teenager.history.isEmpty() && teenager.history.get(teenager.history.lastKey()) == this && teenager.requierments.get("HISTORY").equals("other")){
-            return false;
         }
         return true;
     }
 
+
+    /**
+     * Vérifie si les valeurs des critères est valide et si oui les supprime
+     */
     public void purgeInvalidRequierement(){
         if(requierments.get("HOST_HAS_ANIMAL").equals("yes") && requierments.get("GUEST_ANIMAL_ALLERGY").equals("yes")){
             requierments.remove("HOST_HAS_ANIMAL");
@@ -77,30 +82,50 @@ public class Teenager{
         }
     }
 
+
+    /**
+     * Ajoute un critère donné en paramètre
+     * @param label nom du critère
+     * @param value valeur du critère
+     */
     public void addCriterion(CriterionName label, String value){
         Criterion criterion =  new Criterion(label, value);
         requierments.put(label.name(), criterion);
     }
 
+    /**
+     * Renvoie la valeur d'un critère
+     * @param label nom du critère 
+     * @return String la valeur du critère
+     */
     public String getCriterion(CriterionName label){
         Criterion res = requierments.get(label.name());
         if (res != null) return res.getValue();
         return null;
     }
 
+    /**
+     * Renvoie le pays du Teenager
+     * @return Country le pays du Teenager
+     */
     public Country getCountry() {
         return country;
     }
     
+    /**
+     * Renvoie le nombre de critère d'un Teenager
+     * @return int le nombre de critère
+     */
     public int getNbCriterion(){
         return this.requierments.size();
     }
 
-    public void addHistory(int annee, Country pays, Teenager etudiant){
-        Sejour s = new Sejour(annee, pays);
-        this.history.put(s, etudiant);
-    }
-
+    /**
+     * Renvoie true si le critère est égal à celui donné en paramètre 
+     * @param nameCriterion nom du critère
+     * @param value valeur du critère
+     * @return boolean true or false
+     */
     public boolean criterionEquals(String nameCriterion, String value){
         if(!this.requierments.containsKey(nameCriterion)){
             return false;
@@ -108,6 +133,11 @@ public class Teenager{
         return this.requierments.get(nameCriterion).equals(value);
     }
 
+    /**
+     * Renvoie true si le teenager n'a pas d'habitude l'alimentaire contraire à celui donné en paramètre 
+     * @param teen un Teenager
+     * @return boolean true or false
+     */
     public boolean peutNourrir(Teenager teen){
         if(!teen.requierments.containsKey("GUEST_FOOD") || !this.requierments.containsKey("HOST_FOOD")){
             return false;
@@ -133,6 +163,11 @@ public class Teenager{
 
     }
 
+    /**
+     * Renvoie true si le teenager a un loisir en commun
+     * @param teen un Teenager
+     * @return boolean true or false
+     */
     public boolean loisirCommun(Teenager teen){
         if(!teen.requierments.containsKey("HOBBIES") || !this.requierments.containsKey("HOBBIES")){
             return false;
