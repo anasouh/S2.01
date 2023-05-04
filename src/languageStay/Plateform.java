@@ -7,8 +7,7 @@ import java.util.Map;
 
 
 public class Plateform {
-    
-    private Map<Teenager, Teenager> plateform = new HashMap<Teenager, Teenager>();
+
     private ArrayList<Teenager> promo = new ArrayList<>();
 
     public void supprimer(int i){

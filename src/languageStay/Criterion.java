@@ -19,7 +19,7 @@ public class Criterion {
             return Criterion.isNumeric(this.value);
         }else if(this.label.getTYPE() == 'D'){
             String[] date = this.value.split("-");
-            return Criterion.isYear(date[0]) && Criterion.isMonth(date[1]) && Criterion.isDays(date[2], date[1]);
+            return Criterion.isNumeric(date[0]) && Criterion.isMonth(date[1]) && Criterion.isDays(date[2], date[1]);
         }
         return true;
     }
@@ -50,10 +50,6 @@ public class Criterion {
             }
         }
         return true;
-    }
-
-    public static boolean isYear(String s){
-        return s.length() == 4 && Criterion.isNumeric(s);
     }
 
     public static boolean isMonth(String s){
