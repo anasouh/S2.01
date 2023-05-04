@@ -1,12 +1,12 @@
 package languageStay;
+import java.time.Month;
 
 /**
  * <strong>Permet de créer un objet Criterion </strong>
- * @author Desmee Nathan, Ouhdda Anas, Belguebli Rayane
+ * @author Desmee Nathan
+ * @author Ouhdda Anas
+ * @author Belguebli Rayane
  */
-import java.time.LocalDate;
-import java.time.Month;
-import java.util.ArrayList;
 
 public class Criterion {
     private String value;
@@ -26,6 +26,7 @@ public class Criterion {
     
     /**
      * Vérifie si le critère est valide si oui retourne true
+     * @return boolean true or false
      */
 
     public boolean isValid(){
@@ -42,6 +43,7 @@ public class Criterion {
 
     /**
      * Retourne la valeur du criètre
+     * @return la valeur
      */
     public String getValue() {
         return this.value;
@@ -49,6 +51,7 @@ public class Criterion {
 
     /**
      * Retourne le nom du critère
+     * @return le critère
      */
     public CriterionName getLabel() {
         return this.label;
@@ -56,6 +59,8 @@ public class Criterion {
 
     /**
      * Retourne true si le text est égal à celui donné en paramètre
+     * @param text le texte à verifier
+     * @return boolean true or false
      */
     public boolean equals(String text){
         return this.value.equals(text);
@@ -63,6 +68,8 @@ public class Criterion {
 
     /**
      * Vérifie si la chaine de caractère donné en paramètre est un chiffre si oui retourne true
+     * @param s la chaine à vérifier
+     * @return boolean true or false
      */
     public static boolean isNumeric(String s)
     {
@@ -80,10 +87,21 @@ public class Criterion {
         return true;
     }
 
+    /**
+     * Vérifie si la chaine de caractère donné en paramètre est un mois
+     * @param s la chaine à vérifier
+     * @return boolean true or false
+     */
     public static boolean isMonth(String s){
         return Criterion.isNumeric(s) && Integer.parseInt(s) >= 1 && Integer.parseInt(s) <= 12;
     }
 
+    /**
+     * Vérifie si la chaine de caractère donné en paramètre est un jour
+     * @param s la chaine à vérifier pour le jour
+     * @param month la chaine à vérifier pour le moi
+     * @return boolean true or false
+     */
     public static boolean isDays(String s, String month){
         return Criterion.isNumeric(s) && Integer.parseInt(s) >= 1 && Integer.parseInt(s) <= Month.of(Integer.parseInt(month)).length(false);
     }
