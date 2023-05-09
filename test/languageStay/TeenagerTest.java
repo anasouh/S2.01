@@ -11,23 +11,26 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class TeenagerTest {
-    Teenager t1, t2, t3;
-    String n1, fn1, n2, fn2, n3, fn3;
-    LocalDate d1, d2, d3;
-    Country c1, c2, c3;
+    Teenager t1, t2, t3, t4;
+    String n1, fn1, n2, fn2, n3, fn3, n4, fn4;
+    LocalDate d1, d2, d3, d4;
+    Country c1, c2, c3, c4;
 
     @BeforeEach
     public void testInitialization() {
         d1 = LocalDate.of(2005, 5, 12);
         d2 = LocalDate.of(2004, 12, 3);
         d3 = LocalDate.of(2004, 1, 16);
+        d4 = LocalDate.of(2006, 3, 18);
         n1 = "Paul"; fn1 = "Jean";
         n2 = "Kroos"; fn2 = "Toni";
         n3 = "Iniesta"; fn3 = "Andres";
-        c1 = Country.FRANCE; c2 = Country.GERMANY; c3 = Country.SPAIN;
+        n4 = "Mario"; fn4 = "Super";
+        c1 = Country.FRANCE; c2 = Country.GERMANY; c3 = Country.SPAIN; c4 = Country.ITALY;
         t1 = new Teenager(n1, fn1, d1, c1);
         t2 = new Teenager(n2, fn2, d2, c2);
         t3 = new Teenager(n3, fn3, d3, c3);
+        t4 = new Teenager(n4, fn4, d4, c4);
     }
 
     @Test
@@ -85,6 +88,17 @@ public class TeenagerTest {
 
         assertTrue(t1.criterionEquals(CriterionName.GENDER.name(), t2.getCriterion(CriterionName.GENDER)));
         assertFalse(t1.criterionEquals(CriterionName.HOBBIES.name(), t2.getCriterion(CriterionName.HOBBIES)));
+    }
+
+    @Test
+    public void testNbLoisirCommun(){
+        t1.addCriterion(CriterionName.HOBBIES, "Sport");
+        t2.addCriterion(CriterionName.HOBBIES, "Sport, Cuisine");
+        t3.addCriterion(CriterionName.HOBBIES, "Video_games");
+        t4.addCriterion(CriterionName.HOBBIES, "Sport, Cuisine");
+        assertEquals(0, t2.nbLoisirCommun(t3));
+        assertEquals(1, t2.nbLoisirCommun(t1));
+        assertEquals(2, t2.nbLoisirCommun(t4));
     }
     
 }
