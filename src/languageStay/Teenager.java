@@ -1,4 +1,5 @@
 package languageStay;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,7 +58,7 @@ public class Teenager{
             return false;
         }
         else if(this.country == Country.FRANCE || teenager.getCountry() == Country.FRANCE){
-            if(!this.loisirCommun(teenager)){
+            if(this.nbLoisirCommun(teenager) == 0){
                 return false;
             }
         }
@@ -169,13 +170,13 @@ public class Teenager{
     }
 
     /**
-     * Renvoie true si le teenager a un loisir en commun
+     * Renvoie le nombre de loisirs communs entre le host et le guest
      * @param teen un Teenager
-     * @return boolean true or false
+     * @return int nombre de loisirs communs
      */
-    public boolean loisirCommun(Teenager teen){
+    public int nbLoisirCommun(Teenager teen){
         if(!teen.requierments.containsKey("HOBBIES") || !this.requierments.containsKey("HOBBIES")){
-            return false;
+            return 0;
         }
         ArrayList<String> ask = new ArrayList<>();
         ArrayList<String> give = new ArrayList<>();
@@ -189,12 +190,13 @@ public class Teenager{
                 give.add(s);
             }
         }
+        int nombre = 0;
         for (String s : ask) {
             if (give.indexOf(s) >= 0) {
-                return true;
+                nombre++;
             }
         }
-        return false;
+        return nombre;
 
     }
 }
