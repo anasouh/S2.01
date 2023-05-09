@@ -43,6 +43,9 @@ public class Teenager{
         Teenager.compteur ++;
     }
 
+    public String getName(){ 
+        return this.name;
+    }
 
     /**
      * Vérifie la compatibilité entre 2 Teenagers
@@ -198,5 +201,10 @@ public class Teenager{
         }
         return nombre;
 
+    }
+
+    @Override
+    public String toString() {
+        return "Teenager [id=" + id + ", name=" + name + ", firstname=" + firstname + "]";
     }
 }

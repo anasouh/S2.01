@@ -50,7 +50,7 @@ public class AffectationUtil {
         t5.addCriterion(CriterionName.HOST_FOOD, "");
         t6.addCriterion(CriterionName.HOST_FOOD, "");
 
-        GrapheNonOrienteValue<String> graphe = new GrapheNonOrienteValue<String>();
+        GrapheNonOrienteValue<Teenager> graphe = new GrapheNonOrienteValue<Teenager>();
         List<Teenager> baguette = new ArrayList<Teenager>();
         List<Teenager> spaghetti = new ArrayList<Teenager>();
         baguette.add(t1);
@@ -70,10 +70,9 @@ public class AffectationUtil {
                 graphe.ajouterArete(sommet2, sommet1, AffectationUtil.weight(sommet2, sommet1));
             }
         }
-        CalculAffectation<String> calcul = new CalculAffectation<String>(graphe, partie1, partie2);
-        List<fr.ulille.but.sae2_02.graphes.Arete<String>> liste = calcul.calculerAffectation();
+        CalculAffectation<Teenager> calcul = new CalculAffectation<Teenager>(graphe, baguette, spaghetti);
+        List<fr.ulille.but.sae2_02.graphes.Arete<Teenager>> liste = calcul.calculerAffectation();
         System.out.println(liste);
         System.out.println(calcul.getCout());
     }
-}
 }
