@@ -1,4 +1,10 @@
 package languageStay.graph;
+/**
+ * <strong>Affecte des teenagers visiteur à des teenagers d'autres pays hôte </strong>
+ * @author Desmee Nathan
+ * @author Ouhdda Anas
+ * @author Belguebli Rayane
+ */
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +17,7 @@ public class AffectationUtil {
     /** Calcule le poids de l’arête entre host et visitor dans le graphe modèle.
     * @param host L'adolescent hôte
     * @param visitor L'adolescent visiteur
+    * @return le poids plus il est bas plus ils sont compatibles
     */
     public static double weight (Teenager host, Teenager visitor) {
         double result = 10.0;
