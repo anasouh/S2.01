@@ -215,6 +215,11 @@ public class Teenager{
         return true;
     }
 
+    /** 
+     * Renvoie en chaîne de caratère l'id, le nom et prénom du teenager
+     * @return une chaine de caratère 
+    */
+
     @Override
     public String toString() {
         return "Teenager [id=" + id + ", name=" + name + ", firstname=" + firstname + "]";

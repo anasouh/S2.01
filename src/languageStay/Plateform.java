@@ -75,7 +75,8 @@ public class Plateform {
 
     /**
      * Ajoute à la plateforme un teenager, à condition que celui-ci n'y est pas déjà présent.
-     * @param teenager Teenager à ajouter 
+     * @param teenager Teenager à ajouter $
+     * @return true or false si le teenager est ajouté ou non
      */
     public boolean ajouter(Teenager teenager){
         if (!promo.contains(teenager)) return promo.add(teenager);
@@ -111,6 +112,7 @@ public class Plateform {
 
     /**
      * Vérifie si la plateforme contient un teenager. 
+     * @return true or false si le teenager est présent
      */
     public boolean contains(Teenager teenager){
         return promo.contains(teenager);
@@ -118,6 +120,7 @@ public class Plateform {
 
     /**
      * Retourne le nombre de teenagers dans la plateforme.
+     *  @return un int qui défini la taille
      */
     public int size(){
         return promo.size();

@@ -1,9 +1,6 @@
 package languageStay.graph;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 import java.time.LocalDate;
 
@@ -12,12 +9,11 @@ import org.junit.jupiter.api.BeforeEach;
 
 import languageStay.*;
 
-public class TestAffectationUtil {
+public class TestAffectationVersion1 {
     Teenager t1, t2, t3, t4, t5, t6;
 
     @BeforeEach
     public void testInitialization(){
-        System.out.println("je m'execute");
         t1 = new Teenager("A", "Adonia", LocalDate.now(), Country.FRANCE);
         t2 = new Teenager("B", "Bellatrix", LocalDate.now(), Country.FRANCE);
         t3 = new Teenager("C", "Callista", LocalDate.now(), Country.FRANCE);
@@ -50,7 +46,6 @@ public class TestAffectationUtil {
 
     @Test
     public void testWeight(){
-        System.out.println(t4);
         assertEquals(8, AffectationUtil.weight(t4, t1));
         assertEquals(110, AffectationUtil.weight(t5, t1));
         assertEquals(8, AffectationUtil.weight(t6, t1));
