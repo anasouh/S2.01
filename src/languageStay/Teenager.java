@@ -149,7 +149,7 @@ public class Teenager{
      */
     public boolean peutNourrir(Teenager teen){
         if(!teen.requierments.containsKey("GUEST_FOOD") || !this.requierments.containsKey("HOST_FOOD")){
-            return true;
+            return false;
         }
         ArrayList<String> ask = new ArrayList<>();
         ArrayList<String> give = new ArrayList<>();

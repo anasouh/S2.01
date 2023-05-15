@@ -68,26 +68,22 @@ public class TestAffectationVersion1 {
     @Test
     public void testWeight(){
         assertEquals(8, AffectationUtil.weight(t4, t1));
-        assertEquals(110, AffectationUtil.weight(t5, t1));
+        assertEquals(1010, AffectationUtil.weight(t5, t1));
         assertEquals(8, AffectationUtil.weight(t6, t1));
         assertEquals(8, AffectationUtil.weight(t4, t2));
-        assertEquals(108, AffectationUtil.weight(t5, t2));
-        assertEquals(110, AffectationUtil.weight(t6, t2));
-        assertEquals(110, AffectationUtil.weight(t4, t3));
+        assertEquals(1008, AffectationUtil.weight(t5, t2));
+        assertEquals(1010, AffectationUtil.weight(t6, t2));
+        assertEquals(1010, AffectationUtil.weight(t4, t3));
         assertEquals(6, AffectationUtil.weight(t5, t3));
-        assertEquals(110, AffectationUtil.weight(t6, t3));
+        assertEquals(1010, AffectationUtil.weight(t6, t3));
     }
 
     @Test
     public void testCompatibilityVsHobbies(){
-        assertEquals(8, AffectationUtil.weight(t4, t1));
-        assertEquals(110, AffectationUtil.weight(t5, t1));
-        assertEquals(8, AffectationUtil.weight(t6, t1));
-        assertEquals(8, AffectationUtil.weight(t4, t2));
-        assertEquals(108, AffectationUtil.weight(t5, t2));
-        assertEquals(110, AffectationUtil.weight(t6, t2));
-        assertEquals(110, AffectationUtil.weight(t4, t3));
-        assertEquals(6, AffectationUtil.weight(t5, t3));
-        assertEquals(110, AffectationUtil.weight(t6, t3));
+        assertEquals(10, AffectationUtil.weight(t9, t7));
+        assertEquals(1010, AffectationUtil.weight(t10, t8));
+        assertEquals(910, AffectationUtil.weight(t7, t10));
+        assertEquals(1010, AffectationUtil.weight(t8, t9));
+        assertEquals(910, AffectationUtil.weight(t10, t7));
     }
 }

@@ -21,7 +21,7 @@ public class AffectationUtil {
     */
     public static double weight (Teenager host, Teenager visitor) {
         double result = 10.0;
-        if (!host.compatibleWithGuest(visitor)) result = result + 100;
+        if (!host.compatibleWithGuest(visitor)) result = result + 1000;
         result = result - (2 * host.nbLoisirCommun(visitor));
         return result;
     }
