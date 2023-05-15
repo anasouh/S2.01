@@ -53,8 +53,7 @@ public class Teenager{
      * @return boolean true or false
      */
     public boolean compatibleWithGuest(Teenager teenager){
-        if(this.criterionEquals("HOST_HAS_ANIMAL", "yes") 
-        && teenager.criterionEquals("GUEST_ANIMAL_ALLERGY", "yes")){
+        if(this.problemeAllergie(teenager)){
             return false;
         }
         else if(!this.peutNourrir(teenager)){
@@ -143,22 +142,23 @@ public class Teenager{
     }
 
     /**
-     * Renvoie true si le teenager n'a pas d'habitude l'alimentaire contraire à celui donné en paramètre 
+     * Renvoie true si le teenager l 'habitude l'alimentaire compatible à celui donné en paramètre 
      * @param teen un Teenager
      * @return boolean true or false
      */
     public boolean peutNourrir(Teenager teen){
-        if(!teen.requierments.containsKey("GUEST_FOOD") || !this.requierments.containsKey("HOST_FOOD")){
+        if(teen.requierments.containsKey("GUEST_FOOD") && teen.criterionEquals("GUEST_FOOD", "")){
             return true;
+        }
+        if(!teen.requierments.containsKey("GUEST_FOOD") || !this.requierments.containsKey("HOST_FOOD")){
+            return false;
         }
         ArrayList<String> ask = new ArrayList<>();
         ArrayList<String> give = new ArrayList<>();
-        if(!teen.requierments.get("GUEST_FOOD").equals("")){
-            for (String s : teen.requierments.get("GUEST_FOOD").getValue().split(",")) {
-                ask.add(s);
-            }
+        for (String s : teen.requierments.get("GUEST_FOOD").getValue().split(",")) {
+            ask.add(s);
         }
-        if(!this.requierments.get("HOST_FOOD").equals("")){
+        if(!this.criterionEquals("HOST_FOOD", "")){
             for (String s : this.requierments.get("HOST_FOOD").getValue().split(",")) {
                 give.add(s);
             }
@@ -201,6 +201,18 @@ public class Teenager{
         }
         return nombre;
 
+    }
+
+    /**
+     * Vérifie si il y a un problème d'allergie entre un hôte et un guest
+     * @param teenager un teenager
+     * @return false si problème d'allergie, false sinon
+     */
+    public boolean problemeAllergie(Teenager teenager){
+        if(this.criterionEquals("HOST_HAS_ANIMAL", "no") || teenager.criterionEquals("GUEST_ANIMAL_ALLERGY", "no")){
+            return false;
+        }
+        return true;
     }
 
     @Override

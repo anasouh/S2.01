@@ -26,7 +26,7 @@ public class Plateform {
             int minCri = minimumCritere(promo);
             List<Teenager> aSupp = new ArrayList<>();
             for(Teenager etudiant : promo){
-                if(etudiant.getNbCriterion() == minCri){
+                if(etudiant.getNbCriterion() == minCri && c < nbSupp){
                     c++;
                     aSupp.add(etudiant);
                 }
@@ -49,7 +49,7 @@ public class Plateform {
             int minCri = minimumCritere(promo);
             List<Teenager> aSupp = new ArrayList<>();
             for(Teenager etudiant : promo){
-                if(etudiant.getNbCriterion() == minCri && etudiant.getCountry() == pays){
+                if(etudiant.getNbCriterion() == minCri && etudiant.getCountry() == pays && c < nbSupp){
                     c++;
                     aSupp.add(etudiant);
                 }
