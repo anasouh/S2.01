@@ -20,7 +20,7 @@ public class AffectationUtil {
     * @return le poids plus il est bas plus ils sont compatibles
     */
     public static double weight (Teenager host, Teenager visitor) {
-        double result = 100.0;
+        double result = 10.0;
         if (!host.compatibleWithGuest(visitor)) result = result + 1000;
         result = result - (2 * host.nbLoisirCommun(visitor));
         return result;
@@ -76,8 +76,11 @@ public class AffectationUtil {
         t4.addCriterion(CriterionName.HOST_FOOD, "");
         t5.addCriterion(CriterionName.HOST_FOOD, "");
         t6.addCriterion(CriterionName.HOST_FOOD, "");
-
         t7.addCriterion(CriterionName.GUEST_FOOD, "");
+        t8.addCriterion(CriterionName.GUEST_FOOD, "");
+        t9.addCriterion(CriterionName.GUEST_FOOD, "");
+        t10.addCriterion(CriterionName.GUEST_FOOD, "");
+        t7.addCriterion(CriterionName.HOST_FOOD, "");
         t8.addCriterion(CriterionName.HOST_FOOD, "");
         t9.addCriterion(CriterionName.HOST_FOOD, "");
         t10.addCriterion(CriterionName.HOST_FOOD, "");
