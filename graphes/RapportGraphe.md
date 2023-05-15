@@ -37,7 +37,7 @@
   
   ### Modélisation pour la Version 1
   
-  Donc nous avons décidé de mettre un poids de base entre chaque adolescent de 100. On augmente de 1000 si il y a imcompatibilité dû à la raison que les adolescents français ne peuvent qu'aller chez un hôte ayant au moins un loisir en commun et à l'allergie aux animaux. On enlève 2 pour chaques loisirs en commun.
+  Donc nous avons décidé de mettre un poids de base entre chaque adolescent de 10. On augmente de 100 si il y a imcompatibilité dû à la raison que les adolescents français ne peuvent qu'aller chez un hôte ayant au moins un loisir en commun et à l'allergie aux animaux. On enlève 2 pour chaques loisirs en commun.
   
   ### Implémentation de la Version 1
   
@@ -48,7 +48,9 @@
   
   ### Exemple de vérification de l'incompatibilité 
 
-  La particularité de cette exemple est que des adolescents n'ont pas mis de loisir et que l'adolescent A A est allergique aux animaux et il possède un animal.
+  La particularité de cette exemple est que des adolescents n'ont pas mis de loisir, que d'autres en ont mis beaucoup et que l'adolescent A A est allergique aux animaux et il possède un animal.
+
+  Donc pour parrer à ce problème on a changer la valeur de si il y a imcompatibilité on est passé de 100 à 1000. 
   
   (voir '[TestAffectationVersion1.java méthode *testCompatibilityVsHobbies()*](../test/languageStay/graph/TestAffectationVersion1.java)')
   
