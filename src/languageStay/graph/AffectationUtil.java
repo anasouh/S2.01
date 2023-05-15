@@ -20,8 +20,8 @@ public class AffectationUtil {
     * @return le poids plus il est bas plus ils sont compatibles
     */
     public static double weight (Teenager host, Teenager visitor) {
-        double result = 100.0;
-        if (!host.compatibleWithGuest(visitor)) result = result + 1000;
+        double result = 10.0;
+        if (!host.compatibleWithGuest(visitor)) result = result + 100;
         result = result - (2 * host.nbLoisirCommun(visitor));
         return result;
     }
