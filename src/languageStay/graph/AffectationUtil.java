@@ -76,8 +76,11 @@ public class AffectationUtil {
         t4.addCriterion(CriterionName.HOST_FOOD, "");
         t5.addCriterion(CriterionName.HOST_FOOD, "");
         t6.addCriterion(CriterionName.HOST_FOOD, "");
-
         t7.addCriterion(CriterionName.GUEST_FOOD, "");
+        t8.addCriterion(CriterionName.GUEST_FOOD, "");
+        t9.addCriterion(CriterionName.GUEST_FOOD, "");
+        t10.addCriterion(CriterionName.GUEST_FOOD, "");
+        t7.addCriterion(CriterionName.HOST_FOOD, "");
         t8.addCriterion(CriterionName.HOST_FOOD, "");
         t9.addCriterion(CriterionName.HOST_FOOD, "");
         t10.addCriterion(CriterionName.HOST_FOOD, "");
