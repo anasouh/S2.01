@@ -87,7 +87,7 @@ public class Plateform {
      * Ajoute à la plateforme des teenagers, à condition que ceux-ci n'y soient pas déjà.
      * @param teenagers Liste de Teenager à ajouter 
      */
-    public void ajouter(ArrayList<Teenager> teenagers){
+    public void ajouter(List<Teenager> teenagers){
         for (Teenager t: teenagers){
             if (!promo.contains(t)) promo.add(t);
         }
@@ -116,6 +116,15 @@ public class Plateform {
      */
     public boolean contains(Teenager teenager){
         return promo.contains(teenager);
+    }
+
+    /**
+     * Supprimer un teenager de la plateforme si celu-ci y est présent. 
+     * @oaram teenager le teenager ) supprimer.
+     * @return true si le teenager a correctement été supprimé, false sinon.
+     */
+    public boolean supprimer(Teenager teenager) {
+        return promo.remove(teenager);
     }
 
     /**

@@ -94,17 +94,25 @@ public class Criterion {
      * @return boolean true or false
      */
     public static boolean isMonth(String s){
-        return Criterion.isNumeric(s) && Integer.parseInt(s) >= 1 && Integer.parseInt(s) <= 12;
+        try {
+            return Criterion.isNumeric(s) && Integer.parseInt(s) >= 1 && Integer.parseInt(s) <= 12;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     /**
      * Vérifie si la chaine de caractère donné en paramètre est un jour
      * @param s la chaine à vérifier pour le jour
-     * @param month la chaine à vérifier pour le moi
+     * @param month la chaine à vérifier pour le mois
      * @return boolean true or false
      */
-    public static boolean isDays(String s, String month){
-        return Criterion.isNumeric(s) && Integer.parseInt(s) >= 1 && Integer.parseInt(s) <= Month.of(Integer.parseInt(month)).length(false);
+    public static boolean isDays(String s, String month) {
+        try {
+            return Criterion.isNumeric(s) && Integer.parseInt(s) >= 1 && Integer.parseInt(s) <= Month.of(Integer.parseInt(month)).length(false);
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     @Override
