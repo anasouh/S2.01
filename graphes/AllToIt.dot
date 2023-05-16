@@ -1,0 +1,11 @@
+strict digraph ItalienVersAllemand {
+  rankdir=LR;
+  a [ shape="circle" penwidth="1.0" ];
+  b [ shape="circle" penwidth="1.0" ];
+  c [ shape="circle" penwidth="1.0" ];
+  d [ shape="circle" penwidth="1.0" ];
+  c -> a [ penwidth="1.0" label="10" ];
+  c -> b [ penwidth="1.0" label="10" ];
+  d -> a [ penwidth="1.0" label="-90" ];
+  d -> b [ penwidth="1.0" label="10" ];
+}
