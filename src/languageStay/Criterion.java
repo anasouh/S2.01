@@ -29,16 +29,17 @@ public class Criterion {
      * @return boolean true or false
      */
 
-    public boolean isValid(){
-        if(this.label.getTYPE() == 'B'){
-            return this.value.equals("yes") || this.value.equals("no");
-        }else if(this.label.getTYPE() == 'N'){
-            return Criterion.isNumeric(this.value);
+    public void isValid() throws WrongCriterionTypeException{
+        if(this.label.getTYPE() == 'B' && !this.equals("yes") && !this.equals("no")){
+            throw new WrongCriterionTypeException("Ce critère boolean présente une valeur incorrecte");
+        }else if(this.label.getTYPE() == 'N' && !Criterion.isNumeric(this.value)){
+            throw new WrongCriterionTypeException("Ce critère numerique présente une valeur incorrecte");
         }else if(this.label.getTYPE() == 'D'){
             String[] date = this.value.split("-");
-            return Criterion.isNumeric(date[0]) && Criterion.isMonth(date[1]) && Criterion.isDays(date[2], date[1]);
+            if(!Criterion.isNumeric(date[0]) || !Criterion.isMonth(date[1]) || !Criterion.isDays(date[2], date[1])){
+                throw new WrongCriterionTypeException("Ce critère de type date présente une valeur incorrecte");
+            }
         }
-        return true;
     }
 
     /**
@@ -58,7 +59,7 @@ public class Criterion {
     }
 
     /**
-     * Retourne true si le text est égal à celui donné en paramètre
+     * Retourne true si la valeur du critère est égal à celui donné en paramètre
      * @param text le texte à verifier
      * @return boolean true or false
      */

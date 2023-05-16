@@ -30,7 +30,7 @@ public class TeenagerTest {
         t3 = new Teenager(n3, fn3, d3, c3);
         t4 = new Teenager(n4, fn4, d4, c4);
     }
-
+    
     @Test
     public void testPurgeInvalidRequierement() {
         t1.addCriterion(CriterionName.HOST_HAS_ANIMAL, "yes");

@@ -20,9 +20,17 @@ public class CriterionTest {
 
     @Test
     public void testIsValid(){
-        assertTrue(c5.isValid());
-        assertTrue(c7.isValid());
-        assertFalse(c6.isValid());
+        try{
+            c5.isValid();
+            c7.isValid();
+        }catch(WrongCriterionTypeException e){
+            assertTrue(false);
+        }
+        try{
+            c6.isValid();
+        }catch(WrongCriterionTypeException e){
+            assertTrue(true);
+        }
     }
 
     @Test

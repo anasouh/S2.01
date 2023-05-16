@@ -72,13 +72,15 @@ public class Teenager{
      * Vérifie si les valeurs des critères est valide et si oui les supprime
      */
     public void purgeInvalidRequierement(){
-        if(requierments.get("HOST_HAS_ANIMAL").equals("yes") && requierments.get("GUEST_ANIMAL_ALLERGY").equals("yes")){
+        if(this.criterionEquals("HOST_HAS_ANIMAL", "yes") && this.criterionEquals("GUEST_ANIMAL_ALLERGY", "yes")){
             requierments.remove("HOST_HAS_ANIMAL");
             requierments.remove("GUEST_ANIMAL_ALLERGY");
         }
         ArrayList<String> supp = new ArrayList<String>();
         for(String c : requierments.keySet()){
-            if(!requierments.get(c).isValid()){
+            try{
+                requierments.get(c).isValid();
+            }catch(WrongCriterionTypeException e){
                 supp.add(c);
             }
         }
