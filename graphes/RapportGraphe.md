@@ -50,10 +50,20 @@
 
   La particularité de cette exemple est que des adolescents n'ont pas mis de loisir, que d'autres en ont mis beaucoup et que l'adolescent A A est allergique aux animaux et il possède un animal.
 
-  Donc pour parrer à ce problème on a changer la valeur de si il y a imcompatibilité on est passé de 100 à 1000. 
+  Notre méthode d'affectation des poids n'a pu besoin d'être modifié.
   
   (voir '[TestAffectationVersion1.java méthode *testCompatibilityVsHobbies()*](../test/languageStay/graph/TestAffectationVersion1.java)')
-  
+
+  **Voici les graphes en rapport avec les affectations**
+
+  ![Les allemands qui vont chez les italiens](AllToIt.png)
+
+
+
+
+  ![Les italiens qui vont chez les allemands](ItToAll.png)
+
+
   Version 2
   ---
   
