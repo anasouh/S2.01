@@ -106,4 +106,9 @@ public class Criterion {
     public static boolean isDays(String s, String month){
         return Criterion.isNumeric(s) && Integer.parseInt(s) >= 1 && Integer.parseInt(s) <= Month.of(Integer.parseInt(month)).length(false);
     }
+
+    @Override
+    public String toString() {
+        return getLabel().name();
+    }
 }

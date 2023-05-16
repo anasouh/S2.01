@@ -43,6 +43,10 @@ public class Teenager{
         Teenager.compteur ++;
     }
 
+    /**
+     * Récupérer le nom du Teenager
+     * @return String le nom
+     */
     public String getName(){ 
         return this.name;
     }
@@ -98,6 +102,14 @@ public class Teenager{
     public void addCriterion(CriterionName label, String value){
         Criterion criterion =  new Criterion(label, value);
         requierments.put(label.name(), criterion);
+    }
+
+    /**
+     * Ajoute un critère donné en paramètre
+     * @param criterion le critère
+     */
+    public void addCriterion(Criterion criterion){
+        requierments.put(criterion.toString(), criterion);
     }
 
     /**
