@@ -1,0 +1,8 @@
+type: diwgraph
+name: ItalienVersAllemand
+nodes: [a, b, c, d]
+wedges:
+  c: {b: 10,a: 10}
+  d: {a: -90 ,b: 10}
+  a: {}
+  b: {}
