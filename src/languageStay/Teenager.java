@@ -85,6 +85,16 @@ public class Teenager{
         }
     }
 
+    /**
+     * Vérifie si les valeurs des critères sont incohérents et si oui les supprime
+     */
+    public void purgeIncoherentRequirement(){
+        if(this.criterionEquals("HOST_HAS_ANIMAL", "yes") && this.criterionEquals("GUEST_ANIMAL_ALLERGY", "yes")){
+            requierments.remove("HOST_HAS_ANIMAL");
+            requierments.remove("GUEST_ANIMAL_ALLERGY");
+        }
+    }
+
 
     /**
      * Ajoute un critère donné en paramètre

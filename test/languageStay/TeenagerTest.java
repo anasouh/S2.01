@@ -41,6 +41,8 @@ public class TeenagerTest {
         t3.addCriterion(CriterionName.GENDER, "M");
         t1.purgeInvalidRequierement();
         t3.purgeInvalidRequierement();
+        t1.purgeIncoherentRequirement();
+        t3.purgeIncoherentRequirement();
         assertEquals(1 , t1.getNbCriterion());
         assertEquals(2 , t3.getNbCriterion());
     }

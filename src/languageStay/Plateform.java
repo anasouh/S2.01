@@ -21,6 +21,7 @@ public class Plateform {
         int c = 0;
         for(Teenager t : promo){
             t.purgeInvalidRequierement();
+            t.purgeIncoherentRequirement();
         }
         while(c < nbSupp && promo.size() > 0){
             int minCri = minimumCritere(promo);
@@ -44,6 +45,7 @@ public class Plateform {
         int c = 0;
         for(Teenager t : promo){
             t.purgeInvalidRequierement();
+            t.purgeIncoherentRequirement();
         }
         while(c < nbSupp && promo.size() > 0){
             int minCri = minimumCritere(promo);
