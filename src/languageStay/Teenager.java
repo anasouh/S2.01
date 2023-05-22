@@ -26,7 +26,7 @@ public class Teenager{
     private String firstname;
     private LocalDate birthday;
     private Country country;
-    public static final String CSVHeader = "FORENAME;NAME;COUNTRY;BIRTH_DATE;HOBBIES;GUEST_ANIMAL_ALLERGY;HOST_HAS_ANIMAL;GUEST_FOOD;HOST_FOOD;GENDER;PAIR_GENDER;HISTORY";
+    public static final String CSVHeader = "HOST;GUEST";
     
     Map<String, Criterion> requierments = new HashMap<String, Criterion>();
 
@@ -287,6 +287,6 @@ public class Teenager{
 
     @Override
     public String toString() {
-        return "Teenager [id=" + id + ", name=" + name + ", firstname=" + firstname + "]";
+        return id + ": " + name + " " + firstname;
     }
 }

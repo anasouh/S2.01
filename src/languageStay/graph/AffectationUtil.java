@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.ulille.but.sae2_02.graphes.Arete;
 import fr.ulille.but.sae2_02.graphes.CalculAffectation;
 import fr.ulille.but.sae2_02.graphes.GrapheNonOrienteValue;
 import languageStay.*;
@@ -24,6 +25,36 @@ public class AffectationUtil {
         if (!host.compatibleWithGuest(visitor)) result = result + 1000;
         result = result - (2 * host.nbLoisirCommun(visitor));
         return result;
+    }
+
+    public static List<Arete<Teenager>> affectation(List<Teenager> promo, Country guest, Country host){
+        List<Teenager> teenHost = AffectationUtil.selectionPays(promo, host);
+        List<Teenager> teenGuest = AffectationUtil.selectionPays(promo, guest);
+        GrapheNonOrienteValue<Teenager> graphe = new GrapheNonOrienteValue<Teenager>();
+        for(Teenager sommet : teenHost){
+            graphe.ajouterSommet(sommet);
+        }
+        for(Teenager sommet : teenGuest){
+            graphe.ajouterSommet(sommet);
+        }
+        for(Teenager sommet1 : teenHost){
+            for(Teenager sommet2 : teenGuest){
+                graphe.ajouterArete(sommet2, sommet1, AffectationUtil.weight(sommet1, sommet2));
+            }
+        }
+        CalculAffectation<Teenager> calcul = new CalculAffectation<>(graphe, teenHost, teenGuest);
+        return calcul.calculerAffectation();
+
+    }
+
+    private static List<Teenager> selectionPays(List<Teenager> promo, Country pays){
+        List<Teenager> liste = new ArrayList<>();
+        for(Teenager t : promo){
+            if(t.getCountry() == pays){
+                liste.add(t);
+            }
+        }
+        return liste;
     }
 
     public static void main(String[] args) {
