@@ -150,17 +150,13 @@ public class Plateform {
     public void importer(String filename){
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             int line = 0;
+            br.readLine();
             while (br.ready()) {
-                System.out.println(line);
-                String s = br.readLine();
-                if (line > 0) {
-                    try {
-                        System.out.println(s);
-                        promo.add(Teenager.parse(s));
-                    } catch (WrongLineFormatException e) {
-                        System.out.println("Erreur à la ligne " + line + " : " + e.getMessage());
-                        System.out.println("Poursuite de l'importation...");
-                    }
+                try {
+                    promo.add(Teenager.parse(br.readLine()));
+                } catch (WrongLineFormatException e) {
+                    System.out.println("Erreur à la ligne " + line + " : " + e.getMessage());
+                    System.out.println("Poursuite de l'importation...");
                 }
                 line ++;
             }
