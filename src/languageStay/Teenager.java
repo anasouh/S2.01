@@ -248,10 +248,13 @@ public class Teenager{
     public static Teenager parse(String line) throws WrongLineFormatException {
         Teenager result = null;
         String[] data = line.split(";");
-        if (data.length == 12) {
+        Teenager.gestionVide(data);
+        if(data.length == 12) {
             String[] dateStr = data[3].split("-");
             LocalDate date = null;
-            if (dateStr.length == 3) LocalDate.of(Integer.parseInt(dateStr[0]), Integer.parseInt(dateStr[1]), Integer.parseInt(dateStr[2]));
+            if(dateStr.length == 3){
+                date = LocalDate.of(Integer.parseInt(dateStr[0]), Integer.parseInt(dateStr[1]), Integer.parseInt(dateStr[2]));
+            }
             result = new Teenager(data[1], data[0], date, Country.valueOf(data[2]));
             result.addCriterion(new Criterion(CriterionName.GUEST_ANIMAL_ALLERGY, data[4]));
             result.addCriterion(new Criterion(CriterionName.HOST_HAS_ANIMAL, data[5]));
@@ -264,6 +267,14 @@ public class Teenager{
             return result;
         } else {
             throw new WrongLineFormatException();
+        }
+    }
+
+    public static void gestionVide(String[] data){
+        for(int i = 0; i < data.length; i++){
+            if(data[i].equals("\"\"")){
+                data[i] = "";
+            }
         }
     }
 
@@ -311,6 +322,6 @@ public class Teenager{
 
     @Override
     public String toString() {
-        return id + ": " + name + " " + firstname;
+        return id + "-" + name + "-" + firstname;
     }
 }

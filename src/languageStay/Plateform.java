@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.ulille.but.sae2_02.graphes.Arete;
 import languageStay.exceptions.WrongLineFormatException;
+import languageStay.graph.AffectationUtil;
 
 /**
  * <strong>Permet de créer un objet Platform </strong>
@@ -155,7 +157,18 @@ public class Plateform {
             br.readLine();
             while (br.ready()) {
                 try {
-                    promo.add(Teenager.parse(br.readLine()));
+                    String chaine = br.readLine();
+                    String string = "";
+                    for(int i = 0; i < chaine.length()-1; i++){
+                        string += chaine.charAt(i);
+                        if(chaine.charAt(i) == ';' && chaine.charAt(i+1) == ';'){
+                            string += "\"\"";
+                        }
+                    }
+                    if(chaine.charAt(0) == ';'){
+                        string = "\"\"" + string;
+                    }
+                    promo.add(Teenager.parse(string));
                 } catch (WrongLineFormatException e) {
                     System.out.println("Erreur à la ligne " + line + " : " + e.getMessage());
                     System.out.println("Poursuite de l'importation...");
@@ -171,13 +184,14 @@ public class Plateform {
      * Exporter les teenagers de la plateforme dans un fichier CSV.
      * @param filename Nom du fichier CSV
      */
-    public void exporter(String filename) {
-        File file = new File(filename);
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+    public void exporter(String filename, Country host, Country guest) {
+        List<Arete<Teenager>> liste = AffectationUtil.affectation(promo, guest, host);
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(filename)))) {
             bw.write(Teenager.CSVHeader);
             bw.newLine();
-            for (Teenager t : promo) {
-                bw.write(t.serialize());
+            for (Arete<Teenager> a : liste) {
+                String chaine = a.getExtremite1() + ";" + a.getExtremite2();
+                bw.write(chaine);
                 bw.newLine();
             }
         } catch (IOException e) {
@@ -188,5 +202,11 @@ public class Plateform {
     @Override
     public String toString() {
         return "Plateform [promo=" + promo + "]";
+    }
+
+    public static void main(String[] args) {
+        Plateform plateform = new Plateform();
+        plateform.importer(System.getProperty("user.dir") + File.separator + "res" + File.separator + "teenagersData.csv");
+        plateform.exporter(System.getProperty("user.dir") + File.separator + "res" + File.separator + "affectationData.csv", Country.FRANCE, Country.ITALY);
     }
 }
