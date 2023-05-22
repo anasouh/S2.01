@@ -30,6 +30,8 @@ public class Teenager{
     
     Map<String, Criterion> requierments = new HashMap<String, Criterion>();
 
+    static Map<Teenager, Teenager> history = new HashMap<Teenager, Teenager>();
+
 
     /**
      * Crée un Teenager complètement spécifiée
@@ -278,6 +280,28 @@ public class Teenager{
         result += this.getCriterion(CriterionName.PAIR_GENDER);
         result += this.getCriterion(CriterionName.HISTORY);
         return result;
+    }
+
+    public static void addHistory(Teenager t1, Teenager t2){
+        history.put(t1, t2);
+        System.out.println(history.toString());
+    }
+
+    public static int history(Teenager t1, Teenager t2){
+        if(t1 != null && t2 != null){
+            if(history.get(t2).equals(t1) || history.get(t1).equals(t2)){
+                if(t2.getCriterion(CriterionName.HISTORY).equals("same") && t1.getCriterion(CriterionName.HISTORY).equals("same")){
+                    return -10;
+                }
+                else if(t2.getCriterion(CriterionName.HISTORY).equals("other") || t1.getCriterion(CriterionName.HISTORY).equals("other")){
+                    return 4;
+                }
+                else{
+                    return -5;
+                }
+            }
+        }
+        return 0;
     }
 
     /** 

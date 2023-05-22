@@ -24,6 +24,7 @@ public class AffectationUtil {
         double result = 10.0;
         if (!host.compatibleWithGuest(visitor)) result = result + 1000;
         result = result - (2 * host.nbLoisirCommun(visitor));
+        result = result + Teenager.history(host ,visitor);
         return result;
     }
 
@@ -58,7 +59,9 @@ public class AffectationUtil {
     }
 
     public static void main(String[] args) {
-        Teenager t1, t2, t3, t4, t5, t6, t7, t8, t9, t10;
+        Teenager t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18;
+
+        /*Graphes Version 1 */
         t1 = new Teenager("A", "Adonia", LocalDate.now(), Country.FRANCE);
         t2 = new Teenager("B", "Bellatrix", LocalDate.now(), Country.FRANCE);
         t3 = new Teenager("C", "Callista", LocalDate.now(), Country.FRANCE);
@@ -107,6 +110,7 @@ public class AffectationUtil {
         t4.addCriterion(CriterionName.HOST_FOOD, "");
         t5.addCriterion(CriterionName.HOST_FOOD, "");
         t6.addCriterion(CriterionName.HOST_FOOD, "");
+
         t7.addCriterion(CriterionName.GUEST_FOOD, "");
         t8.addCriterion(CriterionName.GUEST_FOOD, "");
         t9.addCriterion(CriterionName.GUEST_FOOD, "");
@@ -116,6 +120,75 @@ public class AffectationUtil {
         t9.addCriterion(CriterionName.HOST_FOOD, "");
         t10.addCriterion(CriterionName.HOST_FOOD, "");
 
+        /*Graphes Version 2 */
+        t11 = new Teenager("Jack", "Grealish", LocalDate.now(), Country.GERMANY);
+        t12 = new Teenager("Phil", "Foden", LocalDate.now(), Country.GERMANY);
+        t13 = new Teenager("Harry", "Kane", LocalDate.now(), Country.GERMANY);
+        t14 = new Teenager("Kyle", "Walker", LocalDate.now(), Country.GERMANY);
+        t15 = new Teenager("Pedri", "Gonzalez", LocalDate.now(), Country.SPAIN);
+        t16 = new Teenager("Nico", "Williams", LocalDate.now(), Country.SPAIN);
+        t17 = new Teenager("David", "DeGea", LocalDate.now(), Country.SPAIN);
+        t18 = new Teenager("Xavi", "Hernandez", LocalDate.now(), Country.SPAIN);
+
+        t11.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY, "no");
+        t12.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY, "no");
+        t13.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY, "no");
+        t14.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY, "no");
+        t15.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY, "no");
+        t16.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY, "no");
+        t17.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY, "no");
+        t18.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY, "no");
+
+        t11.addCriterion(CriterionName.HOST_HAS_ANIMAL, "no");
+        t12.addCriterion(CriterionName.HOST_HAS_ANIMAL, "no");
+        t13.addCriterion(CriterionName.HOST_HAS_ANIMAL, "no");
+        t14.addCriterion(CriterionName.HOST_HAS_ANIMAL, "no");
+        t15.addCriterion(CriterionName.HOST_HAS_ANIMAL, "no");
+        t16.addCriterion(CriterionName.HOST_HAS_ANIMAL, "no");
+        t17.addCriterion(CriterionName.HOST_HAS_ANIMAL, "no");
+        t18.addCriterion(CriterionName.HOST_HAS_ANIMAL, "no");
+
+        t11.addCriterion(CriterionName.HOBBIES, "");
+        t12.addCriterion(CriterionName.HOBBIES, "");
+        t13.addCriterion(CriterionName.HOBBIES, "");
+        t14.addCriterion(CriterionName.HOBBIES, "");
+        t15.addCriterion(CriterionName.HOBBIES, "");
+        t16.addCriterion(CriterionName.HOBBIES, "");
+        t17.addCriterion(CriterionName.HOBBIES, "");
+        t18.addCriterion(CriterionName.HOBBIES, "");
+
+        t11.addCriterion(CriterionName.GUEST_FOOD, "");
+        t12.addCriterion(CriterionName.GUEST_FOOD, "");
+        t13.addCriterion(CriterionName.GUEST_FOOD, "");
+        t14.addCriterion(CriterionName.GUEST_FOOD, "");
+        t15.addCriterion(CriterionName.GUEST_FOOD, "");
+        t16.addCriterion(CriterionName.GUEST_FOOD, "");
+        t17.addCriterion(CriterionName.GUEST_FOOD, "");
+        t18.addCriterion(CriterionName.GUEST_FOOD, "");
+
+        t11.addCriterion(CriterionName.HOST_FOOD, "");
+        t12.addCriterion(CriterionName.HOST_FOOD, "");
+        t13.addCriterion(CriterionName.HOST_FOOD, "");
+        t14.addCriterion(CriterionName.HOST_FOOD, "");
+        t15.addCriterion(CriterionName.HOST_FOOD, "");
+        t16.addCriterion(CriterionName.HOST_FOOD, "");
+        t17.addCriterion(CriterionName.HOST_FOOD, "");
+        t18.addCriterion(CriterionName.HOST_FOOD, "");
+
+        t11.addCriterion(CriterionName.HISTORY, "same");
+        t12.addCriterion(CriterionName.HISTORY, "other");
+        t13.addCriterion(CriterionName.HISTORY, "same");
+        t14.addCriterion(CriterionName.HISTORY, "");
+        t15.addCriterion(CriterionName.HISTORY, "other");
+        t16.addCriterion(CriterionName.HISTORY, "");
+        t17.addCriterion(CriterionName.HISTORY, "other");
+        t18.addCriterion(CriterionName.HISTORY, "same");
+
+        Teenager.addHistory(t11, t18);
+        Teenager.addHistory(t13, t17);
+        Teenager.addHistory(t14, t15);
+
+        /*Graphes Version 1 */
         GrapheNonOrienteValue<Teenager> graphe = new GrapheNonOrienteValue<Teenager>();
         List<Teenager> baguette = new ArrayList<Teenager>();
         List<Teenager> spaghetti = new ArrayList<Teenager>();
@@ -189,5 +262,36 @@ public class AffectationUtil {
         System.out.println("ManchaftToSpaghetti");
         System.out.println(liste2);
         System.out.println(calcul2.getCout());
+
+        /*Graphes Version 2 */
+
+        GrapheNonOrienteValue<Teenager> grapheHistory = new GrapheNonOrienteValue<Teenager>();
+        List<Teenager> opel = new ArrayList<Teenager>();
+        List<Teenager> salsa = new ArrayList<Teenager>();
+        opel.add(t11);
+        opel.add(t12);
+        opel.add(t13);
+        opel.add(t14);
+        salsa.add(t15);
+        salsa.add(t16);
+        salsa.add(t17);
+        salsa.add(t18);
+        for(Teenager sommet : opel){
+            grapheHistory.ajouterSommet(sommet);
+        }
+        for(Teenager sommet : salsa){
+            grapheHistory.ajouterSommet(sommet);
+        }
+        for(Teenager sommet1 : opel){
+            for(Teenager sommet2 : salsa){
+                grapheHistory.ajouterArete(sommet2, sommet1, AffectationUtil.weight(sommet2, sommet1));
+            }
+        }
+
+        CalculAffectation<Teenager> calculHistory = new CalculAffectation<Teenager>(grapheHistory, salsa, opel);
+        List<fr.ulille.but.sae2_02.graphes.Arete<Teenager>> listeHistory = calculHistory.calculerAffectation();
+        System.out.println("OpelToSalsa");
+        System.out.println(listeHistory);
+        System.out.println(calculHistory.getCout());
     }
 }
