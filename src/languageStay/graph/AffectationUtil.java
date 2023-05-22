@@ -39,7 +39,7 @@ public class AffectationUtil {
         }
         for(Teenager sommet1 : teenHost){
             for(Teenager sommet2 : teenGuest){
-                graphe.ajouterArete(sommet2, sommet1, AffectationUtil.weight(sommet1, sommet2));
+                graphe.ajouterArete(sommet1, sommet2, AffectationUtil.weight(sommet1, sommet2));
             }
         }
         CalculAffectation<Teenager> calcul = new CalculAffectation<>(graphe, teenHost, teenGuest);
