@@ -1,6 +1,12 @@
 package languageStay;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import languageStay.exceptions.WrongLineFormatException;
 
 /**
  * <strong>Permet de créer un objet Platform </strong>
@@ -135,5 +141,38 @@ public class Plateform {
      */
     public int size(){
         return promo.size();
+    }
+
+    /**
+     * Importer des teenagers à partir d'un fichier CSV.
+     * @param filename Nom du fichier CSV
+     */
+    public void importer(String filename){
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            int line = 0;
+            while (br.ready()) {
+                System.out.println(line);
+                String s = br.readLine();
+                if (line > 0) {
+                    try {
+                        System.out.println(s);
+                        promo.add(Teenager.parse(s));
+                    } catch (WrongLineFormatException e) {
+                        System.out.println("Erreur à la ligne " + line + " : " + e.getMessage());
+                        System.out.println("Poursuite de l'importation...");
+                    }
+                }
+                line ++;
+            }
+        } catch (IOException e) {
+            System.out.println("Erreur lors de la lecture du fichier " + filename + " : " + e.getMessage());
+        }
+    }
+
+    
+
+    @Override
+    public String toString() {
+        return "Plateform [promo=" + promo + "]";
     }
 }

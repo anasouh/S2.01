@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import languageStay.exceptions.WrongCriterionTypeException;
+import languageStay.exceptions.WrongLineFormatException;
+
 
 
 /**
@@ -233,6 +236,32 @@ public class Teenager{
             return false;
         }
         return true;
+    }
+
+    /**
+     * Créer une instance Teenager à partir d'une ligne de CSV. 
+     * @param line une ligne de CSV
+     */
+    public static Teenager parse(String line) throws WrongLineFormatException {
+        Teenager result = null;
+        String[] data = line.split(";");
+        if (data.length == 12) {
+            String[] dateStr = data[3].split("-");
+            LocalDate date = null;
+            if (dateStr.length == 3) LocalDate.of(Integer.parseInt(dateStr[0]), Integer.parseInt(dateStr[1]), Integer.parseInt(dateStr[2]));
+            result = new Teenager(data[1], data[0], date, Country.valueOf(data[2]));
+            result.addCriterion(new Criterion(CriterionName.GUEST_ANIMAL_ALLERGY, data[4]));
+            result.addCriterion(new Criterion(CriterionName.HOST_HAS_ANIMAL, data[5]));
+            result.addCriterion(new Criterion(CriterionName.GUEST_FOOD, data[6]));
+            result.addCriterion(new Criterion(CriterionName.HOST_FOOD, data[7]));
+            result.addCriterion(new Criterion(CriterionName.HOBBIES, data[8]));
+            result.addCriterion(new Criterion(CriterionName.GENDER, data[9]));
+            result.addCriterion(new Criterion(CriterionName.PAIR_GENDER, data[10]));
+            result.addCriterion(new Criterion(CriterionName.HISTORY, data[11]));
+            return result;
+        } else {
+            throw new WrongLineFormatException();
+        }
     }
 
     /** 
