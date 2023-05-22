@@ -26,6 +26,7 @@ public class Teenager{
     private String firstname;
     private LocalDate birthday;
     private Country country;
+    public static final String CSVHeader = "FORENAME;NAME;COUNTRY;BIRTH_DATE;HOBBIES;GUEST_ANIMAL_ALLERGY;HOST_HAS_ANIMAL;GUEST_FOOD;HOST_FOOD;GENDER;PAIR_GENDER;HISTORY";
     
     Map<String, Criterion> requierments = new HashMap<String, Criterion>();
 
@@ -262,6 +263,21 @@ public class Teenager{
         } else {
             throw new WrongLineFormatException();
         }
+    }
+
+    public String serialize(){
+        String result = "" + this.firstname + ";" + this.name + ";" + this.country + ";";
+        if (this.birthday != null) result += this.birthday.toString();
+        result += ";";
+        result += this.getCriterion(CriterionName.GUEST_ANIMAL_ALLERGY) + ";";
+        result += this.getCriterion(CriterionName.HOST_HAS_ANIMAL) + ";";
+        result += this.getCriterion(CriterionName.GUEST_FOOD) + ";";
+        result += this.getCriterion(CriterionName.HOST_FOOD) + ";";
+        result += this.getCriterion(CriterionName.HOBBIES) + ";";
+        result += this.getCriterion(CriterionName.GENDER) + ";";
+        result += this.getCriterion(CriterionName.PAIR_GENDER);
+        result += this.getCriterion(CriterionName.HISTORY);
+        return result;
     }
 
     /** 

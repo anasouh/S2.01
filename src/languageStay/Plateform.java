@@ -1,7 +1,9 @@
 package languageStay;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -149,7 +151,7 @@ public class Plateform {
      */
     public void importer(String filename){
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-            int line = 0;
+            int line = 1;
             br.readLine();
             while (br.ready()) {
                 try {
@@ -165,7 +167,23 @@ public class Plateform {
         }
     }
 
-    
+    /**
+     * Exporter les teenagers de la plateforme dans un fichier CSV.
+     * @param filename Nom du fichier CSV
+     */
+    public void exporter(String filename) {
+        File file = new File(filename);
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+            bw.write(Teenager.CSVHeader);
+            bw.newLine();
+            for (Teenager t : promo) {
+                bw.write(t.serialize());
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Erreur lors de l'écriture du fichier " + filename + " : " + e.getMessage());
+        }
+    }
 
     @Override
     public String toString() {
