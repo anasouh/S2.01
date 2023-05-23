@@ -2,6 +2,7 @@ package languageStay;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +27,7 @@ public class Teenager{
     private String firstname;
     private LocalDate birthday;
     private Country country;
-    public static final String CSVHeader = "HOST;GUEST";
+    public static final String CSVHeader = "HOST;GUEST;REDIBITOIRE";
     
     Map<String, Criterion> requierments = new HashMap<String, Criterion>();
 
@@ -247,9 +248,9 @@ public class Teenager{
      */
     public static Teenager parse(String line) throws WrongLineFormatException {
         Teenager result = null;
+        line += "aide";
         String[] data = line.split(";");
-        Teenager.gestionVide(data);
-        if(data.length == 12) {
+        if(data.length == 13) {
             String[] dateStr = data[3].split("-");
             LocalDate date = null;
             if(dateStr.length == 3){
@@ -267,14 +268,6 @@ public class Teenager{
             return result;
         } else {
             throw new WrongLineFormatException();
-        }
-    }
-
-    public static void gestionVide(String[] data){
-        for(int i = 0; i < data.length; i++){
-            if(data[i].equals("\"\"")){
-                data[i] = "";
-            }
         }
     }
 

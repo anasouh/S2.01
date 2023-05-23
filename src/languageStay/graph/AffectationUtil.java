@@ -24,7 +24,7 @@ public class AffectationUtil {
         double result = 10.0;
         if (!host.compatibleWithGuest(visitor)) result = result + 1000;
         result = result - (2 * host.nbLoisirCommun(visitor));
-        result = result + Teenager.history(host ,visitor);
+        //result = result + Teenager.history(host ,visitor);
         return result;
     }
 

@@ -157,18 +157,7 @@ public class Plateform {
             br.readLine();
             while (br.ready()) {
                 try {
-                    String chaine = br.readLine();
-                    String string = "";
-                    for(int i = 0; i < chaine.length()-1; i++){
-                        string += chaine.charAt(i);
-                        if(chaine.charAt(i) == ';' && chaine.charAt(i+1) == ';'){
-                            string += "\"\"";
-                        }
-                    }
-                    if(chaine.charAt(0) == ';'){
-                        string = "\"\"" + string;
-                    }
-                    promo.add(Teenager.parse(string));
+                    promo.add(Teenager.parse(br.readLine()));
                 } catch (WrongLineFormatException e) {
                     System.out.println("Erreur à la ligne " + line + " : " + e.getMessage());
                     System.out.println("Poursuite de l'importation...");
@@ -190,7 +179,7 @@ public class Plateform {
             bw.write(Teenager.CSVHeader);
             bw.newLine();
             for (Arete<Teenager> a : liste) {
-                String chaine = a.getExtremite1() + ";" + a.getExtremite2();
+                String chaine = a.getExtremite1() + ";" + a.getExtremite2() + ";" + !a.getExtremite1().compatibleWithGuest(a.getExtremite2()) + AffectationUtil.weight(a.getExtremite1(), a.getExtremite2());
                 bw.write(chaine);
                 bw.newLine();
             }
