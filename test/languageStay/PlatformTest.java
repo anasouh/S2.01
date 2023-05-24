@@ -7,6 +7,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -15,12 +16,16 @@ public class PlatformTest {
     String n1, fn1, n2, fn2, n3, fn3;
     LocalDate d1, d2, d3;
     Country c1, c2, c3;
-    Plateform pf;
+    Plateform pf, plat;
     ArrayList<Teenager> l1;
     Teenager[] l2;
+    String importFile, exportFile;
 
     @BeforeEach
     public void testInitialization() {
+        plat = new Plateform();
+        importFile = System.getProperty("user.dir") + File.separator + "res" + File.separator + "test" + File.separator + "testImport.csv";
+        exportFile = System.getProperty("user.dir") + File.separator + "res" + File.separator + "test" + File.separator + "testExport.csv";
         pf = new Plateform();
         d1 = LocalDate.of(2005, 5, 12);
         d2 = LocalDate.of(2004, 12, 3);
@@ -115,6 +120,18 @@ public class PlatformTest {
         pf.ajouter(t3);
         pf.supprimer(1, c1);
         assertFalse(pf.contains(t1));
+    }
+
+    @Test
+    public void testImporter(){
+        plat.importer(importFile);
+        assertTrue(plat.size() == 6);
+        assertEquals("1-A-Adonia",plat.getPromo().get(0).toString());
+        assertEquals("1-A-Adonia",plat.getPromo().get(0).toString());
+        assertEquals("1-A-Adonia",plat.getPromo().get(0).toString());
+        assertEquals("1-A-Adonia",plat.getPromo().get(0).toString());
+        assertEquals("1-A-Adonia",plat.getPromo().get(0).toString());
+        assertEquals("1-A-Adonia",plat.getPromo().get(0).toString());
     }
 
 }

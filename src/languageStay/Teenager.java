@@ -27,7 +27,6 @@ public class Teenager{
     private String firstname;
     private LocalDate birthday;
     private Country country;
-    public static final String CSVHeader = "HOST;GUEST;REDIBITOIRE";
     
     Map<String, Criterion> requierments = new HashMap<String, Criterion>();
 
@@ -248,7 +247,7 @@ public class Teenager{
      */
     public static Teenager parse(String line) throws WrongLineFormatException {
         Teenager result = null;
-        line += "aide";
+        line += ";aide";
         String[] data = line.split(";");
         if(data.length == 13) {
             String[] dateStr = data[3].split("-");
@@ -271,7 +270,7 @@ public class Teenager{
         }
     }
 
-    public String serialize(){
+    /* public String serialize(){
         String result = "" + this.firstname + ";" + this.name + ";" + this.country + ";";
         if (this.birthday != null) result += this.birthday.toString();
         result += ";";
@@ -284,7 +283,7 @@ public class Teenager{
         result += this.getCriterion(CriterionName.PAIR_GENDER);
         result += this.getCriterion(CriterionName.HISTORY);
         return result;
-    }
+    } */
 
     public static void addHistory(Teenager t1, Teenager t2){
         history.put(t1, t2);

@@ -22,6 +22,7 @@ import languageStay.graph.AffectationUtil;
 public class Plateform {
 
     private ArrayList<Teenager> promo = new ArrayList<>();
+    public static final String CSVExportHeader = "HOST;GUEST;REDIBITOIRE";
 
     /**
      * Supprime de la platforme un nombre de teenagers.
@@ -93,6 +94,14 @@ public class Plateform {
     public boolean ajouter(Teenager teenager){
         if (!promo.contains(teenager)) return promo.add(teenager);
         return false;
+    }
+
+    /**
+     * retourne l'ensemble des étudiants que contient la plateform
+     * @return promo qui est une arrayList de teenagers
+     */
+    public ArrayList<Teenager> getPromo() {
+        return promo;
     }
 
     /**
@@ -170,16 +179,16 @@ public class Plateform {
     }
 
     /**
-     * Exporter les teenagers de la plateforme dans un fichier CSV.
+     * Réalise une affectation entre deux pays et l'exporte. Chaque ligne contient les deux personnes liées et si elle contiennent un critère rédhibitoire.
      * @param filename Nom du fichier CSV
      */
     public void exporter(String filename, Country host, Country guest) {
         List<Arete<Teenager>> liste = AffectationUtil.affectation(promo, guest, host);
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(filename)))) {
-            bw.write(Teenager.CSVHeader);
+            bw.write(Plateform.CSVExportHeader);
             bw.newLine();
             for (Arete<Teenager> a : liste) {
-                String chaine = a.getExtremite1() + ";" + a.getExtremite2() + ";" + !a.getExtremite1().compatibleWithGuest(a.getExtremite2()) + AffectationUtil.weight(a.getExtremite1(), a.getExtremite2());
+                String chaine = a.getExtremite1() + ";" + a.getExtremite2() + ";" + !a.getExtremite1().compatibleWithGuest(a.getExtremite2());
                 bw.write(chaine);
                 bw.newLine();
             }
