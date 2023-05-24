@@ -1,6 +1,8 @@
 package languageStay;
 import java.time.Month;
 
+import languageStay.exceptions.WrongCriterionTypeException;
+
 /**
  * <strong>Permet de créer un objet Criterion </strong>
  * @author Desmee Nathan

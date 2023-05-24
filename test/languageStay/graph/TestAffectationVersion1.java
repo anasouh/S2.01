@@ -89,5 +89,6 @@ public class TestAffectationVersion1 {
         assertEquals(-90, AffectationUtil.weight(t7, t10));
         assertEquals(10, AffectationUtil.weight(t8, t9));
         assertEquals(910, AffectationUtil.weight(t10, t7));
+        assertEquals(10, AffectationUtil.weight(t9, t7));
     }
 }

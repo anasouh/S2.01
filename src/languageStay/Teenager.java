@@ -2,8 +2,12 @@ package languageStay;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
+import languageStay.exceptions.WrongCriterionTypeException;
+import languageStay.exceptions.WrongLineFormatException;
 
 
 
@@ -23,8 +27,11 @@ public class Teenager{
     private String firstname;
     private LocalDate birthday;
     private Country country;
+    public static final String CSVHeader = "HOST;GUEST;REDIBITOIRE";
     
     Map<String, Criterion> requierments = new HashMap<String, Criterion>();
+
+    static Map<Teenager, Teenager> history = new HashMap<Teenager, Teenager>();
 
 
     /**
@@ -76,10 +83,6 @@ public class Teenager{
      * Vérifie si les valeurs des critères est valide et si oui les supprime
      */
     public void purgeInvalidRequierement(){
-        if(this.criterionEquals("HOST_HAS_ANIMAL", "yes") && this.criterionEquals("GUEST_ANIMAL_ALLERGY", "yes")){
-            requierments.remove("HOST_HAS_ANIMAL");
-            requierments.remove("GUEST_ANIMAL_ALLERGY");
-        }
         ArrayList<String> supp = new ArrayList<String>();
         for(String c : requierments.keySet()){
             try{
@@ -90,6 +93,16 @@ public class Teenager{
         }
         for(String c : supp){
             requierments.remove(c);
+        }
+    }
+
+    /**
+     * Vérifie si les valeurs des critères sont incohérents et si oui les supprime
+     */
+    public void purgeIncoherentRequirement(){
+        if(this.criterionEquals("HOST_HAS_ANIMAL", "yes") && this.criterionEquals("GUEST_ANIMAL_ALLERGY", "yes")){
+            requierments.remove("HOST_HAS_ANIMAL");
+            requierments.remove("GUEST_ANIMAL_ALLERGY");
         }
     }
 
@@ -229,6 +242,72 @@ public class Teenager{
         return true;
     }
 
+    /**
+     * Créer une instance Teenager à partir d'une ligne de CSV. 
+     * @param line une ligne de CSV
+     */
+    public static Teenager parse(String line) throws WrongLineFormatException {
+        Teenager result = null;
+        line += "aide";
+        String[] data = line.split(";");
+        if(data.length == 13) {
+            String[] dateStr = data[3].split("-");
+            LocalDate date = null;
+            if(dateStr.length == 3){
+                date = LocalDate.of(Integer.parseInt(dateStr[0]), Integer.parseInt(dateStr[1]), Integer.parseInt(dateStr[2]));
+            }
+            result = new Teenager(data[1], data[0], date, Country.valueOf(data[2]));
+            result.addCriterion(new Criterion(CriterionName.GUEST_ANIMAL_ALLERGY, data[4]));
+            result.addCriterion(new Criterion(CriterionName.HOST_HAS_ANIMAL, data[5]));
+            result.addCriterion(new Criterion(CriterionName.GUEST_FOOD, data[6]));
+            result.addCriterion(new Criterion(CriterionName.HOST_FOOD, data[7]));
+            result.addCriterion(new Criterion(CriterionName.HOBBIES, data[8]));
+            result.addCriterion(new Criterion(CriterionName.GENDER, data[9]));
+            result.addCriterion(new Criterion(CriterionName.PAIR_GENDER, data[10]));
+            result.addCriterion(new Criterion(CriterionName.HISTORY, data[11]));
+            return result;
+        } else {
+            throw new WrongLineFormatException();
+        }
+    }
+
+    public String serialize(){
+        String result = "" + this.firstname + ";" + this.name + ";" + this.country + ";";
+        if (this.birthday != null) result += this.birthday.toString();
+        result += ";";
+        result += this.getCriterion(CriterionName.GUEST_ANIMAL_ALLERGY) + ";";
+        result += this.getCriterion(CriterionName.HOST_HAS_ANIMAL) + ";";
+        result += this.getCriterion(CriterionName.GUEST_FOOD) + ";";
+        result += this.getCriterion(CriterionName.HOST_FOOD) + ";";
+        result += this.getCriterion(CriterionName.HOBBIES) + ";";
+        result += this.getCriterion(CriterionName.GENDER) + ";";
+        result += this.getCriterion(CriterionName.PAIR_GENDER);
+        result += this.getCriterion(CriterionName.HISTORY);
+        return result;
+    }
+
+    public static void addHistory(Teenager t1, Teenager t2){
+        history.put(t1, t2);
+        System.out.println(history.toString());
+    }
+
+    public static int history(Teenager t1, Teenager t2){
+        if(t1 != null && t2 != null){
+            if(history.get(t2).equals(t1) || history.get(t1).equals(t2)){
+                if(t2.getCriterion(CriterionName.HISTORY).equals("same") && t1.getCriterion(CriterionName.HISTORY).equals("same")){
+                    return -10;
+                }
+                else if(t2.getCriterion(CriterionName.HISTORY).equals("other") || t1.getCriterion(CriterionName.HISTORY).equals("other")){
+                    return 4;
+                }
+                else{
+                    return -5;
+                }
+            }
+        }
+        return 0;
+    }
+
     /** 
      * Renvoie en chaîne de caratère l'id, le nom et prénom du teenager
      * @return une chaine de caratère 
@@ -236,6 +315,6 @@ public class Teenager{
 
     @Override
     public String toString() {
-        return "Teenager [id=" + id + ", name=" + name + ", firstname=" + firstname + "]";
+        return id + "-" + name + "-" + firstname;
     }
 }

@@ -1,6 +1,16 @@
 package languageStay;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import fr.ulille.but.sae2_02.graphes.Arete;
+import languageStay.exceptions.WrongLineFormatException;
+import languageStay.graph.AffectationUtil;
 
 /**
  * <strong>Permet de créer un objet Platform </strong>
@@ -21,6 +31,7 @@ public class Plateform {
         int c = 0;
         for(Teenager t : promo){
             t.purgeInvalidRequierement();
+            t.purgeIncoherentRequirement();
         }
         while(c < nbSupp && promo.size() > 0){
             int minCri = minimumCritere(promo);
@@ -44,6 +55,7 @@ public class Plateform {
         int c = 0;
         for(Teenager t : promo){
             t.purgeInvalidRequierement();
+            t.purgeIncoherentRequirement();
         }
         while(c < nbSupp && promo.size() > 0){
             int minCri = minimumCritere(promo);
@@ -133,5 +145,57 @@ public class Plateform {
      */
     public int size(){
         return promo.size();
+    }
+
+    /**
+     * Importer des teenagers à partir d'un fichier CSV.
+     * @param filename Nom du fichier CSV
+     */
+    public void importer(String filename){
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            int line = 1;
+            br.readLine();
+            while (br.ready()) {
+                try {
+                    promo.add(Teenager.parse(br.readLine()));
+                } catch (WrongLineFormatException e) {
+                    System.out.println("Erreur à la ligne " + line + " : " + e.getMessage());
+                    System.out.println("Poursuite de l'importation...");
+                }
+                line ++;
+            }
+        } catch (IOException e) {
+            System.out.println("Erreur lors de la lecture du fichier " + filename + " : " + e.getMessage());
+        }
+    }
+
+    /**
+     * Exporter les teenagers de la plateforme dans un fichier CSV.
+     * @param filename Nom du fichier CSV
+     */
+    public void exporter(String filename, Country host, Country guest) {
+        List<Arete<Teenager>> liste = AffectationUtil.affectation(promo, guest, host);
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(filename)))) {
+            bw.write(Teenager.CSVHeader);
+            bw.newLine();
+            for (Arete<Teenager> a : liste) {
+                String chaine = a.getExtremite1() + ";" + a.getExtremite2() + ";" + !a.getExtremite1().compatibleWithGuest(a.getExtremite2()) + AffectationUtil.weight(a.getExtremite1(), a.getExtremite2());
+                bw.write(chaine);
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Erreur lors de l'écriture du fichier " + filename + " : " + e.getMessage());
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Plateform [promo=" + promo + "]";
+    }
+
+    public static void main(String[] args) {
+        Plateform plateform = new Plateform();
+        plateform.importer(System.getProperty("user.dir") + File.separator + "res" + File.separator + "teenagersData.csv");
+        plateform.exporter(System.getProperty("user.dir") + File.separator + "res" + File.separator + "affectationData.csv", Country.FRANCE, Country.ITALY);
     }
 }
