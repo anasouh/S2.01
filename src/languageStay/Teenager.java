@@ -245,6 +245,7 @@ public class Teenager{
     /**
      * Créer une instance Teenager à partir d'une ligne de CSV. 
      * @param line une ligne de CSV
+     * @return un Teenager
      */
     public static Teenager parse(String line) throws WrongLineFormatException {
         Teenager result = null;
@@ -271,6 +272,10 @@ public class Teenager{
         }
     }
 
+    /**
+     * Affiche les informations d'un Teenager.
+     * @return une chaîne avec les informations.
+     */
     public String serialize(){
         String result = "" + this.firstname + ";" + this.name + ";" + this.country + ";";
         if (this.birthday != null) result += this.birthday.toString();
@@ -286,6 +291,9 @@ public class Teenager{
         return result;
     }
 
+    /**
+     * Remet le compteur à zéro
+     */
     public static void ResetCompteur(){
         Teenager.compteur = 0;
     }
@@ -325,10 +333,16 @@ public class Teenager{
         return id + "-" + name + "-" + firstname;
     }
 
+    /**
+     * Permet de récupérer l'id d'un Teenager.
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Permet de récupérer le compteur d'identifiant.
+     */
     public static int getCompteur() {
         return compteur;
     }
