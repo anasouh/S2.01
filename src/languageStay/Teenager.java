@@ -31,7 +31,7 @@ public class Teenager{
     
     Map<String, Criterion> requierments = new HashMap<String, Criterion>();
 
-    static Map<Teenager, Teenager> history = new HashMap<Teenager, Teenager>();
+    static Map<Teenager, Teenager> history = new HashMap<>();
 
 
     /**
@@ -286,13 +286,20 @@ public class Teenager{
         return result;
     }
 
+    public static void ResetCompteur(){
+        Teenager.compteur = 0;
+    }
+
     public static void addHistory(Teenager t1, Teenager t2){
+        System.out.println(t1.getId() + "   " + t2.getId() );
         history.put(t1, t2);
-        System.out.println(history.toString());
     }
 
     public static int history(Teenager t1, Teenager t2){
-        if(t1 != null && t2 != null){
+        System.out.println(history.toString());
+        System.out.println(t2.toString());
+        System.out.println(history.get(t2));
+        if(t1 != null && t2 != null && ((history.containsKey(t1) == true && history.containsValue(t2) == true) || (history.containsKey(t2) == true && history.containsValue(t1) == true))){
             if(history.get(t2).equals(t1) || history.get(t1).equals(t2)){
                 if(t2.getCriterion(CriterionName.HISTORY).equals("same") && t1.getCriterion(CriterionName.HISTORY).equals("same")){
                     return -10;
@@ -317,4 +324,14 @@ public class Teenager{
     public String toString() {
         return id + "-" + name + "-" + firstname;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public static int getCompteur() {
+        return compteur;
+    }
+
+    
 }

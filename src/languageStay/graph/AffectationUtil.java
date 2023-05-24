@@ -24,7 +24,7 @@ public class AffectationUtil {
         double result = 10.0;
         if (!host.compatibleWithGuest(visitor)) result = result + 1000;
         result = result - (2 * host.nbLoisirCommun(visitor));
-        //result = result + Teenager.history(host ,visitor);
+        result = result + Teenager.history(host ,visitor);
         return result;
     }
 
@@ -59,6 +59,8 @@ public class AffectationUtil {
     }
 
     public static void main(String[] args) {
+        Teenager.ResetCompteur();
+        System.out.println(Teenager.getCompteur());
         Teenager t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18;
 
         /*Graphes Version 1 */
