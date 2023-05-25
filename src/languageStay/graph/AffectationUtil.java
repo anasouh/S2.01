@@ -8,13 +8,19 @@ package languageStay.graph;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 import fr.ulille.but.sae2_02.graphes.Arete;
 import fr.ulille.but.sae2_02.graphes.CalculAffectation;
 import fr.ulille.but.sae2_02.graphes.GrapheNonOrienteValue;
 import languageStay.*;
 
-public class AffectationUtil {
+public class AffectationUtil implements Serializable {
     /** Calcule le poids de l’arête entre host et visitor dans le graphe modèle.
     * @param host L'adolescent hôte
     * @param visitor L'adolescent visiteur
@@ -59,8 +65,7 @@ public class AffectationUtil {
     }
 
     public static void main(String[] args) {
-        Teenager.ResetCompteur();
-        System.out.println(Teenager.getCompteur());
+        Teenager.resetCompteur();
         Teenager t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18;
 
         /*Graphes Version 1 */
@@ -295,5 +300,11 @@ public class AffectationUtil {
         System.out.println("OpelToSalsa");
         System.out.println(listeHistory);
         System.out.println(calculHistory.getCout());
+
+        Affectations affectations = new Affectations(listeHistory);
+        affectations.exporter("affectations");
+        affectations = Affectations.importer("affectations");
+        System.out.println(affectations);
+
     }
 }

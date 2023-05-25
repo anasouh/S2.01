@@ -1,4 +1,5 @@
 package languageStay;
+import java.io.Serializable;
 import java.time.Month;
 
 import languageStay.exceptions.WrongCriterionTypeException;
@@ -10,7 +11,7 @@ import languageStay.exceptions.WrongCriterionTypeException;
  * @author Belguebli Rayane
  */
 
-public class Criterion {
+public class Criterion implements Serializable {
     private String value;
     private CriterionName label;
 

@@ -1,8 +1,8 @@
 package languageStay;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +19,7 @@ import languageStay.exceptions.WrongLineFormatException;
  */
 
 
-public class Teenager{
+public class Teenager implements Serializable{
 
     private int id;
     private static int compteur = 1;
@@ -289,7 +289,7 @@ public class Teenager{
     /**
      * Remet le compteur à zéro
      */
-    public static void ResetCompteur(){
+    public static void resetCompteur(){
         Teenager.compteur = 0;
     }
 
@@ -299,10 +299,7 @@ public class Teenager{
     }
 
     public static int history(Teenager t1, Teenager t2){
-        System.out.println(history.toString());
-        System.out.println(t2.toString());
-        System.out.println(history.get(t2));
-        if(t1 != null && t2 != null && ((history.containsKey(t1) == true && history.containsValue(t2) == true) || (history.containsKey(t2) == true && history.containsValue(t1) == true))){
+        if(t1 != null && t2 != null && history.containsKey(t1) && history.containsKey(t2)){
             if(history.get(t2).equals(t1) || history.get(t1).equals(t2)){
                 if(t2.getCriterion(CriterionName.HISTORY).equals("same") && t1.getCriterion(CriterionName.HISTORY).equals("same")){
                     return -10;

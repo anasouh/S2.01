@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ import languageStay.graph.AffectationUtil;
  * @author Belguebli Rayane
  */
 
-public class Plateform {
+public class Plateform implements Serializable{
 
     private ArrayList<Teenager> promo = new ArrayList<>();
     public static final String CSVExportHeader = "HOST;GUEST;REDIBITOIRE";
