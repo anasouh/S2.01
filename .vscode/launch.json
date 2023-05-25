@@ -1,0 +1,44 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Plateform",
+            "request": "launch",
+            "mainClass": "languageStay.Plateform",
+            "projectName": "SAE2.01_9838340c"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "languageStay.application.App",
+            "projectName": "SAE2.01_9838340c",
+            "vmArgs": "--module-path=lib/javafx-sdk-20.0.1/lib --add-modules=javafx.controls,javafx.fxml,javafx.graphics"
+        },
+        {
+            "type": "java",
+            "name": "AffectationUtil",
+            "request": "launch",
+            "mainClass": "languageStay.graph.AffectationUtil",
+            "projectName": "SAE2.01_9838340c"
+        },
+        {
+            "type": "java",
+            "name": "TPAffectation",
+            "request": "launch",
+            "mainClass": "languageStay.graph.TPAffectation",
+            "projectName": "SAE2.01_9838340c"
+        }
+    ],
+
+}

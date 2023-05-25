@@ -58,6 +58,22 @@ public class Teenager implements Serializable{
     }
 
     /**
+     * Récupérer le prénom du Teenager
+     * @return String le prénom
+     */
+    public String getFirstname(){
+        return this.firstname;
+    }
+
+    /**
+     * Récupérer la date d'anniversaire du Teenager
+     * @return LocalDate la date d'anniversaire
+     */
+    public LocalDate getBirthday(){
+        return this.birthday;
+    }
+
+    /**
      * Vérifie la compatibilité entre 2 Teenagers
      * @param teenager le teenager pour la vérifier la compatibilité
      * @return boolean true or false
