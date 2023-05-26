@@ -8,6 +8,7 @@ package languageStay.graph;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
 import java.io.Serializable;
 
 import fr.ulille.but.sae2_02.graphes.Arete;
@@ -22,7 +23,8 @@ public class AffectationUtil implements Serializable {
     * @param visitor L'adolescent visiteur
     * @return le poids plus il est bas plus ils sont compatibles
     */
-    public static double weight (Teenager host, Teenager visitor, Affectations history) {
+    public static double weight (Teenager host, Teenager visitor){
+        Affectations history = AffectationUtil.chargerSejour(host.getCountry(), visitor.getCountry());
         double result = 10.0;
         if (!host.compatibleWithGuest(visitor)) result = result + 1000;
         result = result - (2 * host.nbLoisirCommun(visitor));
@@ -30,8 +32,29 @@ public class AffectationUtil implements Serializable {
         return result;
     }
 
+    /**
+     * Charge un séjour via un fichier binaire.
+     * @param host Pays hôte
+     * @param guest Pays visiteur
+     * @return une HashMap avec une combinaison de Teenager
+     */
+    public static Affectations chargerSejour(Country host, Country guest) {
+        if (AffectationUtil.sejourExiste(host, guest)) return Affectations.importer(host + "_" + guest + ".bin");
+        return new Affectations();
+    }
+
+    /**
+     * Vérifie si le séjour entre 2 pays à déjà été fait cette année.
+     * @param host Pays hôte
+     * @param guest Pays visiteur
+     * @return true ou false
+     */
+    public static boolean sejourExiste(Country host, Country guest) {
+        File f = new File(Affectations.PATH + host + "_" + guest + ".bin");
+        return f.exists();
+    }
+
     public static List<Arete<Teenager>> affectation(List<Teenager> promo, Country guest, Country host){
-        Affectations history = new Affectations();
         List<Teenager> teenHost = AffectationUtil.selectionPays(promo, host);
         List<Teenager> teenGuest = AffectationUtil.selectionPays(promo, guest);
         GrapheNonOrienteValue<Teenager> graphe = new GrapheNonOrienteValue<Teenager>();
@@ -43,7 +66,7 @@ public class AffectationUtil implements Serializable {
         }
         for(Teenager sommet1 : teenHost){
             for(Teenager sommet2 : teenGuest){
-                graphe.ajouterArete(sommet1, sommet2, AffectationUtil.weight(sommet1, sommet2, history));
+                graphe.ajouterArete(sommet1, sommet2, AffectationUtil.weight(sommet1, sommet2));
             }
         }
         CalculAffectation<Teenager> calcul = new CalculAffectation<>(graphe, teenHost, teenGuest);
@@ -213,7 +236,7 @@ public class AffectationUtil implements Serializable {
         }
         for(Teenager sommet1 : baguette){
             for(Teenager sommet2 : spaghetti){
-                graphe.ajouterArete(sommet2, sommet1, AffectationUtil.weight(sommet2, sommet1, history));
+                graphe.ajouterArete(sommet2, sommet1, AffectationUtil.weight(sommet2, sommet1));
             }
         }
 
@@ -236,12 +259,12 @@ public class AffectationUtil implements Serializable {
         }
         for(Teenager sommet1 : manchaft){
             for(Teenager sommet2 : spaghetti2){
-                grapheSpaghettiToManchaft.ajouterArete(sommet2, sommet1, AffectationUtil.weight(sommet1, sommet2, history));
+                grapheSpaghettiToManchaft.ajouterArete(sommet2, sommet1, AffectationUtil.weight(sommet1, sommet2));
             }
         }
         for(Teenager sommet1 : spaghetti2){
             for(Teenager sommet2 : manchaft){
-                grapheManchaftToSpaghetti.ajouterArete(sommet2, sommet1, AffectationUtil.weight(sommet1, sommet2, history));
+                grapheManchaftToSpaghetti.ajouterArete(sommet2, sommet1, AffectationUtil.weight(sommet1, sommet2));
             }
         }
 
@@ -291,7 +314,7 @@ public class AffectationUtil implements Serializable {
         }
         for(Teenager sommet1 : opel){
             for(Teenager sommet2 : salsa){
-                grapheHistory.ajouterArete(sommet2, sommet1, AffectationUtil.weight(sommet2, sommet1, history));
+                grapheHistory.ajouterArete(sommet2, sommet1, AffectationUtil.weight(sommet2, sommet1));
             }
         }
 

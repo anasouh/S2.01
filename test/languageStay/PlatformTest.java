@@ -22,8 +22,8 @@ public class PlatformTest {
     Plateform pf, plat;
     ArrayList<Teenager> l1;
     Teenager[] l2;
-    String importFile = "testImport.csv";
-    String exportFile = "testExport.csv";
+    String importFile = System.getProperty("user.dir") + File.separator + "res" + File.separator + "test" + File.separator + "testImport.csv";
+    String exportFile = System.getProperty("user.dir") + File.separator + "res" + File.separator + "test" + File.separator + "testExport.csv";
 
     @BeforeEach
     public void testInitialization() {

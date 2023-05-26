@@ -10,9 +10,9 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import fr.ulille.but.sae2_02.graphes.Arete;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -21,7 +21,7 @@ import java.io.ObjectOutputStream;
 
 public class Affectations implements Serializable {
     private Map<Teenager, Teenager> affectations;
-    public static final String PATH = "data/Affectations/";
+    public static final String PATH = System.getProperty("user.dir") + File.separator + "data" + File.separator;
 
     /**
      * Créer une HashMap de Teenagers.
@@ -34,7 +34,7 @@ public class Affectations implements Serializable {
      * Créer une HashMap de Teenagers avec des arretes.
      *  @param arretes arretes entre 2 Teenagers.
      */
-    public Affectations(List<fr.ulille.but.sae2_02.graphes.Arete<Teenager>> arretes) {
+    public Affectations(List<Arete<Teenager>> arretes) {
         this();
         for (Arete<Teenager> arete : arretes) {
             this.affecter(arete.getExtremite1(), arete.getExtremite2());
@@ -81,12 +81,15 @@ public class Affectations implements Serializable {
      * @param filename
      * @return true ou false
      */
-    public boolean exporter(String filename) {
-        try (FileOutputStream fos = new FileOutputStream(Affectations.PATH + filename)) {
+    public static boolean exporter(Affectations history, String filename) {
+        try{//(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(new File(Affectations.PATH + File.separator + filename)))) {
+            File f = new File(Affectations.PATH + filename);
+            FileOutputStream fos = new FileOutputStream(f);
             ObjectOutputStream out = new ObjectOutputStream(fos);
-            out.writeObject(this);
+            out.writeObject(history);
             out.close();
         } catch (IOException e) {
+            e.printStackTrace();
             return false;
         }
         return true;
@@ -99,11 +102,12 @@ public class Affectations implements Serializable {
      */
     public static Affectations importer(String filename) {
         Affectations result = null;
-        try (FileInputStream fis = new FileInputStream(Affectations.PATH + filename)) {
-            ObjectInputStream in = new ObjectInputStream(fis);
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(new File(Affectations.PATH + filename)))) {
             result = (Affectations) in.readObject();
-            in.close();
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }catch( ClassNotFoundException e){
             return null;
         }
         return result;
@@ -114,7 +118,7 @@ public class Affectations implements Serializable {
     public String toString() {
         String result = "";
         for (Map.Entry<Teenager, Teenager> entry : this.affectations.entrySet()) {
-            result += entry.getKey().toString() + " loge chez " + entry.getValue().toString() + "\n";
+            result += entry.getKey().toString() + " héberge " + entry.getValue().toString() + "\n";
         }
         return result;
     }
@@ -129,17 +133,20 @@ public class Affectations implements Serializable {
      * @return le poids lié à l'historique entre un hôte est un visiteur
      */
     public int history(Teenager host, Teenager visitor){
+        System.out.println(host);
+        System.out.println(this.affectations.keySet());
+        System.out.println(this.estAffecte(host));
         if(this.estAffecte(host)){
             if(this.get(host).equals(visitor)){
-                if(host.getCriterion(CriterionName.HISTORY).equals("same") || visitor.getCriterion(CriterionName.HISTORY).equals("same")){
-                    return -10;
-                }
-                if(host.getCriterion(CriterionName.HISTORY).equals("other") || visitor.getCriterion(CriterionName.HISTORY).equals("other")){
+                if(host.criterionEquals("HISTORY","other") || visitor.criterionEquals("HISTORY","other") ){
                     return 1000;
+                }
+                if(host.criterionEquals("HISTORY","same")  || visitor.criterionEquals("HISTORY","same") ){
+                    return -10;
                 }
             }
         }
-        else if(this.estAffecte(visitor)){
+        /* else if(this.estAffecte(visitor)){
             if(this.get(visitor).equals(host)){
                 if(host.getCriterion(CriterionName.HISTORY).equals("same") || visitor.getCriterion(CriterionName.HISTORY).equals("same")){
                     return -10;
@@ -148,7 +155,7 @@ public class Affectations implements Serializable {
                     return 1000;
                 }
             }
-        }
+        } */
         return 0;        
     }
 }

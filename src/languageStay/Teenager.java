@@ -1,5 +1,6 @@
 package languageStay;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +19,7 @@ import languageStay.exceptions.WrongLineFormatException;
  */
 
 
-public class Teenager{
+public class Teenager implements Serializable{
 
     private int id;
     private static int compteur = 1;
@@ -301,4 +302,46 @@ public class Teenager{
     public String toString() {
         return id + "-" + name + "-" + firstname;
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((firstname == null) ? 0 : firstname.hashCode());
+        result = prime * result + ((birthday == null) ? 0 : birthday.hashCode());
+        result = prime * result + ((country == null) ? 0 : country.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Teenager other = (Teenager) obj;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        if (firstname == null) {
+            if (other.firstname != null)
+                return false;
+        } else if (!firstname.equals(other.firstname))
+            return false;
+        if (birthday == null) {
+            if (other.birthday != null)
+                return false;
+        } else if (!birthday.equals(other.birthday))
+            return false;
+        if (country != other.country)
+            return false;
+        return true;
+    }
+
+    
 }

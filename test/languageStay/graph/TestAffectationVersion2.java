@@ -11,7 +11,8 @@ import languageStay.*;
 
 public class TestAffectationVersion2 {
     Teenager t1, t2, t3, t4, t5, t6, t7, t8, t11, t12, t13, t14, t15, t16;
-    Affectations history = new Affectations();
+    Affectations history1 = new Affectations();
+    Affectations history2 = new Affectations();
         
 
         @BeforeEach
@@ -80,18 +81,21 @@ public class TestAffectationVersion2 {
         t7.addCriterion(CriterionName.HISTORY, "");
         t8.addCriterion(CriterionName.HISTORY, "other");
 
-        history.affecter(t8, t1);
-        history.affecter(t3, t7);
-        history.affecter(t4, t5);
-        history.affecter(t6, t2);
+
+        history1.affecter(t1, t8);
+        history1.affecter(t3, t7);
+        history1.affecter(t4, t5);
+        history1.affecter(t2, t6);
+        Affectations.exporter(history1, "GERMANY_SPAIN.bin");
+        //System.out.println(AffectationUtil.sejourExiste(Country.GERMANY, Country.SPAIN));
 
         //exemple2
         t11 = new Teenager("A", "Adonia", LocalDate.now(), Country.FRANCE);
         t12 = new Teenager("B", "Bellatrix", LocalDate.now(), Country.FRANCE);
         t13 = new Teenager("C", "Callista", LocalDate.now(), Country.FRANCE);
-        t14 = new Teenager("X", "Xolag", LocalDate.now(), Country.ITALY);
-        t15 = new Teenager("Y", "Yak", LocalDate.now(), Country.ITALY);
-        t16 = new Teenager("Z", "Zander", LocalDate.now(), Country.ITALY);
+        t14 = new Teenager("X", "Xolag", LocalDate.now(), Country.SPAIN);
+        t15 = new Teenager("Y", "Yak", LocalDate.now(), Country.SPAIN);
+        t16 = new Teenager("Z", "Zander", LocalDate.now(), Country.SPAIN);
 
         t11.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY, "no");
         t12.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY, "yes");
@@ -135,41 +139,43 @@ public class TestAffectationVersion2 {
         t15.addCriterion(CriterionName.HISTORY, "");
         t16.addCriterion(CriterionName.HISTORY, "same");
 
-        history.affecter(t14, t11);
-        history.affecter(t12, t15);
-        history.affecter(t16, t13);
+        history2.affecter(t11, t14);
+        history2.affecter(t12, t15);
+        history2.affecter(t13, t16);
+        Affectations.exporter(history2, "FRANCE_SPAIN.bin");
+        //System.out.println(AffectationUtil.sejourExiste(Country.FRANCE, Country.SPAIN));
     }
     
     @Test
     public void testExemple1(){
-        assertEquals(10, AffectationUtil.weight(t1, t5, history));
-        assertEquals(10, AffectationUtil.weight(t1, t6, history));
-        assertEquals(10, AffectationUtil.weight(t1, t7, history));
-        assertEquals(0, AffectationUtil.weight(t1, t8, history));
-        assertEquals(10, AffectationUtil.weight(t2, t5, history));
-        assertEquals(0, AffectationUtil.weight(t2, t6, history));
-        assertEquals(10, AffectationUtil.weight(t2, t7, history));
-        assertEquals(10, AffectationUtil.weight(t2, t8, history));
-        assertEquals(10, AffectationUtil.weight(t3, t5, history));
-        assertEquals(10, AffectationUtil.weight(t3, t6, history));
-        assertEquals(10, AffectationUtil.weight(t3, t7, history));
-        assertEquals(10, AffectationUtil.weight(t3, t8, history));
-        assertEquals(1010, AffectationUtil.weight(t4, t5, history));
-        assertEquals(10, AffectationUtil.weight(t4, t6, history));
-        assertEquals(10, AffectationUtil.weight(t4, t7, history));
-        assertEquals(10, AffectationUtil.weight(t4, t8, history));
+        assertEquals(10, AffectationUtil.weight(t1, t5));
+        assertEquals(10, AffectationUtil.weight(t1, t6));
+        assertEquals(10, AffectationUtil.weight(t1, t7));
+        assertEquals(0, AffectationUtil.weight(t1, t8));
+        assertEquals(10, AffectationUtil.weight(t2, t5));
+        assertEquals(0, AffectationUtil.weight(t2, t6));
+        assertEquals(10, AffectationUtil.weight(t2, t7));
+        assertEquals(10, AffectationUtil.weight(t2, t8));
+        assertEquals(10, AffectationUtil.weight(t3, t5));
+        assertEquals(10, AffectationUtil.weight(t3, t6));
+        assertEquals(10, AffectationUtil.weight(t3, t7));
+        assertEquals(10, AffectationUtil.weight(t3, t8));
+        assertEquals(1010, AffectationUtil.weight(t4, t5));
+        assertEquals(10, AffectationUtil.weight(t4, t6));
+        assertEquals(10, AffectationUtil.weight(t4, t7));
+        assertEquals(10, AffectationUtil.weight(t4, t8));
     }
 
     @Test
     public void testExemple2(){
-        assertEquals(-2, AffectationUtil.weight(t11, t14, history));
-        assertEquals(1010, AffectationUtil.weight(t11, t15, history));
-        assertEquals(1008, AffectationUtil.weight(t11, t16, history));
-        assertEquals(8, AffectationUtil.weight(t12, t14, history));
-        assertEquals(8, AffectationUtil.weight(t12, t15, history));
-        assertEquals(1010, AffectationUtil.weight(t12, t16, history));
-        assertEquals(1010, AffectationUtil.weight(t13, t14, history));
-        assertEquals(6, AffectationUtil.weight(t13, t15, history));
-        assertEquals(1000, AffectationUtil.weight(t13, t16, history));
+        assertEquals(-2, AffectationUtil.weight(t11, t14));
+        assertEquals(1010, AffectationUtil.weight(t11, t15));
+        assertEquals(1008, AffectationUtil.weight(t11, t16));
+        assertEquals(8, AffectationUtil.weight(t12, t14));
+        assertEquals(8, AffectationUtil.weight(t12, t15));
+        assertEquals(1010, AffectationUtil.weight(t12, t16));
+        assertEquals(1010, AffectationUtil.weight(t13, t14));
+        assertEquals(6, AffectationUtil.weight(t13, t15));
+        assertEquals(1000, AffectationUtil.weight(t13, t16));
     }
 }

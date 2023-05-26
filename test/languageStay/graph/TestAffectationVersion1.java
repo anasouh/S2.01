@@ -11,7 +11,6 @@ import languageStay.*;
 
 public class TestAffectationVersion1 {
     Teenager t1, t2, t3, t4, t5, t6, t7, t8, t9, t10;
-    Affectations history = new Affectations();
 
     @BeforeEach
     public void testInitialization(){
@@ -72,24 +71,24 @@ public class TestAffectationVersion1 {
 
     @Test
     public void testWeight(){
-        assertEquals(8, AffectationUtil.weight(t4, t1, history));
-        assertEquals(1010, AffectationUtil.weight(t5, t1, history));
-        assertEquals(8, AffectationUtil.weight(t6, t1, history));
-        assertEquals(8, AffectationUtil.weight(t4, t2, history));
-        assertEquals(1008, AffectationUtil.weight(t5, t2, history));
-        assertEquals(1010, AffectationUtil.weight(t6, t2, history));
-        assertEquals(1010, AffectationUtil.weight(t4, t3, history));
-        assertEquals(6, AffectationUtil.weight(t5, t3, history));
-        assertEquals(1010, AffectationUtil.weight(t6, t3, history));
+        assertEquals(8, AffectationUtil.weight(t4, t1));
+        assertEquals(1010, AffectationUtil.weight(t5, t1));
+        assertEquals(8, AffectationUtil.weight(t6, t1));
+        assertEquals(8, AffectationUtil.weight(t4, t2));
+        assertEquals(1008, AffectationUtil.weight(t5, t2));
+        assertEquals(1010, AffectationUtil.weight(t6, t2));
+        assertEquals(1010, AffectationUtil.weight(t4, t3));
+        assertEquals(6, AffectationUtil.weight(t5, t3));
+        assertEquals(1010, AffectationUtil.weight(t6, t3));
     }
 
     @Test
     public void testCompatibilityVsHobbies(){
-        assertEquals(10, AffectationUtil.weight(t9, t7, history));
-        assertEquals(10, AffectationUtil.weight(t10, t8, history));
-        assertEquals(-90, AffectationUtil.weight(t7, t10, history));
-        assertEquals(10, AffectationUtil.weight(t8, t9, history));
-        assertEquals(910, AffectationUtil.weight(t10, t7, history));
-        assertEquals(10, AffectationUtil.weight(t9, t7, history));
+        assertEquals(10, AffectationUtil.weight(t9, t7));
+        assertEquals(10, AffectationUtil.weight(t10, t8));
+        assertEquals(-90, AffectationUtil.weight(t7, t10));
+        assertEquals(10, AffectationUtil.weight(t8, t9));
+        assertEquals(910, AffectationUtil.weight(t10, t7));
+        assertEquals(10, AffectationUtil.weight(t9, t7));
     }
 }

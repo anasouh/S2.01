@@ -193,6 +193,7 @@ public class Plateform implements Serializable{
                 bw.write(chaine);
                 bw.newLine();
             }
+            Plateform.nouveauSejour(liste, host, guest);
         } catch (IOException e) {
             System.out.println("Erreur lors de l'écriture du fichier " + filename + " : " + e.getMessage());
         }
@@ -204,31 +205,9 @@ public class Plateform implements Serializable{
      * @param guest Pays visiteur
      * @return true ou false
      */
-    public boolean nouveauSejour(Country host, Country guest) {
-        Affectations affectations = new Affectations(AffectationUtil.affectation(promo, guest, host));
-        return affectations.exporter("" + host + "_" + guest);
-    }
-
-    /**
-     * Vérifie si le séjour entre 2 pays à déjà été fait cette année.
-     * @param host Pays hôte
-     * @param guest Pays visiteur
-     * @return true ou false
-     */
-    public boolean sejourExiste(Country host, Country guest) {
-        File f = new File(Affectations.PATH + host + "_" + guest);
-        return f.exists();
-    }
-
-    /**
-     * Charge un séjour via un fichier binaire.
-     * @param host Pays hôte
-     * @param guest Pays visiteur
-     * @return une HashMap avec une combinaison de Teenager
-     */
-    public Affectations chargerSejour(Country host, Country guest) {
-        if (sejourExiste(host, guest)) return Affectations.importer(host + "_" + guest);
-        return null;
+    public static boolean nouveauSejour(List<Arete<Teenager>> liste, Country host, Country guest) {
+        Affectations affectations = new Affectations(liste);
+        return Affectations.exporter(affectations, host + "_" + guest + ".bin");
     }
 
     @Override
@@ -236,9 +215,4 @@ public class Plateform implements Serializable{
         return "Plateform [promo=" + promo + "]";
     }
 
-    public static void main(String[] args) {
-        Plateform plateform = new Plateform();
-        plateform.importer(System.getProperty("user.dir") + File.separator + "res" + File.separator + "teenagersData.csv");
-        plateform.exporter(System.getProperty("user.dir") + File.separator + "res" + File.separator + "affectationData.csv", Country.FRANCE, Country.ITALY);
-    }
 }
