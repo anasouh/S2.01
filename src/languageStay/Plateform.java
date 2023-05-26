@@ -199,21 +199,33 @@ public class Plateform implements Serializable{
     }
 
     /**
-     * Affecte les adolescents pour un séjour 
+     * Affecte les adolescents pour un séjour. 
      * @param host Pays hôte
      * @param guest Pays visiteur
-     * @return
+     * @return true ou false
      */
     public boolean nouveauSejour(Country host, Country guest) {
         Affectations affectations = new Affectations(AffectationUtil.affectation(promo, guest, host));
         return affectations.exporter("" + host + "_" + guest);
     }
 
+    /**
+     * Vérifie si le séjour entre 2 pays à déjà été fait cette année.
+     * @param host Pays hôte
+     * @param guest Pays visiteur
+     * @return true ou false
+     */
     public boolean sejourExiste(Country host, Country guest) {
         File f = new File(Affectations.PATH + host + "_" + guest);
         return f.exists();
     }
 
+    /**
+     * Charge un séjour via un fichier binaire.
+     * @param host Pays hôte
+     * @param guest Pays visiteur
+     * @return une HashMap avec une combinaison de Teenager
+     */
     public Affectations chargerSejour(Country host, Country guest) {
         if (sejourExiste(host, guest)) return Affectations.importer(host + "_" + guest);
         return null;

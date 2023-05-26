@@ -297,37 +297,8 @@ public class Teenager{
         Teenager.compteur = 0;
     }
 
-    public static void addHistory(Teenager t1, Teenager t2){
-        System.out.println(t1.getId() + "   " + t2.getId() );
-        history.put(t1, t2);
-    }
-
-    
-    
-
-    /** 
-     * Renvoie en chaîne de caratère l'id, le nom et prénom du teenager
-     * @return une chaine de caratère 
-    */
-
     @Override
     public String toString() {
         return id + "-" + name + "-" + firstname;
     }
-
-    /**
-     * Permet de récupérer l'id d'un Teenager.
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * Permet de récupérer le compteur d'identifiant.
-     */
-    public static int getCompteur() {
-        return compteur;
-    }
-
-    
 }
