@@ -1,8 +1,8 @@
 package languageStay;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +19,7 @@ import languageStay.exceptions.WrongLineFormatException;
  */
 
 
-public class Teenager implements Serializable{
+public class Teenager{
 
     private int id;
     private static int compteur = 1;
@@ -27,6 +27,7 @@ public class Teenager implements Serializable{
     private String firstname;
     private LocalDate birthday;
     private Country country;
+    public static final String CSVHeader = "HOST;GUEST;REDIBITOIRE";
     
     Map<String, Criterion> requierments = new HashMap<String, Criterion>();
 
@@ -55,22 +56,6 @@ public class Teenager implements Serializable{
      */
     public String getName(){ 
         return this.name;
-    }
-
-    /**
-     * Récupérer le prénom du Teenager
-     * @return String le prénom
-     */
-    public String getFirstname(){
-        return this.firstname;
-    }
-
-    /**
-     * Récupérer la date d'anniversaire du Teenager
-     * @return LocalDate la date d'anniversaire
-     */
-    public LocalDate getBirthday(){
-        return this.birthday;
     }
 
     /**
@@ -264,7 +249,7 @@ public class Teenager implements Serializable{
      */
     public static Teenager parse(String line) throws WrongLineFormatException {
         Teenager result = null;
-        line += ";aide";
+        line += "aide";
         String[] data = line.split(";");
         if(data.length == 13) {
             String[] dateStr = data[3].split("-");
@@ -287,7 +272,11 @@ public class Teenager implements Serializable{
         }
     }
 
-    /* public String serialize(){
+    /**
+     * Affiche les informations d'un Teenager.
+     * @return une chaîne avec les informations.
+     */
+    public String serialize(){
         String result = "" + this.firstname + ";" + this.name + ";" + this.country + ";";
         if (this.birthday != null) result += this.birthday.toString();
         result += ";";
@@ -300,12 +289,12 @@ public class Teenager implements Serializable{
         result += this.getCriterion(CriterionName.PAIR_GENDER);
         result += this.getCriterion(CriterionName.HISTORY);
         return result;
-    } */
+    }
 
     /**
      * Remet le compteur à zéro
      */
-    public static void resetCompteur(){
+    public static void ResetCompteur(){
         Teenager.compteur = 0;
     }
 
@@ -314,22 +303,8 @@ public class Teenager implements Serializable{
         history.put(t1, t2);
     }
 
-    public static int history(Teenager t1, Teenager t2){
-        if(t1 != null && t2 != null && history.containsKey(t1) && history.containsKey(t2)){
-            if(history.get(t2).equals(t1) || history.get(t1).equals(t2)){
-                if(t2.getCriterion(CriterionName.HISTORY).equals("same") && t1.getCriterion(CriterionName.HISTORY).equals("same")){
-                    return -10;
-                }
-                else if(t2.getCriterion(CriterionName.HISTORY).equals("other") || t1.getCriterion(CriterionName.HISTORY).equals("other")){
-                    return 4;
-                }
-                else{
-                    return -5;
-                }
-            }
-        }
-        return 0;
-    }
+    
+    
 
     /** 
      * Renvoie en chaîne de caratère l'id, le nom et prénom du teenager

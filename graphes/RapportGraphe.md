@@ -48,7 +48,7 @@
 
   La particularité de cette exemple est que des adolescents n'ont pas mis de loisir, que d'autres en ont mis beaucoup et que l'adolescent A A est allergique aux animaux et il possède un animal.
 
-  Dans notre méthode weight dans la classe *AffectationUtil.java* nous avons passé de 100 à 1000 l'incompatibilité entre adolescents car si ils sont imcopatibles mais qu'ils ont beaucoup d'hobbies en commun le poids peut très vite descendre comme on enlève 2 pour chaque loisir en commun.
+  Dans notre méthode weight dans la classe `*AffectationUtil.java*` nous avons passé de 100 à 1000 l'incompatibilité entre adolescents car si ils sont imcopatibles mais qu'ils ont beaucoup d'hobbies en commun le poids peut très vite descendre comme on enlève 2 pour chaque loisir en commun.
   
   (voir '[TestAffectationVersion1.java méthode *testCompatibilityVsHobbies()*](../test/languageStay/graph/TestAffectationVersion1.java)')
 
@@ -89,15 +89,20 @@
   
 ## Modélisation pour l'historique de la Version 2
   
-  *Décrire une modélisation générale pour la Version 1. C'est à dire, donner une formule ou une description précise qui décrit comment, étant donné un adolescent hôte et un adolescent visiteur, on détermine le poids de l'arête entre ces deux adolescents en fonction des critères considérés dans la Version 1. Décrire également comment vous construisez le graphe modèle à partir des données en entrée.*
+  Pour modéliser l'historique on a décidé comme que ce soit l'hôte où le visiteur si 
   
 ## Implémentation de l'historique de la Version 2
   
-  *Quelles fonctions de votre code avez-vous modifié pour prendre en compte le critère historique ? Donnez ici les noms des méthodes (et leur classe), à quoi elles servent, et quelles modifications vous avez apportées. Essayez d'être synthétique.*
+  Ducoup pour implémenter l'historique nous avons ajouter une classe `*Affectations.java*` qui nous permet d'instancier une HashMap avec Teenager en clé et en valeur, ajouter une combinaison de Teenager ayant déjà été correspondant et elle a une méthode `history` qui retourne un poids -10 si il y a un des 2 qui a répondu "same" et aucun des 2 ayant répondu "other", 1000 si l'un des 2 a répondu "other" et 0 si ils nous jamais été correspondant.
+  Nous avons aussi modifié la méthode `weight` dans la class `*AffectationUtil.java*`, nous avons ajouté en paramètre "Affectations history" qui est une HashMap de la class `*Affectations.java*` pour nous permettre de faire appel à la métode `history` situé dans *Affectations.java*.
+
+  (voir '[AffectationUtil.java méthode *weight*](../src/languageStay/graph/AffectationUtil.java)')
+
+  (voir '[Affecatations.java](../src/languageStay/Affectations.java)')
   
 ## Test pour l'historique de la Version 2
   
-  *Créer la classe de TestAffectationVersion2 qui contiendra deux méthodes de test, une pour chacun des exemples. Chacune de ces méthodes doit avoir la même structure que pour TestAffectationVersion1, c'est à dire créer les données d'entrée (adolescents, historique), créer le graphe, calculer l'affectation, et tester que le résultat est comme attendu.*
+  (voir '[TestAffectationVersion2.java méthode *testExemple1* & *testExemple2*](../test/languageStay/graph/TestAffectationVersion2.java)')
   
 ## Prendre en compte les autres préférences
   

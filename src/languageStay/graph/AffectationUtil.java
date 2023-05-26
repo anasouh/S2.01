@@ -16,20 +16,22 @@ import fr.ulille.but.sae2_02.graphes.GrapheNonOrienteValue;
 import languageStay.*;
 
 public class AffectationUtil implements Serializable {
+
     /** Calcule le poids de l’arête entre host et visitor dans le graphe modèle.
     * @param host L'adolescent hôte
     * @param visitor L'adolescent visiteur
     * @return le poids plus il est bas plus ils sont compatibles
     */
-    public static double weight (Teenager host, Teenager visitor) {
+    public static double weight (Teenager host, Teenager visitor, Affectations history) {
         double result = 10.0;
         if (!host.compatibleWithGuest(visitor)) result = result + 1000;
         result = result - (2 * host.nbLoisirCommun(visitor));
-        result = result + Teenager.history(host ,visitor);
+        result = result + history.history(host, visitor);
         return result;
     }
 
     public static List<Arete<Teenager>> affectation(List<Teenager> promo, Country guest, Country host){
+        Affectations history = new Affectations();
         List<Teenager> teenHost = AffectationUtil.selectionPays(promo, host);
         List<Teenager> teenGuest = AffectationUtil.selectionPays(promo, guest);
         GrapheNonOrienteValue<Teenager> graphe = new GrapheNonOrienteValue<Teenager>();
@@ -41,7 +43,7 @@ public class AffectationUtil implements Serializable {
         }
         for(Teenager sommet1 : teenHost){
             for(Teenager sommet2 : teenGuest){
-                graphe.ajouterArete(sommet1, sommet2, AffectationUtil.weight(sommet1, sommet2));
+                graphe.ajouterArete(sommet1, sommet2, AffectationUtil.weight(sommet1, sommet2, history));
             }
         }
         CalculAffectation<Teenager> calcul = new CalculAffectation<>(graphe, teenHost, teenGuest);
@@ -60,7 +62,8 @@ public class AffectationUtil implements Serializable {
     }
 
     public static void main(String[] args) {
-        Teenager.resetCompteur();
+        Affectations history = new Affectations();
+        Teenager.ResetCompteur();
         Teenager t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18;
 
         /*Graphes Version 1 */
@@ -178,17 +181,19 @@ public class AffectationUtil implements Serializable {
         t18.addCriterion(CriterionName.HOST_FOOD, "");
 
         t11.addCriterion(CriterionName.HISTORY, "same");
-        t12.addCriterion(CriterionName.HISTORY, "other");
+        t12.addCriterion(CriterionName.HISTORY, "same");
         t13.addCriterion(CriterionName.HISTORY, "same");
-        t14.addCriterion(CriterionName.HISTORY, "");
+        t14.addCriterion(CriterionName.HISTORY, "other");
         t15.addCriterion(CriterionName.HISTORY, "other");
-        t16.addCriterion(CriterionName.HISTORY, "");
-        t17.addCriterion(CriterionName.HISTORY, "other");
-        t18.addCriterion(CriterionName.HISTORY, "same");
+        t16.addCriterion(CriterionName.HISTORY, "same");
+        t17.addCriterion(CriterionName.HISTORY, "");
+        t18.addCriterion(CriterionName.HISTORY, "");
 
-        Teenager.addHistory(t11, t18);
-        Teenager.addHistory(t13, t17);
-        Teenager.addHistory(t14, t15);
+        history.affecter(t18, t11);
+        history.affecter(t13, t17);
+        history.affecter(t14, t15);
+        history.affecter(t16, t17);
+
 
         /*Graphes Version 1 */
         GrapheNonOrienteValue<Teenager> graphe = new GrapheNonOrienteValue<Teenager>();
@@ -208,7 +213,7 @@ public class AffectationUtil implements Serializable {
         }
         for(Teenager sommet1 : baguette){
             for(Teenager sommet2 : spaghetti){
-                graphe.ajouterArete(sommet2, sommet1, AffectationUtil.weight(sommet2, sommet1));
+                graphe.ajouterArete(sommet2, sommet1, AffectationUtil.weight(sommet2, sommet1, history));
             }
         }
 
@@ -231,12 +236,12 @@ public class AffectationUtil implements Serializable {
         }
         for(Teenager sommet1 : manchaft){
             for(Teenager sommet2 : spaghetti2){
-                grapheSpaghettiToManchaft.ajouterArete(sommet2, sommet1, AffectationUtil.weight(sommet1, sommet2));
+                grapheSpaghettiToManchaft.ajouterArete(sommet2, sommet1, AffectationUtil.weight(sommet1, sommet2, history));
             }
         }
         for(Teenager sommet1 : spaghetti2){
             for(Teenager sommet2 : manchaft){
-                grapheManchaftToSpaghetti.ajouterArete(sommet2, sommet1, AffectationUtil.weight(sommet1, sommet2));
+                grapheManchaftToSpaghetti.ajouterArete(sommet2, sommet1, AffectationUtil.weight(sommet1, sommet2, history));
             }
         }
 
@@ -286,7 +291,7 @@ public class AffectationUtil implements Serializable {
         }
         for(Teenager sommet1 : opel){
             for(Teenager sommet2 : salsa){
-                grapheHistory.ajouterArete(sommet2, sommet1, AffectationUtil.weight(sommet2, sommet1));
+                grapheHistory.ajouterArete(sommet2, sommet1, AffectationUtil.weight(sommet2, sommet1, history));
             }
         }
 
@@ -296,10 +301,6 @@ public class AffectationUtil implements Serializable {
         System.out.println(listeHistory);
         System.out.println(calculHistory.getCout());
 
-        Affectations affectations = new Affectations(listeHistory);
-        affectations.exporter("affectations");
-        affectations = Affectations.importer("affectations");
-        System.out.println(affectations);
 
     }
 }
