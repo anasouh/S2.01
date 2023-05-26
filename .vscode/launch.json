@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Plateform",
+            "request": "launch",
+            "mainClass": "languageStay.Plateform",
+            "projectName": "S2.01-S2.02_d2f854de"
+        },
+        {
+            "type": "java",
             "name": "AffectationUtil",
             "request": "launch",
             "mainClass": "languageStay.graph.AffectationUtil",

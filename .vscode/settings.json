@@ -3,5 +3,9 @@
         "lib",
         "src",
         "test"
-    ]
+    ],
+
+    "java.test.config": {
+        "workingDirectory": "${workspaceFolder}"
+    }
 }

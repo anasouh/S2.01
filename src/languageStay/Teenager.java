@@ -2,7 +2,6 @@ package languageStay;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -249,7 +248,7 @@ public class Teenager{
      */
     public static Teenager parse(String line) throws WrongLineFormatException {
         Teenager result = null;
-        line += "aide";
+        line += ";aide";
         String[] data = line.split(";");
         if(data.length == 13) {
             String[] dateStr = data[3].split("-");
