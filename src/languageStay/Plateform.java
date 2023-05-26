@@ -198,6 +198,27 @@ public class Plateform implements Serializable{
         }
     }
 
+    /**
+     * Affecte les adolescents pour un séjour 
+     * @param host Pays hôte
+     * @param guest Pays visiteur
+     * @return
+     */
+    public boolean nouveauSejour(Country host, Country guest) {
+        Affectations affectations = new Affectations(AffectationUtil.affectation(promo, guest, host));
+        return affectations.exporter("" + host + "_" + guest);
+    }
+
+    public boolean sejourExiste(Country host, Country guest) {
+        File f = new File(Affectations.PATH + host + "_" + guest);
+        return f.exists();
+    }
+
+    public Affectations chargerSejour(Country host, Country guest) {
+        if (sejourExiste(host, guest)) return Affectations.importer(host + "_" + guest);
+        return null;
+    }
+
     @Override
     public String toString() {
         return "Plateform [promo=" + promo + "]";
