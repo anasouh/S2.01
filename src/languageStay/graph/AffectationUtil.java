@@ -26,8 +26,13 @@ public class AffectationUtil implements Serializable {
     public static double weight (Teenager host, Teenager visitor){
         Affectations history = AffectationUtil.chargerSejour(host.getCountry(), visitor.getCountry());
         double result = 10.0;
+        int i = 0;
         if (!host.compatibleWithGuest(visitor)) result = result + 1000;
-        result = result - (2 * host.nbLoisirCommun(visitor));
+        i = i + (2 * host.nbLoisirCommun(visitor));
+        if(i>10){
+            i = 10;
+        }
+        result = result - i;
         result = result + history.history(host, visitor);
         return result;
     }

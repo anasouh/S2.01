@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "languageStay.application.App",
+            "projectName": "A1_525c443e"
+        },
+        {
+            "type": "java",
             "name": "Plateform",
             "request": "launch",
             "mainClass": "languageStay.Plateform",

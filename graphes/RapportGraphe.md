@@ -85,7 +85,7 @@
   
 ## Modélisation pour les exemples
   
-  *Pour chacun des deux exemples précédents, donnez un graphe (donné par sa matrice d'adjacence) tel que l'affectation minimale dans ce graphe correspond à l'appariement optimal identifié plus haut. Expliquez comment vous avez choisi le poids pour chacune des arêtes.*
+  ![Modélisation du Graphe Exemple 1](Img/HistoriqueEx1.png)
   
 ## Modélisation pour l'historique de la Version 2
   
