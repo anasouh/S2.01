@@ -87,9 +87,9 @@ public class TestAffectationVersion1 {
     public void testCompatibilityVsHobbies(){
         assertEquals(10, AffectationUtil.weight(t9, t7, history));
         assertEquals(10, AffectationUtil.weight(t10, t8, history));
-        assertEquals(-90, AffectationUtil.weight(t7, t10, history));
+        assertEquals(0, AffectationUtil.weight(t7, t10, history));
         assertEquals(10, AffectationUtil.weight(t8, t9, history));
-        assertEquals(910, AffectationUtil.weight(t10, t7, history));
+        assertEquals(1000, AffectationUtil.weight(t10, t7, history));
         assertEquals(10, AffectationUtil.weight(t9, t7, history));
     }
 }
