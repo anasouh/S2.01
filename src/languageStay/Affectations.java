@@ -10,6 +10,9 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import fr.ulille.but.sae2_02.graphes.Arete;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -33,7 +36,7 @@ public class Affectations implements Serializable {
      */
     public Affectations(List<fr.ulille.but.sae2_02.graphes.Arete<Teenager>> arretes) {
         this();
-        for (fr.ulille.but.sae2_02.graphes.Arete<Teenager> arete : arretes) {
+        for (Arete<Teenager> arete : arretes) {
             this.affecter(arete.getExtremite1(), arete.getExtremite2());
         }
     }

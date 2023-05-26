@@ -7,9 +7,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PlatformTest {
     Teenager t1, t2, t3;
@@ -19,13 +22,12 @@ public class PlatformTest {
     Plateform pf, plat;
     ArrayList<Teenager> l1;
     Teenager[] l2;
-    String importFile, exportFile;
+    String importFile = "testImport.csv";
+    String exportFile = "testExport.csv";
 
     @BeforeEach
     public void testInitialization() {
         plat = new Plateform();
-        importFile = System.getProperty("user.dir") + File.separator + "res" + File.separator + "test" + File.separator + "testImport.csv";
-        exportFile = System.getProperty("user.dir") + File.separator + "res" + File.separator + "test" + File.separator + "testExport.csv";
         pf = new Plateform();
         d1 = LocalDate.of(2005, 5, 12);
         d2 = LocalDate.of(2004, 12, 3);
@@ -121,17 +123,37 @@ public class PlatformTest {
         pf.supprimer(1, c1);
         assertFalse(pf.contains(t1));
     }
-
+    
     @Test
     public void testImporter(){
+        Teenager.ResetCompteur();
         plat.importer(importFile);
         assertTrue(plat.size() == 6);
-        assertEquals("1-A-Adonia",plat.getPromo().get(0).toString());
-        assertEquals("1-A-Adonia",plat.getPromo().get(0).toString());
-        assertEquals("1-A-Adonia",plat.getPromo().get(0).toString());
-        assertEquals("1-A-Adonia",plat.getPromo().get(0).toString());
-        assertEquals("1-A-Adonia",plat.getPromo().get(0).toString());
-        assertEquals("1-A-Adonia",plat.getPromo().get(0).toString());
+        assertEquals("0-A-Adonia",plat.getPromo().get(0).toString());
+        assertEquals("1-B-Bellatrix",plat.getPromo().get(1).toString());
+        assertEquals("2-C-Callista",plat.getPromo().get(2).toString());
+        assertEquals("3-X-Xolag",plat.getPromo().get(3).toString());
+        assertEquals("4-Y-Yak",plat.getPromo().get(4).toString());
+        assertEquals("5-Z-Zander",plat.getPromo().get(5).toString());
+    }
+
+    @Test
+    public void testExporter(){
+        Teenager.ResetCompteur();
+        plat.importer(importFile);
+        plat.exporter(exportFile, Country.FRANCE, Country.ITALY);
+        List<String> liste = new ArrayList<>();
+        try(BufferedReader br = new BufferedReader(new FileReader(new File(exportFile)))){
+            br.readLine();
+            while(br.ready()){
+                liste.add(br.readLine());
+            }
+        }catch(Exception e){
+            assertTrue(false);
+        }
+        assertTrue(liste.contains("2-C-Callista;4-Y-Yak;false"));
+        assertTrue(liste.contains("0-A-Adonia;5-Z-Zander;false"));
+        assertTrue(liste.contains("1-B-Bellatrix;3-X-Xolag;false"));
     }
 
 }
