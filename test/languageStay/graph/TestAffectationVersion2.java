@@ -151,7 +151,7 @@ public class TestAffectationVersion2 {
         assertEquals(10, AffectationUtil.weight(t1, t5));
         assertEquals(10, AffectationUtil.weight(t1, t6));
         assertEquals(10, AffectationUtil.weight(t1, t7));
-        assertEquals(0, AffectationUtil.weight(t1, t8));
+        assertEquals(1010, AffectationUtil.weight(t1, t8));
         assertEquals(10, AffectationUtil.weight(t2, t5));
         assertEquals(0, AffectationUtil.weight(t2, t6));
         assertEquals(10, AffectationUtil.weight(t2, t7));

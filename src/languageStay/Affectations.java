@@ -133,9 +133,6 @@ public class Affectations implements Serializable {
      * @return le poids lié à l'historique entre un hôte est un visiteur
      */
     public int history(Teenager host, Teenager visitor){
-        System.out.println(host);
-        System.out.println(this.affectations.keySet());
-        System.out.println(this.estAffecte(host));
         if(this.estAffecte(host)){
             if(this.get(host).equals(visitor)){
                 if(host.criterionEquals("HISTORY","other") || visitor.criterionEquals("HISTORY","other") ){
@@ -146,16 +143,6 @@ public class Affectations implements Serializable {
                 }
             }
         }
-        /* else if(this.estAffecte(visitor)){
-            if(this.get(visitor).equals(host)){
-                if(host.getCriterion(CriterionName.HISTORY).equals("same") || visitor.getCriterion(CriterionName.HISTORY).equals("same")){
-                    return -10;
-                }
-                if(host.getCriterion(CriterionName.HISTORY).equals("other") || visitor.getCriterion(CriterionName.HISTORY).equals("other")){
-                    return 1000;
-                }
-            }
-        } */
         return 0;        
     }
 }
