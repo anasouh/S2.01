@@ -32,7 +32,7 @@ public class Criterion implements Serializable {
      * @return boolean true or false
      */
 
-    public void isValid() throws WrongCriterionTypeException{
+    public boolean isValid() throws WrongCriterionTypeException{
         if(this.label.getTYPE() == 'B' && !this.equals("yes") && !this.equals("no")){
             throw new WrongCriterionTypeException("Ce critère boolean présente une valeur incorrecte");
         }else if(this.label.getTYPE() == 'N' && !Criterion.isNumeric(this.value)){
@@ -43,6 +43,7 @@ public class Criterion implements Serializable {
                 throw new WrongCriterionTypeException("Ce critère de type date présente une valeur incorrecte");
             }
         }
+        return true;
     }
 
     /**

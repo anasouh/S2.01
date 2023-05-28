@@ -164,10 +164,10 @@ public class Plateform implements Serializable{
     public void importer(String filename){
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             int line = 1;
-            br.readLine();
+            String header = br.readLine();
             while (br.ready()) {
                 try {
-                    promo.add(Teenager.parse(br.readLine()));
+                    promo.add(Teenager.parse(br.readLine(), header));
                 } catch (WrongLineFormatException e) {
                     System.out.println("Erreur à la ligne " + line + " : " + e.getMessage());
                     System.out.println("Poursuite de l'importation...");

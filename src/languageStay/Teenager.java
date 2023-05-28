@@ -29,7 +29,7 @@ public class Teenager implements Serializable{
     private Country country;
     public static final String CSVHeader = "HOST;GUEST;REDIBITOIRE";
     
-    Map<String, Criterion> requierments = new HashMap<String, Criterion>();
+    Map<String, Criterion> requierments;
 
     static Map<Teenager, Teenager> history = new HashMap<>();
 
@@ -42,6 +42,19 @@ public class Teenager implements Serializable{
      * @param country pays du Teenager
      */
     public Teenager(String name, String firstname, LocalDate birthday, Country country){
+        this(name, firstname, birthday, country, new HashMap<String, Criterion>());
+    }
+
+    /**
+     * Crée un Teenager complètement spécifiée
+     * @param name nom du Teenager
+     * @param firstname prénom du Teenager
+     * @param birthday date d'anniversaire du Teenager
+     * @param country pays du Teenager
+     * @param crit critère du Teenager
+     */
+    public Teenager(String name, String firstname, LocalDate birthday, Country country, Map<String, Criterion> crit){
+        this.requierments = crit;
         this.name = name;
         this.firstname = firstname;
         this.birthday = birthday;
@@ -247,25 +260,34 @@ public class Teenager implements Serializable{
      * @param line une ligne de CSV
      * @return un Teenager
      */
-    public static Teenager parse(String line) throws WrongLineFormatException {
+    public static Teenager parse(String line, String header) throws WrongLineFormatException {
         Teenager result = null;
         line += ";aide";
         String[] data = line.split(";");
+        String[] head = header.split(";");
+        String firstname = null;
+        String name = null;
+        Country country = null;
+        LocalDate birthDate = null;
+        Map<String, Criterion> crit = new HashMap<String, Criterion>();
         if(data.length == 13) {
-            String[] dateStr = data[3].split("-");
-            LocalDate date = null;
-            if(dateStr.length == 3){
-                date = LocalDate.of(Integer.parseInt(dateStr[0]), Integer.parseInt(dateStr[1]), Integer.parseInt(dateStr[2]));
+            for(int i = 0; i < 12; i++){
+                if(head[i].equals("FORENAME")){
+                    firstname = data[i];
+                }else if(head[i].equals("NAME")){
+                    name = data[i];
+                }else if(head[i].equals("COUNTRY")){
+                    country = Country.valueOf(data[i]);
+                }else if(head[i].equals("BIRTH_DATE")){
+                    String[] dateStr = data[i].split("-");
+                    if(dateStr.length == 3){
+                        birthDate = LocalDate.of(Integer.parseInt(dateStr[0]), Integer.parseInt(dateStr[1]), Integer.parseInt(dateStr[2]));
+                    }
+                }else{
+                    crit.put(head[i], new Criterion(CriterionName.valueOf(head[i]), data[i]));
+                }
             }
-            result = new Teenager(data[1], data[0], date, Country.valueOf(data[2]));
-            result.addCriterion(new Criterion(CriterionName.GUEST_ANIMAL_ALLERGY, data[4]));
-            result.addCriterion(new Criterion(CriterionName.HOST_HAS_ANIMAL, data[5]));
-            result.addCriterion(new Criterion(CriterionName.GUEST_FOOD, data[6]));
-            result.addCriterion(new Criterion(CriterionName.HOST_FOOD, data[7]));
-            result.addCriterion(new Criterion(CriterionName.HOBBIES, data[8]));
-            result.addCriterion(new Criterion(CriterionName.GENDER, data[9]));
-            result.addCriterion(new Criterion(CriterionName.PAIR_GENDER, data[10]));
-            result.addCriterion(new Criterion(CriterionName.HISTORY, data[11]));
+            result = new Teenager(name, firstname, birthDate, country, crit);
             return result;
         } else {
             throw new WrongLineFormatException();
