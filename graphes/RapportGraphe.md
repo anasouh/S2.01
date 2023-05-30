@@ -62,6 +62,7 @@
   ![Les italiens qui vont chez les allemands](Img/ItToAll.png)
 
 \newpage
+
 # Version 2
   ---
   
@@ -86,10 +87,16 @@
 ## Modélisation pour les exemples
   
   ![Modélisation du Graphe Exemple 1](Img/HistoriqueEx1.png)
+
+  ![Modélisation du Graphe Exemple 2](Img/HistoriqueEx2.png)
+
+  ![Matrice d'Adjacence Exemple 1](Img/Matrice_d'ajacenceV2Ex1.png)
+
+  ![Matrice d'Adjacence Exemple 1](Img/Matrice_d'ajacenceV2Ex2.png)
   
 ## Modélisation pour l'historique de la Version 2
   
-  Pour modéliser l'historique on a décidé comme que ce soit l'hôte où le visiteur si 
+  Pour modéliser l'historique on a décidé que si ils ont été correspondant que ce soit l'hôte ou le visiteur si l'un dès de 2 mets "other" c'est considéré comme une contrainte donc on ajoute au poids 1000 même si l'autre mets "same", si l'un des 2 et l'autre ne mets rien ou les 2 mettent "same" on enlève 10 au poids. 
   
 ## Implémentation de l'historique de la Version 2
   
@@ -106,7 +113,7 @@
   
 ## Prendre en compte les autres préférences
   
-  *Pour chacun des autres critères d'affinité que vous décidez de prendre en compte, décrire comment vous changez la fonction weight de la classe AffectationUtil.*
+  Dans la fonction weight nous chargeons un fichier de séjour précédent pour faire appel à la méthode `history` et nous avons ajouté une vérification si 2 teenagers on plus de 5 hobbies en commun on arrête de diminuer le poids par 2.
   
 ## L'incompatibilité en tant que malus
   

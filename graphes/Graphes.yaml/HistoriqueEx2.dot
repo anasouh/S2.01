@@ -1,0 +1,18 @@
+strict digraph V2Ex2 {
+  rankdir=LR;
+  a [ shape="circle" penwidth="1.0" ];
+  b [ shape="circle" penwidth="1.0" ];
+  c [ shape="circle" penwidth="1.0" ];
+  x [ shape="circle" penwidth="1.0" ];
+  y [ shape="circle" penwidth="1.0" ];
+  z [ shape="circle" penwidth="1.0" ];
+  a -> x [ penwidth="1.0" label="-2" ];
+  a -> y [ penwidth="1.0" label="1010" ];
+  a -> z [ penwidth="1.0" label="1008" ];
+  b -> x [ penwidth="1.0" label="8" ];
+  b -> y [ penwidth="1.0" label="8" ];
+  b -> z [ penwidth="1.0" label="1010" ];
+  c -> x [ penwidth="1.0" label="1010" ];
+  c -> y [ penwidth="1.0" label="6" ];
+  c -> z [ penwidth="1.0" label="1000" ];
+}
