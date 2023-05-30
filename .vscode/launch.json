@@ -23,7 +23,16 @@
             "name": "App",
             "request": "launch",
             "mainClass": "languageStay.application.App",
-            "projectName": "A1_525c443e"
+            "projectName": "S2.01_58e3cf04",
+            "vmArgs": "--module-path=lib/javafx-sdk-20.0.1/lib --add-modules=javafx.controls,javafx.fxml,javafx.graphics"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "languageStay.application.App",
+            "projectName": "A1_525c443e",
+            "vmArgs": "--module-path=lib/javafx-sdk-20.0.1/lib --add-modules=javafx.controls,javafx.fxml,javafx.graphics"
         },
         {
             "type": "java",
