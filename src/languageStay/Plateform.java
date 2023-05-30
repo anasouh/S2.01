@@ -23,7 +23,16 @@ import languageStay.graph.AffectationUtil;
 public class Plateform implements Serializable{
 
     private ArrayList<Teenager> promo = new ArrayList<>();
-    public static final String CSVExportHeader = "HOST;GUEST;REDIBITOIRE";
+    public static String CSVExportHeader = "HOST;GUEST;REDIBITOIRE";
+    public static String CSVImportHeader;
+
+    static{
+        try(BufferedReader br = new BufferedReader(new FileReader(new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + "teenagersData.csv")))){
+            CSVImportHeader = br.readLine();
+        }catch(Exception e){
+            CSVImportHeader = "ratio";
+        }
+    }
 
     /**
      * Supprime de la platforme un nombre de teenagers.

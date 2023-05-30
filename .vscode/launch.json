@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "InterfaceCommande",
+            "request": "launch",
+            "mainClass": "languageStay.InterfaceCommande",
+            "projectName": "S2.01-S2.02_d2f854de"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "languageStay.application.App",
+            "projectName": "S2.01-S2.02_d2f854de"
+        },
+        {
+            "type": "java",
             "name": "App",
             "request": "launch",
             "mainClass": "languageStay.application.App",

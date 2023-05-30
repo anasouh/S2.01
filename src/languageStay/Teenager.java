@@ -27,7 +27,6 @@ public class Teenager implements Serializable{
     private String firstname;
     private LocalDate birthday;
     private Country country;
-    public static final String CSVHeader = "HOST;GUEST;REDIBITOIRE";
     
     Map<String, Criterion> requierments;
 
