@@ -1,0 +1,10 @@
+type: diwgraph
+name: V2Ex2
+nodes: [a, b, c, x, y, z]
+wedges:
+  a: {x: -2, y: 1010, z: 1008 }
+  b: {x: 8, y: 8, z: 1010}
+  c: {x: 1010, y: 6, z: 1000}
+  x: {}
+  y: {}
+  z: {}
