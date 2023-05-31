@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import fr.ulille.but.sae2_02.graphes.Arete;
+import languageStay.graph.AffectationUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,6 +30,13 @@ public class Affectations implements Serializable {
     public Affectations() {
         this.affectations = new HashMap<Teenager, Teenager>();
     }
+
+    
+    public Map<Teenager, Teenager> getMap() {
+        return affectations;
+    }
+
+
 
     /**
      * Créer une HashMap de Teenagers avec des arretes.
@@ -118,7 +126,12 @@ public class Affectations implements Serializable {
     public String toString() {
         String result = "";
         for (Map.Entry<Teenager, Teenager> entry : this.affectations.entrySet()) {
-            result += entry.getKey().toString() + " héberge " + entry.getValue().toString() + "\n";
+            if(entry.getKey().compatibleWithGuest(entry.getValue())){
+                result += entry.getKey().toString() + " héberge " + entry.getValue().toString() + " et ils ne possèdent pas de contraintes rédhibitoires" + "\n";
+            }else{
+                result += entry.getKey().toString() + " héberge " + entry.getValue().toString() + " mais ils possèdent une contrainte rédhibitoire" + "\n";
+            }
+            
         }
         return result;
     }
@@ -136,10 +149,10 @@ public class Affectations implements Serializable {
         if(this.estAffecte(host)){
             if(this.get(host).equals(visitor)){
                 if(host.criterionEquals("HISTORY","other") || visitor.criterionEquals("HISTORY","other") ){
-                    return 1000;
+                    return AffectationUtil.redhibitoire;
                 }
                 if(host.criterionEquals("HISTORY","same")  || visitor.criterionEquals("HISTORY","same") ){
-                    return -10;
+                    return -5 * AffectationUtil.pref;
                 }
             }
         }

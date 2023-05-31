@@ -21,7 +21,7 @@ import languageStay.exceptions.WrongLineFormatException;
 
 public class Teenager implements Serializable{
 
-    private int id;
+    private final int ID;
     private static int compteur = 1;
     private String name;
     private String firstname;
@@ -58,7 +58,7 @@ public class Teenager implements Serializable{
         this.firstname = firstname;
         this.birthday = birthday;
         this.country = country;
-        this.id = compteur;
+        this.ID = compteur;
         Teenager.compteur ++;
     }
 
@@ -321,7 +321,7 @@ public class Teenager implements Serializable{
 
     @Override
     public String toString() {
-        return id + "-" + name + "-" + firstname;
+        return ID + "-" + name + "-" + firstname;
     }
 
     @Override
@@ -364,5 +364,9 @@ public class Teenager implements Serializable{
         return true;
     }
 
-    
+    public int getID() {
+        return ID;
+    }
+
+       
 }
