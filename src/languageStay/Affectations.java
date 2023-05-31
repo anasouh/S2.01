@@ -23,6 +23,8 @@ import java.io.ObjectOutputStream;
 public class Affectations implements Serializable {
     private Map<Teenager, Teenager> affectations;
     public static final String PATH = System.getProperty("user.dir") + File.separator + "data" + File.separator;
+    private Country host;
+    private Country guest;
 
     /**
      * Créer une HashMap de Teenagers.
@@ -43,10 +45,20 @@ public class Affectations implements Serializable {
      *  @param arretes arretes entre 2 Teenagers.
      */
     public Affectations(List<Arete<Teenager>> arretes) {
+        this(arretes, null, null);
+    }
+
+    /**
+     * Créer une HashMap de Teenagers avec des arretes en précisant les pays hote et visiteur
+     *  @param arretes arretes entre 2 Teenagers.
+     */
+    public Affectations(List<Arete<Teenager>> arretes, Country host, Country guest) {
         this();
         for (Arete<Teenager> arete : arretes) {
             this.affecter(arete.getExtremite1(), arete.getExtremite2());
         }
+        this.host = host;
+        this.guest = guest;
     }
 
     /**
@@ -157,5 +169,29 @@ public class Affectations implements Serializable {
             }
         }
         return 0;        
+    }
+
+
+    public Country getHost() {
+        return host;
+    }
+
+
+    public Country getGuest() {
+        return guest;
+    }
+
+    public void clear(){
+        this.affectations.clear();
+    }
+
+    public void put(Teenager host, Teenager guest){
+        this.affectations.put(host, guest);
+    }
+
+    public void add(List<Arete<Teenager>> arretes){
+        for (Arete<Teenager> arete : arretes) {
+            this.affecter(arete.getExtremite1(), arete.getExtremite2());
+        }
     }
 }
