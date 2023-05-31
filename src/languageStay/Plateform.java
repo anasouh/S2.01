@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import fr.ulille.but.sae2_02.graphes.Arete;
@@ -20,10 +21,19 @@ import languageStay.graph.AffectationUtil;
  * @author Belguebli Rayane
  */
 
-public class Plateform implements Serializable{
+public class Plateform implements Serializable, Iterable<Teenager>{
 
     private ArrayList<Teenager> promo = new ArrayList<>();
-    public static final String CSVExportHeader = "HOST;GUEST;REDIBITOIRE";
+    public static String CSVExportHeader = "HOST;GUEST;REDIBITOIRE";
+    public static String CSVImportHeader;
+
+    static{
+        try(BufferedReader br = new BufferedReader(new FileReader(new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + "teenagersData.csv")))){
+            CSVImportHeader = br.readLine();
+        }catch(Exception e){
+            CSVImportHeader = "ratio";
+        }
+    }
 
     /**
      * Supprime de la platforme un nombre de teenagers.
@@ -213,6 +223,21 @@ public class Plateform implements Serializable{
     @Override
     public String toString() {
         return "Plateform [promo=" + promo + "]";
+    }
+
+    @Override
+    public Iterator<Teenager> iterator() {
+        return this.promo.iterator();
+    }
+
+    
+    public int getIndex(int id){
+        for(Teenager t : this.promo){
+            if(t.getID() == id){
+                return this.promo.indexOf(t);
+            }
+        }
+        return -1;
     }
 
 }

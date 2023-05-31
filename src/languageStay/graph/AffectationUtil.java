@@ -18,6 +18,9 @@ import languageStay.*;
 
 public class AffectationUtil implements Serializable {
 
+    public static int redhibitoire = 1000;
+    public static int pref = 2;
+
     /** Calcule le poids de l’arête entre host et visitor dans le graphe modèle.
     * @param host L'adolescent hôte
     * @param visitor L'adolescent visiteur
@@ -27,8 +30,8 @@ public class AffectationUtil implements Serializable {
         Affectations history = AffectationUtil.chargerSejour(host.getCountry(), visitor.getCountry());
         double result = 10.0;
         int i = 0;
-        if (!host.compatibleWithGuest(visitor)) result = result + 1000;
-        i = i + (2 * host.nbLoisirCommun(visitor));
+        if (!host.compatibleWithGuest(visitor)) result = result + redhibitoire;
+        i = i + (pref * host.nbLoisirCommun(visitor));
         if(i>10){
             i = 10;
         }
