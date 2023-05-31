@@ -70,19 +70,15 @@
   
 ## Exemple minimal pour la gestion de l'historique
   
-  *Présenter un exemple minimal qui est pertinent pour tester l'historique. L'exemple contiendra:*
-  - *huit adolescents de deux pays différents tels que* 
-    - *certains des adolescents expriment des préférences d'historique (critère HISTORY). Toutes les valeurs possibles pour ce critère doivent être présentes* 
-    - *aucun des adolescents n'est allergique aux animaux en aucun n'a exprimé de passe-temps, ainsi pour l'instant on peut se concentrer uniquement sur la gestion de l'historique*
-  - *un historique, c'est à dire une collection de paires d'adolescents qui étaient correspondants l'année passée. Ces paires doivent permettre d'illustrer les différents cas de figure qui peuvent se présenter par rapport aux contraintes d'historique et les huit adolescents*
-  
-  *Puis, donner un appariement optimal qui tient compte des données d'historique, et expliquer pourquoi il est optimal. L'explication ne doit pas parler des graphes, mais uniquement des adolescents et les critères exprimés.*
+  ![Exemple 1](Img/Exemple1.png)
+
+  ![Ancien Correspondants](Img/Coores1.png)
   
 ## Deuxième exemple pour la gestion d'historique
   
-  *Modifiez l'exemple précédent en ajoutant des préférences liées aux passe-temps. Donnez l'appariement que vous considérez optimal dans ce cas. En particulier, expliquez comment vous comptez combiner une éventuelle affinité liée à l'historique avec l'affinité liée aux passe-temps. Rappelons que l'historique peut compter comme une contrainte rédhibitoire ou comme une préférence, voir le sujet pour plus de précisions.*
-  
-  *Donner l'appariement que vous considérez optimal dans ce deuxième exemple, toujours sans parler de graphes.*
+  ![Exemple](Img/Exemple2.png)
+
+  ![Ancien Correspondants](Img/Coores2.png)
   
 ## Modélisation pour les exemples
   
