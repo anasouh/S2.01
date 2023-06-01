@@ -240,4 +240,23 @@ public class Plateform implements Serializable, Iterable<Teenager>{
         return -1;
     }
 
+    public void removeById(int id){
+        Teenager aSupp = null;
+        for(Teenager t : this.promo){
+            if(t.getID() == id){
+                aSupp = t;
+            }
+        }
+        this.promo.remove(aSupp);
+    }
+
+    public Teenager getById(int id){
+        for(Teenager t : this.promo){
+            if(t.getID() == id){
+                return t;
+            }
+        }
+        return null;
+    }
+
 }

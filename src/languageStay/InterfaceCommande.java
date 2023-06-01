@@ -4,8 +4,10 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 import languageStay.graph.AffectationUtil;
 
@@ -104,29 +106,79 @@ public class InterfaceCommande {
         Plateform plat = new Plateform();
         plat.importer(teenList);
         plat.exporter(affList, host, guest);
-        Affectations affectations = new Affectations(AffectationUtil.affectation(plat.getPromo(), guest, host));
-        System.out.println("\nAffectations :");
-        System.out.println(affectations);
+        Affectations affectations = new Affectations(AffectationUtil.affectation(plat.getPromo(), guest, host), host, guest);
         boolean continuer = true;
         while(continuer){
+            System.out.println("\nAffectations :");
+            System.out.println(affectations);
             System.out.println("\nCommandes :");
             System.out.println("- la commande q permet de quitter l'interface");
+            System.out.println("- la commande f permet de fixer un appariement");
+            System.out.println("- la commande e permet d'éviter un appariement'");
             char c = ecouterChar();
             if(c == 'q'){
                 continuer = false;
+            }else if(c == 'f'){
+                fixerApp(affectations, plat);
             }
         }
+    }
+
+    public static void fixerApp(Affectations affectations, Plateform plateform){
+        Set<Teenager> hotes = affectations.getMap().keySet();
+        Collection<Teenager> visiteurs = affectations.getMap().values();
+        System.out.println("\nFixer un appariement :");
+        System.out.println("Voici la liste des hotes :");
+        for(Teenager t : hotes){
+            System.out.println(t);
+        }
+        System.out.println("Voici la liste des invités :");
+        for(Teenager t : visiteurs){
+            System.out.println(t);
+        }
+        int idHost = -1;
+        int idGuest = -1;
+        while(!containsId(hotes, idHost)){
+            System.out.print("Entrez le numéro id de l'hote à affecter : ");
+            try{
+                idHost = scan.nextInt();
+            }catch(Exception e){
+
+            }
+        }
+        while(!containsId(visiteurs, idGuest)){
+            System.out.print("Entrez le numéro id du visiteur à affecter : ");
+            try{
+                idGuest = scan.nextInt();
+            }catch(Exception e){
+                
+            }
+        }
+        affectations.clear();
+        affectations.put(plateform.getById(idHost), plateform.getById(idGuest));
+        plateform.removeById(idHost);
+        plateform.removeById(idGuest);
+        affectations.add(AffectationUtil.affectation(plateform.getPromo(), affectations.getGuest(), affectations.getHost()));
+    }
+
+    public static boolean containsId(Collection<Teenager> liste, int id){
+        for(Teenager t : liste){
+            if(t.getID() == id){
+                return true;
+            }
+        }
+        return false;
     }
 
     public static void gesEtu(){
         Plateform plat = new Plateform();
         plat.importer(teenList);
-        System.out.println("\nListe des étudiants :");
-        for(Teenager t : plat){
-            System.out.println(t);
-        }
         boolean continuer = true;
         while(continuer){
+            System.out.println("\nListe des étudiants :");
+            for(Teenager t : plat){
+                System.out.println(t);
+            }
             System.out.println("\nCommandes :");
             System.out.println("- la commande q permet de quitter l'interface");
             char c = ecouterChar();
