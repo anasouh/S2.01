@@ -44,6 +44,9 @@ public class AffectationUtil implements Serializable {
         }
         result = result - i;
         result = result + history.history(host, visitor);
+        if(host.pairGender(visitor) == true){
+            result = result - pref*2;
+        }
         return result;
     }
 
@@ -162,6 +165,20 @@ public class AffectationUtil implements Serializable {
         t8.addCriterion(CriterionName.HOST_FOOD, "");
         t9.addCriterion(CriterionName.HOST_FOOD, "");
         t10.addCriterion(CriterionName.HOST_FOOD, "");
+
+        t1.addCriterion(CriterionName.GENDER, "male");
+        t2.addCriterion(CriterionName.GENDER, "male");
+        t3.addCriterion(CriterionName.GENDER, "female");
+        t4.addCriterion(CriterionName.GENDER, "other");
+        t5.addCriterion(CriterionName.GENDER, "female");
+        t6.addCriterion(CriterionName.GENDER, "female");
+
+        t1.addCriterion(CriterionName.PAIR_GENDER, "other");
+        t2.addCriterion(CriterionName.PAIR_GENDER, "other");
+        t3.addCriterion(CriterionName.PAIR_GENDER, "female");
+        t4.addCriterion(CriterionName.PAIR_GENDER, "female");
+        t5.addCriterion(CriterionName.PAIR_GENDER, "male");
+        t6.addCriterion(CriterionName.PAIR_GENDER, "female");
 
         /*Graphes Version 2 */
         t11 = new Teenager("Jack", "Grealish", LocalDate.now(), Country.GERMANY);
