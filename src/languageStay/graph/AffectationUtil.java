@@ -20,7 +20,6 @@ public class AffectationUtil implements Serializable {
 
     public static int redhibitoire = 1000;
     public static int pref = 2;
-    public static int prefGender = 5;
 
     /** Calcule le poids de l’arête entre host et visitor dans le graphe modèle.
     * @param host L'adolescent hôte
@@ -46,7 +45,7 @@ public class AffectationUtil implements Serializable {
         result = result - i;
         result = result + history.history(host, visitor);
         if(host.pairGender(visitor) == true){
-            result = result - prefGender;
+            result = result - pref*2;
         }
         return result;
     }
