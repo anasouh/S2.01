@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fitToWidth="true" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="languageStay.application.AppController">
+   <content>
+      <BorderPane>
+         <top>
+            <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="249.0" prefWidth="600.0" spacing="30.0" style="-fx-padding: 20px;" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Fixer appairements">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="100.0" prefWidth="275.0">
+                           <children>
+                              <HBox prefHeight="27.0" prefWidth="263.0">
+                                 <children>
+                                    <Label prefHeight="26.0" prefWidth="36.0" text="ID :" />
+                                    <TextField />
+                                 </children>
+                              </HBox>
+                              <ListView prefHeight="71.0" prefWidth="301.0" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="100.0" prefWidth="298.0">
+                           <children>
+                              <HBox prefHeight="27.0" prefWidth="263.0">
+                                 <children>
+                                    <Label prefHeight="26.0" prefWidth="36.0" text="ID :" />
+                                    <TextField />
+                                 </children>
+                              </HBox>
+                              <ListView prefHeight="70.0" prefWidth="292.0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="28.0" prefWidth="179.0">
+                     <children>
+                        <Button fx:id="saveTeenagerButton" mnemonicParsing="false" onAction="#saveTeenager" prefHeight="24.0" prefWidth="185.0" text="Enregistrer" />
+                        <HBox prefHeight="28.0" prefWidth="104.0" />
+                        <HBox prefHeight="28.0" prefWidth="102.0" />
+                        <Button fx:id="saveTeenagerButton11" mnemonicParsing="false" onAction="#saveTeenager" prefHeight="24.0" prefWidth="192.0" text="Retour" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </top>
+      </BorderPane>
+   </content>
+</ScrollPane>
