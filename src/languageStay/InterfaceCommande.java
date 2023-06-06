@@ -1,7 +1,9 @@
 package languageStay;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,6 +23,7 @@ public class InterfaceCommande {
         System.out.print("Veuillez entrer 1 caractère : ");
         String c = scan.next();
         while(c.length() != 1){
+            System.out.println("invalide");
             System.out.print("Veuillez entrer 1 caractère : ");
             c = scan.next();
         }
@@ -28,8 +31,9 @@ public class InterfaceCommande {
     }
 
     private static void ajouterEtu(){
+        clear();
         List<String> liste = new ArrayList<>();
-        System.out.println("\nAjouter étudiant :");
+        System.out.println("Ajouter étudiant :");
         String[] header = Plateform.CSVImportHeader.split(";");
         for(int i = 0; i < header.length; i++){
             System.out.print("Veuillez la valeur qui coresspond au critère " + header[i] + ": ");
@@ -56,7 +60,8 @@ public class InterfaceCommande {
     public static void tableauDeBord(){
         boolean continuer = true;
         while(continuer){
-            System.out.println("\nTableau de bord :");
+            clear();
+            System.out.println("Tableau de bord :");
             System.out.println("- la commande q permet de quitter l'interface");
             System.out.println("- la commande d permet de définir les pondérations");
             System.out.println("- la commande t permet de gérer les étudiants");
@@ -109,7 +114,8 @@ public class InterfaceCommande {
         Affectations affectations = new Affectations(AffectationUtil.affectation(plat.getPromo(), guest, host), host, guest);
         boolean continuer = true;
         while(continuer){
-            System.out.println("\nAffectations :");
+            clear();
+            System.out.println("Affectations :");
             System.out.println(affectations);
             System.out.println("\nCommandes :");
             System.out.println("- la commande q permet de quitter l'interface");
@@ -123,10 +129,12 @@ public class InterfaceCommande {
             }else if(c == 'e'){
                 appManuel(affectations, plat, 0);
             }
+            plat.exporter(affList, host, guest);
         }
     }
 
     public static void appManuel(Affectations affectations, Plateform plateform, int n){
+        clear();
         String mot = "";
         if(n == 0){
             mot = "eviter";
@@ -135,7 +143,7 @@ public class InterfaceCommande {
         }
         Set<Teenager> hotes = affectations.getMap().keySet();
         Collection<Teenager> visiteurs = affectations.getMap().values();
-        System.out.println("\n" + mot + " un appariement :");
+        System.out.println(mot + " un appariement :");
         System.out.println("Voici la liste des hotes :");
         for(Teenager t : hotes){
             System.out.println(t);
@@ -218,21 +226,173 @@ public class InterfaceCommande {
         plat.importer(teenList);
         boolean continuer = true;
         while(continuer){
-            System.out.println("\nListe des étudiants :");
+            clear();
+            System.out.println("Liste des étudiants :");
             for(Teenager t : plat){
                 System.out.println(t);
             }
             System.out.println("\nCommandes :");
             System.out.println("- la commande q permet de quitter l'interface");
+            System.out.println("- la commande s permet de supprimer un étudiant précis");
+            System.out.println("- la commande p permet de supprimer un certain nombre d'étudiants");
+            System.out.println("- la commande m permet de modifier un étudiant");
             char c = ecouterChar();
             if(c == 'q'){
                 continuer = false;
+            }else if(c == 's'){
+                suppEtu(plat);
+            }else if(c == 'p'){
+                etuSupp(plat);
+            }else if(c == 'm'){
+                modifEtu(plat);
             }
         }
     }
 
+    public static void modifEtu(Plateform plat){
+        clear();
+        System.out.println("Liste des étudiants :");
+        for(Teenager t : plat){
+            System.out.println(t);
+        }
+        int idEtu = -1;
+        while(!containsId(plat.getPromo(), idEtu)){
+            System.out.print("Entrez le numéro id de l'étudiant à mofifier : ");
+            try{
+                idEtu = scan.nextInt();
+            }catch(Exception e){
+
+            }
+        }
+        Teenager teen = plat.getById(idEtu);
+        suppEtuCSV(teen);
+        etuModif(teen);
+        File file = new File(teenList);
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))){
+            bw.write(teen.chaineCSV());
+            bw.newLine();
+        }catch(Exception e){
+            System.out.println("Erreur dans l'écriture du fichier");
+        }
+    }
+
+    public static void etuModif(Teenager teen){
+        String[] header = Plateform.CSVImportHeader.split(";");
+        for(String s : header){
+            clear();
+            System.out.println("Entrez une nouvelle valeur pour le critère " + s + " (ou rien si il faut laisser comme actuellement) :");
+            if(s.equals("FORENAME")){
+                System.out.println("Valeur actuelle : " + teen.getFirstname());
+                System.out.print("Nouvelle valeur : ");
+                String chaine = scan.nextLine();
+                if(!chaine.equals("")){
+                    teen.setFirstname(chaine);
+                }
+            }else if(s.equals("NAME")){
+                System.out.println("Valeur actuelle : " + teen.getName());
+                System.out.print("Nouvelle valeur : ");
+                String chaine = scan.nextLine();
+                if(!chaine.equals("")){
+                    teen.setName(chaine);
+                }
+            }else if(s.equals("BIRTH_DATE")){
+                System.out.println("Valeur actuelle : " + teen.date());
+                System.out.print("Nouvelle valeur : ");
+                String chaine = scan.nextLine();
+                if(!chaine.equals("")){
+                    teen.setBirthday(chaine);
+                }
+            }else if(s.equals("COUNTRY")){
+                System.out.println("Valeur actuelle : " + teen.getCountry());
+                System.out.print("Nouvelle valeur : ");
+                String chaine = scan.nextLine();
+                if(!chaine.equals("")){
+                    teen.setCountry(chaine);
+                }
+            }else{
+                System.out.println("Valeur actuelle : " + teen.getCriterion(CriterionName.valueOf(s)));
+                System.out.print("Nouvelle valeur : ");
+                String chaine = scan.nextLine();
+                if(!chaine.equals("")){
+                    teen.setCriterion(s, chaine);
+                }
+            }
+        }
+    }
+
+    public static void etuSupp(Plateform plat){
+        int nb = -1;
+        while(nb < 0){
+            System.out.print("Entrez le nombre d'étudiants à supprimer : ");
+            try{
+                nb = scan.nextInt();
+            }catch (Exception e){
+
+            }
+        }
+        String country = "";
+        System.out.print("Entrez l'éventuel pays d'où ils doivent être supprimés (null sinon) : ");
+        country = scan.next();
+        List<Teenager> liste = new ArrayList<>();
+        if(paysExist(country)){
+            liste = plat.supprimer(nb, Country.valueOf(country));
+        }else{
+            liste = plat.supprimer(nb);
+        }
+        for(Teenager t : liste){
+            suppEtuCSV(t);
+        }
+    }
+
+    public static void suppEtu(Plateform plat){
+        clear();
+        System.out.println("Liste des étudiants :");
+        for(Teenager t : plat){
+            System.out.println(t);
+        }
+        int idEtu = -1;
+        while(!containsId(plat.getPromo(), idEtu)){
+            System.out.print("Entrez le numéro id de l'étudiant à supprimer : ");
+            try{
+                idEtu = scan.nextInt();
+            }catch(Exception e){
+
+            }
+        }
+        Teenager teen = plat.getById(idEtu);
+        suppEtuCSV(teen);
+        plat.removeById(idEtu);
+    }
+
+    public static void suppEtuCSV(Teenager teen){
+        List<String> fichier = new ArrayList<>();
+        fichier.add(Plateform.CSVImportHeader);
+        try(BufferedReader br = new BufferedReader(new FileReader(new File(teenList)))){
+            br.readLine();
+            while(br.ready()){
+                String line = br.readLine();
+                Teenager t = Teenager.parse(line, fichier.get(0));
+                if(!t.equals(teen)){
+                    fichier.add(line);
+                }
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(new File(teenList)))){
+            for(String s : fichier){
+                bw.write(s);
+                bw.newLine();
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
     public static void defPond(){
-        System.out.println("\nChangement pondérations :");
+        clear();
+        System.out.println("Changement pondérations :");
         System.out.print("Indiquez la pondération d'un critère rédhibitoire : ");
         try{
             AffectationUtil.redhibitoire = scan.nextInt();
@@ -251,7 +411,7 @@ public class InterfaceCommande {
         boolean continuer = true;
         while(continuer){
             clear();
-            System.out.println("\nMenu principal :");
+            System.out.println("Menu principal :");
             System.out.println("- la commande q permet de quitter l'interface");
             System.out.println("- la commande a permet d'ajouter un étudiant");
             System.out.println("- la commande t permet d'afficher la tableau de bord");

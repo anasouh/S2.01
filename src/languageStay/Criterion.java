@@ -123,4 +123,11 @@ public class Criterion implements Serializable {
     public String toString() {
         return getLabel().name();
     }
+
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    
 }

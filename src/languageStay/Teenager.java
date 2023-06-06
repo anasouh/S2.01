@@ -381,4 +381,66 @@ public class Teenager implements Serializable{
     public int getFixerEviter(Teenager t){
         return this.fixerEviter.get(t);
     }
+
+    public String date(){
+        return "" + this.birthday.getYear() + "-" + this.birthday.getMonthValue() + "-" + this.birthday.getDayOfMonth();
+    }
+
+    public String chaineCSV(){
+        String[] header = Plateform.CSVImportHeader.split(";");
+        String res = "";
+        for(String s : header){
+            if(s.equals("FORENAME")){
+                res += this.firstname + ";";
+            }else if(s.equals("NAME")){
+                res += this.name + ";";
+            }else if(s.equals("BIRTH_DATE")){
+                res += this.date() + ";";
+            }else if(s.equals("COUNTRY")){
+                res += this.country + ";";
+            }else if(this.requierments.containsKey(s)){
+                res += this.requierments.get(s).getValue() + ";";
+            }else{
+                res += ";";
+            }
+        }
+        return res.substring(0, res.length()-1);
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public void setBirthday(String birthday) {
+        String[] dates = birthday.split("-");
+        if(dates.length == 3){
+            this.birthday = LocalDate.of(Integer.valueOf(dates[0]), Integer.valueOf(dates[1]), Integer.valueOf(dates[2]));
+        }else{
+            this.birthday = null;
+        }
+    }
+
+    public void setCountry(String country) {
+        this.country = Country.valueOf(country);
+    }
+
+    public void setCriterion(String critName, String value){
+        if(!this.requierments.containsKey(critName)){
+            this.addCriterion(CriterionName.valueOf(critName), value);
+        }else{
+            this.requierments.get(critName).setValue(value);
+        }
+    }
 }

@@ -38,8 +38,10 @@ public class Plateform implements Serializable, Iterable<Teenager>{
     /**
      * Supprime de la platforme un nombre de teenagers.
      * @param nbSupp Nombre de teenager à supprimer
+     * @return liste des étudiants supprimés
      */
-    public void supprimer(int nbSupp){
+    public List<Teenager> supprimer(int nbSupp){
+        List<Teenager> liste = new ArrayList<>();
         int c = 0;
         for(Teenager t : promo){
             t.purgeInvalidRequierement();
@@ -54,16 +56,20 @@ public class Plateform implements Serializable, Iterable<Teenager>{
                     aSupp.add(etudiant);
                 }
             }
+            liste.addAll(aSupp);
             promo.removeAll(aSupp);
         }
+        return liste;
     }
 
     /**
      * Supprime des teenagers d'un pays de la plateforme.
      * @param nbSupp nombre de teenagers du pays à supprimer
      * @param pays pays des teenagers à supprimer
+     * @return liste des étudiants supprimés
      */
-    public void supprimer(int nbSupp, Country pays){
+    public List<Teenager> supprimer(int nbSupp, Country pays){
+        List<Teenager> liste = new ArrayList<>();
         int c = 0;
         for(Teenager t : promo){
             t.purgeInvalidRequierement();
@@ -78,8 +84,10 @@ public class Plateform implements Serializable, Iterable<Teenager>{
                     aSupp.add(etudiant);
                 }
             }
+            liste.addAll(aSupp);
             promo.removeAll(aSupp);
         }
+        return liste;
     }
 
     /**
