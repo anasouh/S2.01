@@ -381,4 +381,21 @@ public class Teenager implements Serializable{
     public int getFixerEviter(Teenager t){
         return this.fixerEviter.get(t);
     }
+
+    public boolean pairGender(Teenager t){
+        if((this.getCriterion(CriterionName.PAIR_GENDER) != null && t.getCriterion(CriterionName.GENDER) != null) ||
+        (t.getCriterion(CriterionName.PAIR_GENDER) != null && this.getCriterion(CriterionName.GENDER) != null)){
+            
+            if(this.getCriterion(CriterionName.PAIR_GENDER).equals(t.getCriterion(CriterionName.GENDER)) || 
+            t.getCriterion(CriterionName.PAIR_GENDER).equals(this.getCriterion(CriterionName.GENDER))){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
+    }
 }
