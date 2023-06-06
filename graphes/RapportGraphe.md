@@ -63,7 +63,7 @@
 
 \newpage
 
-# Version 2
+# **Version 2**
   ---
   
   Sera évaluée à partir du tag git `Graphes-v2`
@@ -73,8 +73,12 @@
   ![Exemple 1](Img/Exemple1.png)
 
   ![Ancien Correspondants](Img/Coores1.png)
+
+  Voici le première exemple pris pour gérer l'historique qu'avec des contraintes liées à l'historique.
   
 ## Deuxième exemple pour la gestion d'historique
+
+  Voici le deuxième exemple pris pour gérer l'historique avec des contraintes liées à l'historique, la nourriture, les alergies aux animaux, les hobbies.
   
   ![Exemple](Img/Exemple2.png)
 
@@ -84,11 +88,11 @@
   
   ![Modélisation du Graphe Exemple 1](Img/HistoriqueEx1.png)
 
-  ![Modélisation du Graphe Exemple 2](Img/HistoriqueEx2.png)
-
   ![Matrice d'Adjacence Exemple 1](Img/Matrice_d'ajacenceV2Ex1.png)
 
-  ![Matrice d'Adjacence Exemple 1](Img/Matrice_d'ajacenceV2Ex2.png)
+  ![Modélisation du Graphe Exemple 2](Img/HistoriqueEx2.png)
+
+  ![Matrice d'Adjacence Exemple 2](Img/Matrice_d'ajacenceV2Ex2.png)
   
 ## Modélisation pour l'historique de la Version 2
   
@@ -111,6 +115,3 @@
   
   Dans la fonction weight nous chargeons un fichier de séjour précédent pour faire appel à la méthode `history` et nous avons ajouté une vérification si 2 teenagers on plus de 5 hobbies en commun on arrête de diminuer le poids par 2.
   
-## L'incompatibilité en tant que malus
-  
-  *Proposer une formule ou une description précise qui explique comment calculer le poids d'une arête en considérant les incompatibilités comme des malus et les critères satisfaits comme des bonus. Implémenter cette formule dans une seconde méthode appelée `weightAdvanced`, ceci pour éviter de casser votre code. Puis, écrire une méthode de test qui permet d'illustrer le calcul d'affectation basé sur `weightAdvanced`. Vous pouvez égalmente tester l'affectation en utilisant le fichier de données `incompatibilityVsBonus.csv`.*
