@@ -27,6 +27,13 @@ public class AffectationUtil implements Serializable {
     * @return le poids plus il est bas plus ils sont compatibles
     */
     public static double weight (Teenager host, Teenager visitor){
+        for(Teenager t : host.getFixerEviter().keySet()){
+            if(t.equals(visitor) && host.getFixerEviter(t) == 0){
+                return 1000000;
+            }else if(t.equals(visitor) && host.getFixerEviter(t) == 1){
+                return -1000000;
+            }
+        }
         Affectations history = AffectationUtil.chargerSejour(host.getCountry(), visitor.getCountry());
         double result = 10.0;
         int i = 0;

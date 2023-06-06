@@ -114,17 +114,60 @@ public class InterfaceCommande {
             System.out.println("\nCommandes :");
             System.out.println("- la commande q permet de quitter l'interface");
             System.out.println("- la commande f permet de fixer un appariement");
-            System.out.println("- la commande e permet d'éviter un appariement'");
+            System.out.println("- la commande e permet d'éviter un appariement");
             char c = ecouterChar();
             if(c == 'q'){
                 continuer = false;
             }else if(c == 'f'){
-                fixerApp(affectations, plat);
+                appManuel(affectations, plat, 1);
+            }else if(c == 'e'){
+                appManuel(affectations, plat, 0);
             }
         }
     }
 
-    public static void fixerApp(Affectations affectations, Plateform plateform){
+    public static void appManuel(Affectations affectations, Plateform plateform, int n){
+        String mot = "";
+        if(n == 0){
+            mot = "eviter";
+        }else if(n == 1){
+            mot = "fixer";
+        }
+        Set<Teenager> hotes = affectations.getMap().keySet();
+        Collection<Teenager> visiteurs = affectations.getMap().values();
+        System.out.println("\n" + mot + " un appariement :");
+        System.out.println("Voici la liste des hotes :");
+        for(Teenager t : hotes){
+            System.out.println(t);
+        }
+        System.out.println("Voici la liste des invités :");
+        for(Teenager t : visiteurs){
+            System.out.println(t);
+        }
+        int idHost = -1;
+        int idGuest = -1;
+        while(!containsId(hotes, idHost)){
+            System.out.print("Entrez le numéro id de l'hote à " + mot + " : ");
+            try{
+                idHost = scan.nextInt();
+            }catch(Exception e){
+
+            }
+        }
+        while(!containsId(visiteurs, idGuest)){
+            System.out.print("Entrez le numéro id du visiteur à " + mot + " : ");
+            try{
+                idGuest = scan.nextInt();
+            }catch(Exception e){
+
+            }
+        }
+        affectations.clear();
+        plateform.getById(idHost).putFixerEviter(plateform.getById(idGuest), n);
+        affectations.add(AffectationUtil.affectation(plateform.getPromo(), affectations.getGuest(), affectations.getHost()));
+    }
+
+    /* public static void fixerApp(Affectations affectations, Plateform plateform){
         Set<Teenager> hotes = affectations.getMap().keySet();
         Collection<Teenager> visiteurs = affectations.getMap().values();
         System.out.println("\nFixer un appariement :");
@@ -159,7 +202,7 @@ public class InterfaceCommande {
         plateform.removeById(idHost);
         plateform.removeById(idGuest);
         affectations.add(AffectationUtil.affectation(plateform.getPromo(), affectations.getGuest(), affectations.getHost()));
-    }
+    } */
 
     public static boolean containsId(Collection<Teenager> liste, int id){
         for(Teenager t : liste){
@@ -207,6 +250,7 @@ public class InterfaceCommande {
     public static void main(String[] args) {
         boolean continuer = true;
         while(continuer){
+            clear();
             System.out.println("\nMenu principal :");
             System.out.println("- la commande q permet de quitter l'interface");
             System.out.println("- la commande a permet d'ajouter un étudiant");
@@ -223,4 +267,13 @@ public class InterfaceCommande {
         System.out.println("Salut, bisous");
         scan.close();
     }
+
+    public static void clear()
+	{
+        final String ESC = "\033[";
+        System.out.print (ESC + "2J");
+        System.out.print (ESC + "0;0H");
+        System.out.flush();
+	}
+
 }

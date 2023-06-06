@@ -32,6 +32,8 @@ public class Teenager implements Serializable{
 
     static Map<Teenager, Teenager> history = new HashMap<>();
 
+    private Map<Teenager, Integer> fixerEviter = new HashMap<>();
+
 
     /**
      * Crée un Teenager complètement spécifiée
@@ -368,5 +370,15 @@ public class Teenager implements Serializable{
         return ID;
     }
 
-       
+    public Map<Teenager, Integer> getFixerEviter() {
+        return fixerEviter;
+    }
+
+    public void putFixerEviter(Teenager t, int i){
+        this.fixerEviter.put(t, i);
+    }
+
+    public int getFixerEviter(Teenager t){
+        return this.fixerEviter.get(t);
+    }
 }
