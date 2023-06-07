@@ -69,12 +69,30 @@
   Sera évaluée à partir du tag git `Graphes-v2`
   
 ## Exemple minimal pour la gestion de l'historique
+
+  Voici le première exemple pris pour gérer l'historique qu'avec des contraintes liées à l'historique.
   
   ![Exemple 1](Img/Exemple1.png)
 
   ![Ancien Correspondants](Img/Coores1.png)
 
-  Voici le première exemple pris pour gérer l'historique qu'avec des contraintes liées à l'historique.
+  liste des appariements compatibles :
+
+  - Jack -- Pedri
+  - Jack -- Nico
+  - Jack -- David
+  - Phil -- Pedri
+  - Phil -- Nico
+  - Phil -- David
+  - Phil -- Xavi
+  - Harry -- Pedri
+  - Harry -- Nico
+  - Harry -- David
+  - Harry -- Xavi
+  - Kyle -- Nico
+  - Kyle -- David
+  - Kyle -- Xavi
+
   
 ## Deuxième exemple pour la gestion d'historique
 
@@ -83,6 +101,13 @@
   ![Exemple](Img/Exemple2.png)
 
   ![Ancien Correspondants](Img/Coores2.png)
+
+  liste des appariements compatibles :
+
+  - A -- X
+  - B -- X
+  - B -- Y
+  - C -- Y
   
 ## Modélisation pour les exemples
   
@@ -114,4 +139,5 @@
 ## Prendre en compte les autres préférences
   
   Dans la fonction weight nous chargeons un fichier de séjour précédent pour faire appel à la méthode `history` et nous avons ajouté une vérification si 2 teenagers on plus de 5 hobbies en commun on arrête de diminuer le poids par 2.
+  Et comme dernière préférence celle du genre si elle est respecté on enlève 4 qui est le double du poids de la préférence.
   

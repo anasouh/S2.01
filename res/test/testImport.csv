@@ -1,7 +1,7 @@
 FORENAME;NAME;COUNTRY;BIRTH_DATE;GUEST_ANIMAL_ALLERGY;HOST_HAS_ANIMAL;GUEST_FOOD;HOST_FOOD;HOBBIES;GENDER;PAIR_GENDER;HISTORY
-Adonia;A;FRANCE;;;no;;;sports,technology;;;
-Bellatrix;B;FRANCE;;;yes;;;culture,science;;;
-Callista;C;FRANCE;;;no;;;science,reading;;;
-Xolag;X;ITALY;;no;;;;culture,technology;;;
-Yak;Y;ITALY;;yes;;;;science,reading;;;
-Zander;Z;ITALY;;no;;;;technology;;;
+Adonia;A;FRANCE;2000-01-01;;no;;;sports,technology;;;
+Bellatrix;B;FRANCE;2000-01-01;;yes;;;culture,science;;;
+Callista;C;FRANCE;2000-01-01;;no;;;science,reading;;;
+Xolag;X;ITALY;2000-01-01;no;;;;culture,technology;;;
+Yak;Y;ITALY;2000-01-01;yes;;;;science,reading;;;
+Zander;Z;ITALY;2000-01-01;no;;;;technology;;;

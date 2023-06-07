@@ -30,10 +30,7 @@ public class Teenager implements Serializable{
     
     Map<String, Criterion> requierments;
 
-    static Map<Teenager, Teenager> history = new HashMap<>();
-
     private Map<Teenager, Integer> fixerEviter = new HashMap<>();
-
 
     /**
      * Crée un Teenager complètement spécifiée
@@ -280,7 +277,7 @@ public class Teenager implements Serializable{
                 }else if(head[i].equals("NAME")){
                     name = data[i];
                 }else if(head[i].equals("COUNTRY")){
-                    country = Country.valueOf(data[i]);
+                    country = Country.valueOf(data[i].toUpperCase());
                 }else if(head[i].equals("BIRTH_DATE")){
                     String[] dateStr = data[i].split("-");
                     if(dateStr.length == 3){

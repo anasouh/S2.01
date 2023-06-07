@@ -108,8 +108,21 @@ public class InterfaceCommande {
     }
 
     public static void gesApp(Country host, Country guest){
+        clear();
         Plateform plat = new Plateform();
         plat.importer(teenList);
+        if(plat.getNbCountry(host) != plat.getNbCountry(guest)){
+            System.out.println("Le nombre d'étudiants doit être identique pour les deux pays");
+            System.out.println("Il y a actuellement " + plat.getNbCountry(host) + " pour le pays " + host);
+            System.out.println("Il y a actuellement " + plat.getNbCountry(guest) + " pour le pays " + guest);
+            System.out.println("Il est possible de modifier ça dans l'interface de gestion des étudiants");
+            try{
+                Thread.sleep(5000);
+            }catch(Exception e){
+
+            }
+            return;
+        }
         plat.exporter(affList, host, guest);
         Affectations affectations = new Affectations(AffectationUtil.affectation(plat.getPromo(), guest, host), host, guest);
         boolean continuer = true;
