@@ -127,6 +127,8 @@ public class Teenager implements Serializable{
      * @param value valeur du critère
      */
     public void addCriterion(CriterionName label, String value){
+        System.out.println(label + ": " + value );
+        if (value == null || value.equals("null")) value = "";
         Criterion criterion =  new Criterion(label, value);
         requierments.put(label.name(), criterion);
     }
@@ -147,7 +149,7 @@ public class Teenager implements Serializable{
     public String getCriterion(CriterionName label){
         Criterion res = requierments.get(label.name());
         if (res != null) return res.getValue();
-        return null;
+        return "";
     }
 
     /**
@@ -303,13 +305,13 @@ public class Teenager implements Serializable{
         String result = "" + this.firstname + ";" + this.name + ";" + this.country + ";";
         if (this.birthday != null) result += this.birthday.toString();
         result += ";";
+        result += this.getCriterion(CriterionName.HOBBIES) + ";";
         result += this.getCriterion(CriterionName.GUEST_ANIMAL_ALLERGY) + ";";
         result += this.getCriterion(CriterionName.HOST_HAS_ANIMAL) + ";";
         result += this.getCriterion(CriterionName.GUEST_FOOD) + ";";
         result += this.getCriterion(CriterionName.HOST_FOOD) + ";";
-        result += this.getCriterion(CriterionName.HOBBIES) + ";";
         result += this.getCriterion(CriterionName.GENDER) + ";";
-        result += this.getCriterion(CriterionName.PAIR_GENDER);
+        result += this.getCriterion(CriterionName.PAIR_GENDER) + ";";
         result += this.getCriterion(CriterionName.HISTORY);
         return result;
     }
@@ -323,7 +325,7 @@ public class Teenager implements Serializable{
 
     @Override
     public String toString() {
-        return ID + "-" + name + "-" + firstname;
+        return ID + "\t|\t" + name + "\t|\t" + firstname + "\t|\t" + getCriterion(CriterionName.GENDER) + "\t|\t" + birthday;
     }
 
     @Override

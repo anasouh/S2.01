@@ -47,9 +47,12 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="28.0" prefWidth="179.0">
+                  <HBox prefHeight="28.0" prefWidth="179.0">
                      <children>
                         <Button fx:id="FixerSaveBtn" mnemonicParsing="false" onAction="#saveTeenager" prefHeight="24.0" prefWidth="185.0" text="Enregistrer" />
+                        <HBox prefHeight="28.0" prefWidth="104.0" />
+                        <HBox prefHeight="28.0" prefWidth="102.0" />
+                        <Button fx:id="FixerBackBtn" mnemonicParsing="false" onAction="#saveTeenager" prefHeight="24.0" prefWidth="192.0" text="Retour" />
                      </children>
                   </HBox>
                   <HBox>

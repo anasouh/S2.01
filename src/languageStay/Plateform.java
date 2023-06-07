@@ -26,6 +26,7 @@ public class Plateform implements Serializable, Iterable<Teenager>{
     private ArrayList<Teenager> promo = new ArrayList<>();
     public static String CSVExportHeader = "HOST;GUEST;REDIBITOIRE";
     public static String CSVImportHeader;
+    public final static String TEENAGERS_HEADER = "FORENAME;NAME;COUNTRY;BIRTH_DATE;HOBBIES;GUEST_ANIMAL_ALLERGY;HOST_HAS_ANIMAL;GUEST_FOOD;HOST_FOOD;GENDER;PAIR_GENDER;HISTORY";
 
     static{
         try(BufferedReader br = new BufferedReader(new FileReader(new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + "teenagersData.csv")))){
@@ -194,6 +195,19 @@ public class Plateform implements Serializable, Iterable<Teenager>{
             }
         } catch (IOException e) {
             System.out.println("Erreur lors de la lecture du fichier " + filename + " : " + e.getMessage());
+        }
+    }
+
+    public void exporterTeenagers(String filename) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename))) {
+            bw.write(TEENAGERS_HEADER);
+            bw.newLine();
+            for (Teenager t: this) {
+                bw.write(t.serialize());
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Erreur lors de l'écriture du fichier " + filename + " : " + e.getMessage());
         }
     }
 

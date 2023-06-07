@@ -1,7 +1,6 @@
 package languageStay.application;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

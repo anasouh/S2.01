@@ -14,37 +14,63 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import languageStay.Country;
-import languageStay.CriterionName;
-import languageStay.Teenager;
+import languageStay.*;
 
 public class AppController {
     Stage stage;
-    Scene ajouter;
-    Scene accueil;
+    Scene accueil, ajouter, dashboard, ponderation, participants, appariements;
+    Plateform plateform;
+    final String teenagersPath = "res/teenagersData.csv";
+    @FXML Button homeBtn;
 
-    @FXML
-    Label accueilTitle;
-    @FXML
-    Button dashboardButton;
-    @FXML
-    Button addTeenagerButton;
-    @FXML
-    TextField nameField, forenameField, ddnField, hobbiesField;
-    @FXML
-    CheckBox allergyField, hostNuts, hostVege, visitorVege, visitorNuts, hostAnimalField, keepField;
-    @FXML
-    ChoiceBox genderField, countryField, prefGenderField;
+    // Pages d'accueil et ajouter/modifier
+    @FXML Label accueilTitle;
+    @FXML Button dashboardButton;
+    @FXML Button addTeenagerButton;
+    @FXML TextField nameField, forenameField, ddnField, hobbiesField;
+    @FXML CheckBox allergyField, hostNuts, hostVege, visitorVege, visitorNuts, hostAnimalField, keepField;
+    @FXML ChoiceBox genderField, countryField, prefGenderField;
     
-    @FXML
+    // Page "Éviter appariement"
+    @FXML TextField EviterID1, EviterID2;
+    @FXML ListView EviterRes1, EviterRes2;
+    @FXML Button EviterSaveBtn, EviterBackBtn;
+
+    // Page "Fixer appariement"
+    @FXML TextField FixerID1, FixerID2;
+    @FXML ListView FixerRes1, FixerRes2;
+    @FXML Button FixerSaveBtn, FixerBackBtn;
+
+    // Page "Liste des appariements"
+    @FXML ListView ListeApp;
+    @FXML Button EditAppBtn, DelAppBtn, ListeAppBack;
+
+    // Page "Liste des participants"
+    @FXML ListView ListeTeen;
+    @FXML Button EditTeen, DelTeen, ListTeenBack;
+
+    // Page "Définir pondération"
+    @FXML TextField initialWeight, constraintWeight, preferenceWeight;
+    @FXML Button savePonderation, defaultPonderation, ponderationBack;
+    
+    // Page "Tableau de bord"
+    @FXML Button ponderationBtn, participantsBtn, appariementsBtn;
+
     public void initialize() throws IOException {
-        System.out.println("Initialisation...");
+        plateform = new Plateform();
+        plateform.importer(teenagersPath);
+
         if (genderField != null){
             genderField.getItems().addAll("Male", "Female");
             prefGenderField.getItems().addAll("Male", "Female");
             countryField.getItems().addAll("FRANCE", "GERMANY");
+        } else if (ListeTeen != null){
+            for (Teenager t: plateform) {
+                ListeTeen.getItems().add(t.toString());
+            }
         }
     }
 
@@ -58,8 +84,18 @@ public class AppController {
                 accueil = new Scene(loadFXML(name));
             } else if (name.equals("Ajouter")) {
                 ajouter = new Scene(loadFXML(name));
+            } else if (name.equals("Dashboard")) {
+                dashboard = new Scene(loadFXML(name));
+            } else if (name.equals("Preference")) {
+                ponderation = new Scene(loadFXML(name));
+            } else if (name.equals("ListeAppariements")) {
+                appariements = new Scene(loadFXML(name));
+            } else if (name.equals("ListeTeenager")) {
+                participants = new Scene(loadFXML(name));
             }
+            stage = (Stage) homeBtn.getScene().getWindow();
         } catch (IOException ie) { ie.printStackTrace();}
+        catch (NullPointerException npe) {stage = (Stage) dashboardButton.getScene().getWindow();}
     }
 
     private void setScene(Scene s) {
@@ -80,11 +116,17 @@ public class AppController {
         return fxmlLoader.load();
     }
 
+    public void plateformSave(){
+        plateform.exporterTeenagers(teenagersPath);
+    }
+
     public void pressedDashboard(ActionEvent event) {
         /*
          * Déclenché lors de l'appui sur le bouton "Tableau de bord"
          */
         if (stage == null) stage = (Stage) dashboardButton.getScene().getWindow();
+        loadScene("Dashboard");
+        setScene(dashboard);
     }
 
     public void pressedAddTeenager(ActionEvent event) {
@@ -95,6 +137,26 @@ public class AppController {
         loadScene("Ajouter");
         setScene(ajouter);
     } 
+
+    public void pressedHome() {
+        if (stage == null) stage = (Stage) homeBtn.getScene().getWindow();
+        loadScene("Accueil");
+        setScene(accueil);
+    }
+
+    public void pressedPonderation(ActionEvent event) {
+        loadScene("Preference");
+        setScene(ponderation);
+    }
+
+    public void pressedParticipants(ActionEvent event) {
+        loadScene("ListeTeenager");
+        setScene(participants);
+    }
+
+    public void pressedAppariements(ActionEvent event) {
+        loadScene("ListeAppariements");
+        setScene(appariements);}
 
     private String yesOrNo(boolean b) {
         /*
@@ -188,8 +250,8 @@ public class AppController {
             teen.addCriterion(CriterionName.HOBBIES, hobbiesField.getText());
             if (prefGenderField.getValue() != null) teen.addCriterion(CriterionName.PAIR_GENDER, prefGenderField.getValue().toString().toLowerCase());
             teen.purgeInvalidRequierement();
-            System.out.println(teen.getNbCriterion());
-            System.out.println(teen);
+            plateform.ajouter(teen);
+            plateformSave();
         }
     }
 }

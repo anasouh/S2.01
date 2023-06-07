@@ -153,6 +153,15 @@
                      </children>
                   </VBox>
                   <Button fx:id="saveTeenagerButton" mnemonicParsing="false" onAction="#saveTeenager" text="Enregistrer" />
+                  <HBox>
+                     <children>
+                        <Button fx:id="homeBtn" mnemonicParsing="false" onMouseClicked="#pressedHome" text="🏠">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </center>

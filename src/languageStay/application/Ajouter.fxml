@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fitToWidth="true" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="languageStay.application.AppController">
+<ScrollPane fitToWidth="true" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="languageStay.application.AppController">
    <content>
       <BorderPane>
          <center>
@@ -153,6 +153,15 @@
                      </children>
                   </VBox>
                   <Button fx:id="saveTeenagerButton" mnemonicParsing="false" onAction="#saveTeenager" text="Enregistrer" />
+                  <HBox>
+                     <children>
+                        <Button fx:id="homeBtn" mnemonicParsing="false" onMouseClicked="#pressedHome" text="🏠">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </center>

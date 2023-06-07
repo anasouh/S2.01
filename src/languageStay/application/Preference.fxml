@@ -9,13 +9,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fitToWidth="true" prefHeight="308.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="languageStay.application.AppController">
+<ScrollPane fitToWidth="true" prefHeight="355.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="languageStay.application.AppController">
    <content>
       <BorderPane>
-         <bottom>
+         <right>
             <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="319.0" prefWidth="600.0" spacing="30.0" style="-fx-padding: 20px;" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Definir Pondération">
+                  <Label text="Definir la pondération">
                      <font>
                         <Font name="System Bold" size="30.0" />
                      </font>
@@ -23,7 +23,7 @@
                   <HBox prefHeight="23.0" prefWidth="560.0">
                      <children>
                         <Label prefWidth="100.0" text="Poids initial :" wrapText="true" />
-                        <TextField fx:id="ddnField1" prefHeight="24.0" prefWidth="140.0" />
+                        <TextField fx:id="initialWeight" prefHeight="24.0" prefWidth="140.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="560.0">
@@ -31,7 +31,7 @@
                         <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="240.0" spacing="10.0">
                            <children>
                               <Label prefHeight="16.0" prefWidth="107.0" text="Contrainte :" />
-                              <TextField fx:id="nameField" prefHeight="24.0" prefWidth="152.0" />
+                              <TextField fx:id="constraintWeight" prefHeight="24.0" prefWidth="152.0" />
                            </children>
                         </HBox>
                      </children>
@@ -39,21 +39,28 @@
                   <HBox prefHeight="27.0" prefWidth="560.0">
                      <children>
                         <Label prefWidth="100.0" text="Préférence :" wrapText="true" />
-                        <TextField fx:id="ddnField" prefHeight="24.0" prefWidth="140.0" />
+                        <TextField fx:id="preferenceWeight" prefHeight="24.0" prefWidth="140.0" />
                      </children>
                   </HBox>
-                  <HBox prefHeight="28.0" prefWidth="179.0">
+                  <HBox alignment="CENTER" prefHeight="28.0" prefWidth="179.0">
                      <children>
-                        <Button fx:id="saveTeenagerButton" mnemonicParsing="false" onAction="#saveTeenager" prefHeight="24.0" prefWidth="185.0" text="Enregistrer" />
+                        <Button fx:id="savePonderation" mnemonicParsing="false" onAction="#saveTeenager" prefHeight="24.0" prefWidth="185.0" text="Enregistrer" />
                         <HBox prefHeight="28.0" prefWidth="104.0" />
-                        <Button fx:id="saveTeenagerButton1" mnemonicParsing="false" onAction="#saveTeenager" prefHeight="24.0" prefWidth="192.0" text="Par défaut" />
-                        <HBox prefHeight="28.0" prefWidth="102.0" />
-                        <Button fx:id="saveTeenagerButton11" mnemonicParsing="false" onAction="#saveTeenager" prefHeight="24.0" prefWidth="192.0" text="Retour" />
+                        <Button fx:id="defaultPonderation" mnemonicParsing="false" onAction="#saveTeenager" prefHeight="24.0" prefWidth="192.0" text="Par défaut" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Button fx:id="homeBtn" mnemonicParsing="false" onMouseClicked="#pressedHome" text="🏠">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
                      </children>
                   </HBox>
                </children>
             </VBox>
-         </bottom>
+         </right>
       </BorderPane>
    </content>
 </ScrollPane>

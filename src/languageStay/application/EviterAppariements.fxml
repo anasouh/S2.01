@@ -14,9 +14,9 @@
    <content>
       <BorderPane>
          <top>
-            <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="331.0" prefWidth="600.0" spacing="30.0" style="-fx-padding: 20px;" BorderPane.alignment="CENTER">
+            <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="302.0" prefWidth="600.0" spacing="30.0" style="-fx-padding: 20px;" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Fixer appariements">
+                  <Label text="Eviter un appariement">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -28,10 +28,10 @@
                               <HBox prefHeight="27.0" prefWidth="263.0">
                                  <children>
                                     <Label prefHeight="26.0" prefWidth="36.0" text="ID :" />
-                                    <TextField fx:id="FixerID1" />
+                                    <TextField fx:id="EviterID1" />
                                  </children>
                               </HBox>
-                              <ListView fx:id="FixerRes1" prefHeight="71.0" prefWidth="301.0" />
+                              <ListView fx:id="EviterRes1" prefHeight="71.0" prefWidth="301.0" />
                            </children>
                         </VBox>
                         <VBox prefHeight="100.0" prefWidth="298.0">
@@ -39,17 +39,20 @@
                               <HBox prefHeight="27.0" prefWidth="263.0">
                                  <children>
                                     <Label prefHeight="26.0" prefWidth="36.0" text="ID :" />
-                                    <TextField fx:id="FixerID2" />
+                                    <TextField fx:id="EviterID2" />
                                  </children>
                               </HBox>
-                              <ListView fx:id="FixerRes2" prefHeight="70.0" prefWidth="292.0" />
+                              <ListView fx:id="EviterRes2" prefHeight="70.0" prefWidth="292.0" />
                            </children>
                         </VBox>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="28.0" prefWidth="179.0">
+                  <HBox prefHeight="28.0" prefWidth="179.0">
                      <children>
-                        <Button fx:id="FixerSaveBtn" mnemonicParsing="false" onAction="#saveTeenager" prefHeight="24.0" prefWidth="185.0" text="Enregistrer" />
+                        <Button fx:id="EviterSaveBtn" mnemonicParsing="false" onAction="#saveTeenager" prefHeight="24.0" prefWidth="185.0" text="Enregistrer" />
+                        <HBox prefHeight="28.0" prefWidth="104.0" />
+                        <HBox prefHeight="28.0" prefWidth="102.0" />
+                        <Button fx:id="EviterBackBtn" mnemonicParsing="false" onAction="#saveTeenager" prefHeight="24.0" prefWidth="192.0" text="Retour" />
                      </children>
                   </HBox>
                   <HBox>
