@@ -1,4 +1,4 @@
 HOST;GUEST;REDIBITOIRE
-1-B-Bellatrix;3-X-Xolag;false
-2-C-Callista;4-Y-Yak;false
-0-A-Adonia;5-Z-Zander;false
+0-A-Adonia-"2000-01-01"-FRANCE;5-Z-Zander-"2000-01-01"-ITALY;false
+1-B-Bellatrix-"2000-01-01"-FRANCE;3-X-Xolag-"2000-01-01"-ITALY;false
+2-C-Callista-"2000-01-01"-FRANCE;4-Y-Yak-"2000-01-01"-ITALY;false

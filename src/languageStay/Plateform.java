@@ -267,4 +267,14 @@ public class Plateform implements Serializable, Iterable<Teenager>{
         return null;
     }
 
+    public int getNbCountry(Country pays){
+        int n = 0;
+        for(Teenager t : this.promo){
+            if(t.getCountry() == pays){
+                n++;
+            }
+        }
+        return n;
+    }   
+    
 }

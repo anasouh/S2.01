@@ -129,12 +129,12 @@ public class PlatformTest {
         Teenager.ResetCompteur();
         plat.importer(importFile);
         assertTrue(plat.size() == 6);
-        assertEquals("0-A-Adonia",plat.getPromo().get(0).toString());
-        assertEquals("1-B-Bellatrix",plat.getPromo().get(1).toString());
-        assertEquals("2-C-Callista",plat.getPromo().get(2).toString());
-        assertEquals("3-X-Xolag",plat.getPromo().get(3).toString());
-        assertEquals("4-Y-Yak",plat.getPromo().get(4).toString());
-        assertEquals("5-Z-Zander",plat.getPromo().get(5).toString());
+        assertEquals("0-A-Adonia-\"2000-01-01\"-FRANCE",plat.getPromo().get(0).toString());
+        assertEquals("1-B-Bellatrix-\"2000-01-01\"-FRANCE",plat.getPromo().get(1).toString());
+        assertEquals("2-C-Callista-\"2000-01-01\"-FRANCE",plat.getPromo().get(2).toString());
+        assertEquals("3-X-Xolag-\"2000-01-01\"-ITALY",plat.getPromo().get(3).toString());
+        assertEquals("4-Y-Yak-\"2000-01-01\"-ITALY",plat.getPromo().get(4).toString());
+        assertEquals("5-Z-Zander-\"2000-01-01\"-ITALY",plat.getPromo().get(5).toString());
     }
 
     @Test
@@ -151,9 +151,9 @@ public class PlatformTest {
         }catch(Exception e){
             assertTrue(false);
         }
-        assertTrue(liste.contains("2-C-Callista;4-Y-Yak;false"));
-        assertTrue(liste.contains("0-A-Adonia;5-Z-Zander;false"));
-        assertTrue(liste.contains("1-B-Bellatrix;3-X-Xolag;false"));
+        assertTrue(liste.contains("2-C-Callista-\"2000-01-01\"-FRANCE;4-Y-Yak-\"2000-01-01\"-ITALY;false"));
+        assertTrue(liste.contains("0-A-Adonia-\"2000-01-01\"-FRANCE;5-Z-Zander-\"2000-01-01\"-ITALY;false"));
+        assertTrue(liste.contains("1-B-Bellatrix-\"2000-01-01\"-FRANCE;3-X-Xolag-\"2000-01-01\"-ITALY;false"));
     }
 
 }

@@ -278,7 +278,7 @@ public class Teenager implements Serializable{
                 }else if(head[i].equals("NAME")){
                     name = data[i];
                 }else if(head[i].equals("COUNTRY")){
-                    country = Country.valueOf(data[i]);
+                    country = Country.valueOf(data[i].toUpperCase());
                 }else if(head[i].equals("BIRTH_DATE")){
                     String[] dateStr = data[i].split("-");
                     if(dateStr.length == 3){
@@ -323,7 +323,7 @@ public class Teenager implements Serializable{
 
     @Override
     public String toString() {
-        return ID + "-" + name + "-" + firstname;
+        return ID + "-" + name + "-" + firstname + "-\"" + birthday + "\"-" + country;
     }
 
     @Override
