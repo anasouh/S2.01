@@ -2,6 +2,7 @@ package languageStay.application;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Arrays;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -93,9 +94,7 @@ public class AppController {
             } else if (name.equals("ListeTeenager")) {
                 participants = new Scene(loadFXML(name));
             }
-            stage = (Stage) homeBtn.getScene().getWindow();
         } catch (IOException ie) { ie.printStackTrace();}
-        catch (NullPointerException npe) {stage = (Stage) dashboardButton.getScene().getWindow();}
     }
 
     private void setScene(Scene s) {
@@ -103,6 +102,12 @@ public class AppController {
          * Changer la scene actuelle
          * @param s : nouvelle scene
          */
+        try {
+            stage = (Stage) homeBtn.getScene().getWindow();
+        } catch (NullPointerException npe) {
+            stage = (Stage) dashboardButton.getScene().getWindow();
+        }
+        
         stage.setScene(s);
         stage.show();
     }
@@ -144,6 +149,8 @@ public class AppController {
         setScene(accueil);
     }
 
+    // Page "Dashboard"
+
     public void pressedPonderation(ActionEvent event) {
         loadScene("Preference");
         setScene(ponderation);
@@ -157,6 +164,20 @@ public class AppController {
     public void pressedAppariements(ActionEvent event) {
         loadScene("ListeAppariements");
         setScene(appariements);}
+
+    // Page "Liste des participants"
+
+    public void editTeenager(ActionEvent event) {
+        String id = ListeTeen.getSelectionModel().getSelectedItem().toString().split("\t")[0];
+        Teenager teenager = plateform.getById(Integer.valueOf(id));
+        // à compléter
+    }
+
+    public void delTeenager(ActionEvent event) {
+        String id = ListeTeen.getSelectionModel().getSelectedItem().toString().split("\t")[0];
+        Teenager teenager = plateform.getById(Integer.valueOf(id));
+        // à compléter
+    }
 
     private String yesOrNo(boolean b) {
         /*

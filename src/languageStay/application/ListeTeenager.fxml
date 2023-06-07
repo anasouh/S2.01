@@ -23,9 +23,9 @@
                   <ListView fx:id="ListeTeen" prefHeight="200.0" prefWidth="200.0" />
                   <HBox alignment="CENTER" prefHeight="28.0" prefWidth="179.0">
                      <children>
-                        <Button fx:id="EditTeen" mnemonicParsing="false" onAction="#saveTeenager" prefHeight="24.0" prefWidth="185.0" text="Modifier" />
+                        <Button fx:id="EditTeen" mnemonicParsing="false" onAction="#editTeenager" prefHeight="24.0" prefWidth="185.0" text="Modifier" />
                         <HBox prefHeight="28.0" prefWidth="104.0" />
-                        <Button fx:id="DelTeen" mnemonicParsing="false" onAction="#saveTeenager" prefHeight="24.0" prefWidth="192.0" text="Supprimer" />
+                        <Button fx:id="DelTeen" mnemonicParsing="false" onAction="#delTeenager" prefHeight="24.0" prefWidth="192.0" text="Supprimer" />
                      </children>
                   </HBox>
                   <HBox>
