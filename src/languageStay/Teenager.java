@@ -30,10 +30,7 @@ public class Teenager implements Serializable{
     
     Map<String, Criterion> requierments;
 
-    static Map<Teenager, Teenager> history = new HashMap<>();
-
     private Map<Teenager, Integer> fixerEviter = new HashMap<>();
-
 
     /**
      * Crée un Teenager complètement spécifiée
