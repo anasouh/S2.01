@@ -2,17 +2,9 @@
 
 **Auteurs : *Rayane BELGUEBLI*, *Nathan DESMEE*, *Anas OUHDDA***
 
-Générer la documentation : 
+## Démonstration
 
-```bash
-$ javadoc -d ./doc -cp ./lib/sae2_02.jar --source-path ./src languageStay
-```
-
-Démarrer l'application :
-
-```bash
-$ 
-```
+<iframe width="560" height="315" src="https://www.youtube.com/embed/zJkU-DNvPH4?si=GFsL4D-ZxIoEoI5X" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 Liens utiles :
 - Rapport de graphes [*PDF*](graphes/RapportGraphe.pdf), [*Markdown*](graphes/RapportGraphe.md)
