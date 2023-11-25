@@ -4,7 +4,7 @@
 
 ## Démonstration
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/zJkU-DNvPH4?si=GFsL4D-ZxIoEoI5X" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+https://www.youtube.com/embed/zJkU-DNvPH4?si=GFsL4D-ZxIoEoI5X
 
 Liens utiles :
 - Rapport de graphes [*PDF*](graphes/RapportGraphe.pdf), [*Markdown*](graphes/RapportGraphe.md)
